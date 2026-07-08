@@ -52,7 +52,3 @@
 [data-theme="dark"] .section-title p { color: var(--text-secondary); }
 [data-theme="dark"] .logo { color: #E8E8F0; }
 [data-theme="dark"] .back-top { color: var(--text); background: rgba(15,15,26,0.85); }
-[data-theme="dark"] svg text { fill: #e0e0e0; }
-[data-theme="dark"] .svgbg { fill: #1a1a2e; }
-[data-theme="dark"] svg path { stroke: #333; }
-[data-theme="dark"] svg circle { stroke: #ff6b6b; }
