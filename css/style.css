@@ -187,7 +187,7 @@ img { max-width: 100%; height: auto; }
 .mobile-toggle.open .icon-close { display: block; font-size: 1.3rem; }
 
 @media (max-width: 768px) {
-  .site-header { top: 0; padding: 0 8px; }
+  .site-header { padding: 0 8px; }
   .header-inner { border-radius: 50px; padding: 0 12px; }
   .mobile-toggle { display: flex; align-items: center; justify-content: center; }
 
