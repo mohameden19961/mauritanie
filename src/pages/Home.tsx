@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatsSection from '../components/StatsSection';
+import SearchBox from '../components/SearchBox';
 import Lightbox from '../components/Lightbox';
 import BackToTop from '../components/BackToTop';
 
@@ -142,7 +143,7 @@ export default function Home() {
           </div>
           <div className="card" style={{ padding: 24, maxWidth: 600, margin: '0 auto' }}>
             <h2>Recherche</h2>
-            <input type="text" className="form-control" placeholder="Rechercher..." />
+            <SearchBox />
           </div>
         </div>
       </section>
