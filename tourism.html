@@ -92,15 +92,24 @@
   </div>
 </footer>
 
+<div class="detail-modal">
+  <div class="detail-modal-content">
+    <button class="detail-modal-close">&times;</button>
+    <div class="detail-modal-body"></div>
+  </div>
+</div>
 <script src="js/main.js"></script>
 <script>
 (function() {
   var grid = document.getElementById('destinations-grid');
-  MAURITANIA.tourism.forEach(function(dest) {
+  MAURITANIA.tourism.forEach(function(dest, i) {
     var card = document.createElement('div');
     card.className = 'card';
     card.style.padding = '0';
+    card.style.cursor = 'pointer';
+    card.setAttribute('data-index', i);
     card.innerHTML = '<img src="' + dest.image + '&fit=crop" alt="' + dest.name + '" style="width:100%;height:200px;object-fit:cover;border-radius:var(--radius-md) var(--radius-md) 0 0;"><div style="padding:20px;"><span class="badge badge-green">' + dest.location + '</span><h3 style="font-family:var(--ff-sans);font-size:1.1rem;margin:12px 0 8px;">' + dest.name + '</h3><p style="color:var(--text-secondary);font-size:0.9rem;">' + dest.desc + '</p></div>';
+    card.addEventListener('click', function() { openDetail('tourism', i); });
     grid.appendChild(card);
   });
 })();

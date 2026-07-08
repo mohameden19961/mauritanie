@@ -92,14 +92,22 @@
   </div>
 </footer>
 
+<div class="detail-modal">
+  <div class="detail-modal-content">
+    <button class="detail-modal-close">&times;</button>
+    <div class="detail-modal-body"></div>
+  </div>
+</div>
 <script src="js/main.js"></script>
 <script>
 (function() {
   var container = document.getElementById('timeline');
-  MAURITANIA.history.forEach(function(item) {
+  MAURITANIA.history.forEach(function(item, i) {
     var el = document.createElement('div');
     el.className = 'timeline-item';
+    el.setAttribute('data-index', i);
     el.innerHTML = '<div class="timeline-year">' + item.year + '</div><h3>' + item.title + '</h3><p style="color:var(--text-secondary);font-size:0.92rem;">' + item.desc + '</p>';
+    el.addEventListener('click', function() { openDetail('history', i); });
     container.appendChild(el);
   });
 })();
