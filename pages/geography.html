@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Géographie & Culture de la Mauritanie</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+  <meta name="description" content="Découvrez la géographie et la culture de la Mauritanie : désert du Sahara, fleuve Sénégal, parc du Banc d Arguin, et les 15 wilayas du pays.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../js/data.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <img src="../images/drapeaumauritanie.png" alt="Drapeau Mauritanie" style="height:24px;width:auto;border-radius:2px;">
+      Mauritanie
+    </a>
+    <button class="theme-toggle header-theme-toggle" aria-label="Mode sombre"></button>
+    <button class="mobile-toggle" onclick="toggleMobileNav()"><span class="icon-open">&#8942;</span><span class="icon-close">&#10005;</span></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="history.html">Histoire</a></li>
+      <li><a href="tourism.html">Tourisme</a></li>
+      <li><a href="economy.html">Économie</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="nav-plus"><a href="pages.html">Plus</a></li>
+      <li class="nav-mobile-hide"><a href="geography.html">Géographie</a></li>
+      <li class="nav-mobile-hide"><a href="demographics.html">Démographie</a></li>
+      <li class="nav-mobile-hide"><a href="government.html">Gouvernement</a></li>
+      <li class="nav-mobile-hide"><a href="cuisine.html">Cuisine</a></li>
+      <li class="nav-mobile-hide"><a href="gallery.html">Galerie</a></li>
+      <li class="nav-theme"><button class="theme-toggle" aria-label="Mode sombre"></button></li>
+    </ul>
+    <div class="nav-overlay" onclick="toggleMobileNav()"></div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a>
+      <span>/</span>
+      <span>Géographie</span>
+    </div>
+    <h1>Géographie & Culture</h1>
+    <p>Immensité saharienne, côte atlantique et richesses culturelles — la Mauritanie offre une diversité géographique exceptionnelle.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -32px;">
+      <div class="card" style="text-align: center; padding: 24px 16px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌍</div>
+        <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">1 030 700</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">km² de superficie</div>
+      </div>
+      <div class="card" style="text-align: center; padding: 24px 16px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🏜️</div>
+        <div style="font-size: 1.6rem; font-weight: 800; color: var(--secondary);">75%</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">couvert par le Sahara</div>
+      </div>
+      <div class="card" style="text-align: center; padding: 24px 16px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌊</div>
+        <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-dark);">754</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">km de côte atlantique</div>
+      </div>
+      <div class="card" style="text-align: center; padding: 24px 16px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🏛️</div>
+        <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">15</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">wilayas (régions)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Régions de Mauritanie</h2>
+      <p>Le pays est divisé en 15 wilayas (régions), chacune avec ses particularités.</p>
+    </div>
+    <div class="cards-grid" id="regions-grid"></div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Carte de la Mauritanie</h2>
+      <p>Explorez le territoire mauritanien et ses régions.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <img src="../images/mauritanie-div-map.gif" alt="Carte des régions de Mauritanie" style="width:100%;height:auto;display:block;">
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px;">Aperçu géographique</h3>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px;">La Mauritanie s'étend sur 1 030 700 km², ce qui en fait le 29e plus grand pays du monde. Elle est bordée par l'océan Atlantique à l'ouest, le Sahara occidental et l'Algérie au nord, le Mali à l'est et au sud, et le Sénégal au sud-ouest.</p>
+        <p style="color:var(--text-secondary);line-height:1.8;">Le territoire est divisé en 15 wilayas, avec Nouakchott comme capitale. Les deux tiers du pays sont recouverts par le désert du Sahara, tandis que la bande sahélienne au sud et la côte atlantique offrent des paysages plus verdoyants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Caractéristiques naturelles</h2>
+      <p>Des paysages variés entre désert, fleuve et océan.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <div id="features-grid" style="display:grid;gap:16px;"></div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop" alt="Désert du Sahara" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-md);aspect-ratio:4/3;object-fit:cover;border:1px solid var(--glass-border);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Climat et environnement</h2>
+      <p>Un climat aride à désertique avec des variations nord-sud marquées.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div class="card" style="padding: 28px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+          <div class="feature-icon green" style="margin:0;">☀️</div>
+          <h3 style="margin:0;">Climat du Nord</h3>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">Désertique hyper-aride avec des températures atteignant 45°C en été et des précipitations inférieures à 50 mm par an. Les nuits peuvent être très froides en hiver, descendant jusqu'à 5°C dans l'Adrar.</p>
+      </div>
+      <div class="card" style="padding: 28px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+          <div class="feature-icon blue" style="margin:0;">🌦️</div>
+          <h3 style="margin:0;">Climat du Sud</h3>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">Sahélien avec une saison des pluies de juillet à septembre (200-600 mm/an). La région du fleuve Sénégal bénéficie d'un climat plus humide propice à l'agriculture et aux pâturages.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3><img src="../images/drapeaumauritanie.png" alt="" style="height:20px;width:auto;vertical-align:middle;margin-right:6px;border-radius:2px;">Mauritanie</h3>
+        <p>Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.</p>
+        <a href="https://github.com/mohameden19961/mauritanie" target="_blank" rel="noopener" class="footer-github"><svg viewBox="0 0 16 16" fill="currentColor" style="height:36px;width:auto;vertical-align:middle;margin-right:10px;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code source sur GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="../index.html">Accueil</a>
+        <a href="history.html">Histoire</a>
+        <a href="geography.html">Géographie</a>
+        <a href="tourism.html">Tourisme</a>
+        <a href="economy.html">Économie</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="demographics.html">Démographie</a>
+        <a href="government.html">Gouvernement</a>
+        <a href="cuisine.html">Cuisine</a>
+        <a href="gallery.html">Galerie</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@mauritanie.tourisme.mr">info@mauritanie.tourisme.mr</a>
+        <a href="tel:+22245251100">+222 45 25 11 00</a>
+        <a href="#">Nouakchott, Mauritanie</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Mauritanie — Site éducatif. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
+
+<script src="../js/nav.js"></script>
+<script src="../js/stats.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/widgets.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/modal.js"></script>
+<script>
+(function() {
+  var regionIcons = ['🏜️','⛰️','🌾','🌿','🏙️','⚓'];
+  var regionsEl = document.getElementById('regions-grid');
+  MAURITANIA.geography.regions.forEach(function(region, i) {
+    var card = document.createElement('div');
+    card.className = 'info-card';
+    card.innerHTML = '<div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;"><div class="feature-icon green" style="margin:0;font-size:1.3rem;">' + regionIcons[i] + '</div><div><h3 style="margin:0;font-size:1.05rem;">' + region.name + '</h3><div style="font-size:0.8rem;color:var(--text-muted);">Capitale : ' + region.capital + '</div></div></div><p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.6;">' + region.desc + '</p>';
+    regionsEl.appendChild(card);
+  });
+
+  var featureIcons = ['🏜️','🌊','🦩','🏖️','⛰️'];
+  var featuresEl = document.getElementById('features-grid');
+  MAURITANIA.geography.features.forEach(function(feature, i) {
+    var el = document.createElement('div');
+    el.className = 'info-card';
+    el.style.padding = '18px 20px';
+    el.innerHTML = '<div style="display:flex;align-items:center;gap:12px;"><div class="feature-icon green" style="width:40px;height:40px;border-radius:10px;font-size:1.1rem;margin:0;flex-shrink:0;">' + featureIcons[i] + '</div><div><h3 style="font-size:0.95rem;margin:0 0 2px;">' + feature.name + '</h3><p style="color:var(--text-secondary);font-size:0.85rem;margin:0;">' + feature.desc + '</p></div></div>';
+    featuresEl.appendChild(el);
+  });
+})();
+</script>
+</body>
+</html>

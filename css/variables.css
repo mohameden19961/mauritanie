@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+/* ===== CSS VARIABLES & RESET ===== */
+
+:root {
+  --primary: #0D8A3C;
+  --primary-dark: #0A6B2F;
+  --secondary: #1E88E5;
+  --accent: #D4A843;
+  --accent-dark: #B8860B;
+  --red: #D32F2F;
+  --background: #F5F0E8;
+  --text: #1A1A2E;
+  --text-secondary: #4A4A6A;
+  --text-muted: #8A8AA8;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  --header-height: 64px;
+  --glass: rgba(255,255,255,0.18);
+  --glass-border: rgba(255,255,255,0.35);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.04);
+}
+
+[data-theme="dark"] {
+  --background: #0F0F1A;
+  --background-image: none;
+  --text: #E8E8F0;
+  --text-secondary: #A0A0B8;
+  --text-muted: #6A6A8A;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.25);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--background);
+  background-image: var(--background-image,
+    radial-gradient(ellipse at 15% 30%, rgba(13,138,60,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 25%, rgba(30,136,229,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 75%, rgba(212,168,67,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 60%, rgba(13,138,60,0.03) 0%, transparent 40%));
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + 16px);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+h1, h2, h3 { font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.25rem; }
+
+a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--primary-dark); }
+img { max-width: 100%; height: auto; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+@media (max-width: 768px) {
+  .container { padding: 0 12px; }
+  section .container > div:not(.section-title) { max-width: 100%; overflow: hidden; }
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}

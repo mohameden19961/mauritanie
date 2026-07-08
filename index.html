@@ -1,18 +1,254 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Découvrez la Mauritanie : histoire, géographie, culture, économie et tourisme. Guide complet sur ce pays d'Afrique de l'Ouest." />
-    <title>Mauritanie</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mauritanie — Découvrez le Trésor du Sahara</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+  <meta name="description" content="Découvrez la Mauritanie : guide complet sur lhistoire, la géographie, le tourisme, l économie, la démographie, la cuisine et la culture mauritanienne. Site éducatif et informatif.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/data.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+      <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/drapeaumauritanie.png" alt="Drapeau Mauritanie" style="height:24px;width:auto;border-radius:2px;">
+      Mauritanie
+    </a>
+    <button class="theme-toggle header-theme-toggle" aria-label="Mode sombre"></button>
+    <button class="mobile-toggle" onclick="toggleMobileNav()"><span class="icon-open">&#8942;</span><span class="icon-close">&#10005;</span></button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="pages/history.html">Histoire</a></li>
+      <li><a href="pages/tourism.html">Tourisme</a></li>
+      <li><a href="pages/economy.html">Économie</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
+      <li class="nav-plus"><a href="pages/pages.html">Plus</a></li>
+      <li class="nav-mobile-hide"><a href="pages/geography.html">Géographie</a></li>
+      <li class="nav-mobile-hide"><a href="pages/demographics.html">Démographie</a></li>
+      <li class="nav-mobile-hide"><a href="pages/government.html">Gouvernement</a></li>
+      <li class="nav-mobile-hide"><a href="pages/cuisine.html">Cuisine</a></li>
+      <li class="nav-mobile-hide"><a href="pages/gallery.html">Galerie</a></li>
+      <li class="nav-theme"><button class="theme-toggle" aria-label="Mode sombre"></button></li>
+    </ul>
+    <div class="nav-overlay" onclick="toggleMobileNav()"></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div>
+        <h1>Bienvenue en <span>Mauritanie</span></h1>
+        <p>Explorez un pays aux mille visages : des dunes dorées du Sahara aux eaux poissonneuses de l'Atlantique, des cités anciennes aux marchés animés de Nouakchott.</p>
+        <div class="hero-actions">
+          <a href="pages/tourism.html" class="btn btn-primary">Explorer les destinations</a>
+          <a href="pages/history.html" class="btn btn-secondary">Découvrir l'histoire</a>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=420&fit=crop" alt="Paysage mauritanien" class="hero-image">
+    </div>
+  </div>
+</section>
+
+<section class="features reveal">
+  <div class="container">
+    <div class="section-title">
+      <h2>Pourquoi visiter la Mauritanie ?</h2>
+      <p>Une destination unique où le désert rencontre l'océan, riche d'une histoire millénaire et de traditions vivantes.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card feature-card">
+        <div class="feature-icon green">&#127965;</div>
+        <h3>Désert du Sahara</h3>
+        <p>Paysages lunaires, dunes majestueuses et l'impressionnant Œil du Sahara.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon blue">&#127754;</div>
+        <h3>Banc d'Arguin</h3>
+        <p>Parc national classé UNESCO, paradis des oiseaux migrateurs.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon gold">&#127963;</div>
+        <h3>Cités anciennes</h3>
+        <p>Chinguetti et Ouadane, joyaux architecturaux du siècle d'or maure.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon green">&#127859;</div>
+        <h3>Cuisine authentique</h3>
+        <p>Saveurs du thé à la menthe, thiéboudienne et méchoui traditionnel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-value" data-target="1030700" data-suffix=" km²">0</div>
+        <div class="stat-label">Superficie</div>
+      </div>
+      <div>
+        <div class="stat-value" data-target="4618974">0</div>
+        <div class="stat-label">Habitants</div>
+      </div>
+      <div>
+        <div class="stat-value" data-target="754" data-suffix=" km">0</div>
+        <div class="stat-label">Côte Atlantique</div>
+      </div>
+      <div>
+        <div class="stat-value" data-target="1960">0</div>
+        <div class="stat-label">Indépendance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Une brève histoire</h2>
+      <p>Des empires anciens aux temps modernes, la Mauritanie est riche d'un passé fascinant.</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <p style="color:var(--text-secondary);line-height:1.8;font-size:1.05rem;">La Mauritanie est un carrefour de civilisations. Terre des Almoravides qui ont marqué l'histoire de l'Afrique du Nord et de l'Andalousie, elle a vu se succéder empires, émirats et colonisation. Depuis son indépendance en 1960, elle construit une nation moderne tout en préservant ses traditions ancestrales.</p>
+        <a href="pages/history.html" class="btn btn-primary" style="margin-top:16px;">Voir la frise chronologique</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;margin-bottom:4px;">&#127759;</div>
+          <div style="font-weight:600;font-size:0.9rem;">1076</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary);">Empire almoravide</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;margin-bottom:4px;">&#127477;&#127465;</div>
+          <div style="font-weight:600;font-size:0.9rem;">1960</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary);">Indépendance</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;margin-bottom:4px;">&#127758;</div>
+          <div style="font-weight:600;font-size:0.9rem;">1989</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary);">UNESCO Banc d'Arguin</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;margin-bottom:4px;">&#127891;</div>
+          <div style="font-weight:600;font-size:0.9rem;">2019</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary);">Transition démocratique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Ce que disent les voyageurs</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;padding:32px;">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face" alt="Sophie" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid var(--glass-border);">
+        <div style="font-size:2rem;margin-bottom:8px;color:var(--accent);line-height:1;">"</div>
+        <p style="color:var(--text-secondary);font-style:italic;margin-bottom:16px;">Un voyage inoubliable au cœur du Sahara. Les paysages de l'Adrar sont à couper le souffle.</p>
+        <div style="font-weight:600;font-size:0.9rem;">— Sophie L.</div>
+      </div>
+      <div class="card" style="text-align:center;padding:32px;">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" alt="Marc" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid var(--glass-border);">
+        <div style="font-size:2rem;margin-bottom:8px;color:var(--accent);line-height:1;">"</div>
+        <p style="color:var(--text-secondary);font-style:italic;margin-bottom:16px;">Le Parc du Banc d'Arguin est un paradis pour les amateurs d'ornithologie. Magnifique !</p>
+        <div style="font-weight:600;font-size:0.9rem;">— Marc D.</div>
+      </div>
+      <div class="card" style="text-align:center;padding:32px;">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face" alt="Aïcha" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid var(--glass-border);">
+        <div style="font-size:2rem;margin-bottom:8px;color:var(--accent);line-height:1;">"</div>
+        <p style="color:var(--text-secondary);font-style:italic;margin-bottom:16px;">L'accueil des Mauritaniens est chaleureux. Le thé à la menthe est une expérience à part entière.</p>
+        <div style="font-weight:600;font-size:0.9rem;">— Aïcha K.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section search-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Rechercher sur le site</h2>
+      <p>Trouvez rapidement une destination, un plat, une date historique ou une information.</p>
+    </div>
+    <div class="search-wrap">
+      <input type="text" class="search-input" placeholder="Rechercher..." autocomplete="off">
+      <div class="search-results"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Prêt à découvrir la Mauritanie ?</h2>
+      <p>Planifiez votre voyage dès maintenant et partez à l'aventure dans ce joyau du Sahara.</p>
+    </div>
+    <div style="text-align:center;">
+      <a href="pages/contact.html" class="btn btn-accent" style="font-size:1.1rem;padding:16px 36px;">Contactez-nous</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3><img src="images/drapeaumauritanie.png" alt="" style="height:20px;width:auto;vertical-align:middle;margin-right:6px;border-radius:2px;">Mauritanie</h3>
+        <p>Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.</p>
+        <a href="https://github.com/mohameden19961/mauritanie" target="_blank" rel="noopener" class="footer-github"><svg viewBox="0 0 16 16" fill="currentColor" style="height:36px;width:auto;vertical-align:middle;margin-right:10px;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code source sur GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Accueil</a>
+        <a href="pages/history.html">Histoire</a>
+        <a href="pages/geography.html">Géographie</a>
+        <a href="pages/tourism.html">Tourisme</a>
+        <a href="pages/economy.html">Économie</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="pages/demographics.html">Démographie</a>
+        <a href="pages/government.html">Gouvernement</a>
+        <a href="pages/cuisine.html">Cuisine</a>
+        <a href="pages/gallery.html">Galerie</a>
+        <a href="pages/contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@mauritanie.tourisme.mr">info@mauritanie.tourisme.mr</a>
+        <a href="tel:+22245251100">+222 45 25 11 00</a>
+        <a href="#">Nouakchott, Mauritanie</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Mauritanie — Site éducatif. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Retour en haut">&#8593;</button>
+
+<div class="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <img src="" alt="">
+</div>
+
+
+<script src="js/nav.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/widgets.js"></script>
+<script src="js/search.js"></script>
+<script src="js/modal.js"></script>
+</body>
 </html>
