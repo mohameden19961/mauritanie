@@ -7,10 +7,10 @@ import Lightbox from '../components/Lightbox';
 import BackToTop from '../components/BackToTop';
 
 const statsData = [
-  { value: '1 030 700 km²', label: 'Superficie', icon: '🌍' },
-  { value: '4,62 millions', label: 'Habitants', icon: '👥' },
-  { value: '754 km', label: 'Côte Atlantique', icon: '🌊' },
-  { value: '1960', label: 'Indépendance', icon: '🇲🇷' },
+  { value: '1 030 700 km²', label: 'Superficie', icon: '🌍', num: 1030700, suffix: ' km²' },
+  { value: '4,62 millions', label: 'Habitants', icon: '👥', num: 462, suffix: ' M' },
+  { value: '754 km', label: 'Côte Atlantique', icon: '🌊', num: 754, suffix: ' km' },
+  { value: '1960', label: 'Indépendance', icon: '🇲🇷', num: 1960 },
 ];
 
 const features = [
