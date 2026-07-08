@@ -55,6 +55,8 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   padding-top: calc(var(--header-height) + 16px);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3 { font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
@@ -67,6 +69,11 @@ a:hover { color: var(--primary-dark); }
 img { max-width: 100%; height: auto; }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+@media (max-width: 768px) {
+  .container { padding: 0 12px; }
+  section .container > div:not(.section-title) { max-width: 100%; overflow: hidden; }
+}
 
 .glass {
   background: var(--glass);
