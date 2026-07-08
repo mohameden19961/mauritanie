@@ -20,12 +20,9 @@ function textColor(): string {
 }
 
 export default function Demographics() {
-  const chartsInitialized = useRef(false);
   const createdCharts = useRef<Record<string, any>>({});
 
   useEffect(() => {
-    if (chartsInitialized.current) return;
-    chartsInitialized.current = true;
 
     const loadChartJS = () => {
       if ((window as any).Chart) {
