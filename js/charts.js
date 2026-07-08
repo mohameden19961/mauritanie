@@ -4,128 +4,96 @@
     plugins: { legend: { labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim() || '#555', font: { size: 11 } } } }
   };
   function color(c) { return getComputedStyle(document.documentElement).getPropertyValue(c).trim(); }
-  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  var gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
-  var textColor = isDark ? '#aaa' : '#666';
-
-  function getCtx(id) {
-    var el = document.getElementById(id);
-    if (!el) return null;
-    var canvas = document.createElement('canvas');
-    el.appendChild(canvas);
-    return canvas.getContext('2d');
-  }
+  function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function gridColor() { return isDark() ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'; }
+  function textColor() { return isDark() ? '#aaa' : '#666'; }
 
   var econ = MAURITANIA.economy;
   var demo = MAURITANIA.demographics;
 
-  var ctx1 = getCtx('chart-gdp');
-  if (ctx1) {
-    new Chart(ctx1, Object.assign({}, chartDefaults, {
-      type: 'line',
-      data: {
-        labels: econ.gdpData.map(function(d) { return d.year; }),
-        datasets: [{
-          label: 'PIB (milliards $)',
-          data: econ.gdpData.map(function(d) { return d.value; }),
-          borderColor: color('--primary') || '#0D8A3C',
-          backgroundColor: (color('--primary') || '#0D8A3C') + '22',
-          fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: color('--primary') || '#0D8A3C'
-        }]
-      },
-      options: {
-        scales: { x: { grid: { color: gridColor }, ticks: { color: textColor } }, y: { grid: { color: gridColor }, ticks: { color: textColor } } }
+  var chartMap = {
+    'chart-gdp': { type: 'line', data: econ.gdpData, labelsKey: 'year', valueKey: 'value', label: 'PIB (milliards $)', colorKey: '--primary', desc: econ.gdpDesc },
+    'chart-sectors': { type: 'doughnut', data: econ.sectors, labelsKey: 'name', valueKey: 'value', colors: ['#0D8A3C','#1E88E5','#FF9800','#9C27B0','#00BCD4'], desc: econ.sectorsDesc },
+    'chart-exports': { type: 'bar', data: econ.exports, labelsKey: 'product', valueKey: 'value', label: '% des exportations', colors: ['#0D8A3C','#FF9800','#1E88E5','#9C27B0','#E91E63','#607D8B'], desc: econ.exportsDesc, horizontal: true },
+    'chart-population': { type: 'bar', data: demo.population, labelsKey: 'year', valueKey: 'value', label: 'Population', color: '--primary', colors: null, desc: demo.popDesc },
+    'chart-urbanisation': { type: 'line', data: demo.urbanisation, labelsKey: 'year', valueKey: 'value', label: "Taux d'urbanisation (%)", color: '--secondary', desc: demo.urbanDesc },
+    'chart-ethnic': { type: 'pie', data: demo.ethnicGroups, labelsKey: 'group', valueKey: 'value', colors: ['#0D8A3C','#1E88E5','#FF9800','#9C27B0','#E91E63','#00BCD4'], desc: demo.ethnicDesc }
+  };
+
+  var createdCharts = {};
+
+  Object.keys(chartMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var cfg = chartMap[id];
+    var chartEl = el.querySelector('.flip-front');
+    if (!chartEl) return;
+    var canvas = document.createElement('canvas');
+    chartEl.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    var datasets = [];
+    if (cfg.type === 'doughnut' || cfg.type === 'pie') {
+      datasets = [{
+        data: cfg.data.map(function(d) { return d[cfg.valueKey]; }),
+        backgroundColor: cfg.colors
+      }];
+    } else {
+      var c = cfg.colors ? cfg.colors[0] : (color(cfg.color) || '#0D8A3C');
+      var ds = {
+        label: cfg.label || '',
+        data: cfg.data.map(function(d) { return d[cfg.valueKey]; }),
+        backgroundColor: cfg.colors ? cfg.colors : c + '55',
+        borderColor: cfg.colors ? undefined : c,
+        borderWidth: cfg.colors ? undefined : 2
+      };
+      if (cfg.type === 'line') {
+        ds.fill = true;
+        ds.tension = 0.4;
+        ds.pointRadius = 4;
+        ds.pointBackgroundColor = c;
+        ds.backgroundColor = c + '22';
       }
-    }));
-  }
-
-  var ctx2 = getCtx('chart-sectors');
-  if (ctx2) {
-    new Chart(ctx2, Object.assign({}, chartDefaults, {
-      type: 'doughnut',
-      data: {
-        labels: econ.sectors.map(function(d) { return d.name; }),
-        datasets: [{
-          data: econ.sectors.map(function(d) { return d.value; }),
-          backgroundColor: ['#0D8A3C','#1E88E5','#FF9800','#9C27B0','#00BCD4']
-        }]
-      },
-      options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } } } }
-    }));
-  }
-
-  var ctx3 = getCtx('chart-exports');
-  if (ctx3) {
-    new Chart(ctx3, Object.assign({}, chartDefaults, {
-      type: 'bar',
-      data: {
-        labels: econ.exports.map(function(d) { return d.product; }),
-        datasets: [{
-          label: '% des exportations',
-          data: econ.exports.map(function(d) { return d.value; }),
-          backgroundColor: ['#0D8A3C','#FF9800','#1E88E5','#9C27B0','#E91E63','#607D8B'],
-          borderRadius: 4
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        scales: { x: { grid: { color: gridColor }, ticks: { color: textColor } }, y: { grid: { display: false }, ticks: { color: textColor, font: { size: 10 } } } }
+      if (cfg.type === 'bar') {
+        ds.borderRadius = 4;
       }
-    }));
-  }
+      datasets = [ds];
+    }
 
-  var ctx4 = getCtx('chart-population');
-  if (ctx4) {
-    new Chart(ctx4, Object.assign({}, chartDefaults, {
-      type: 'bar',
-      data: {
-        labels: demo.population.map(function(d) { return d.year; }),
-        datasets: [{
-          label: 'Population',
-          data: demo.population.map(function(d) { return d.value; }),
-          backgroundColor: (color('--primary') || '#0D8A3C') + '55',
-          borderColor: color('--primary') || '#0D8A3C',
-          borderWidth: 2, borderRadius: 4
-        }]
-      },
-      options: {
-        scales: { x: { grid: { color: gridColor }, ticks: { color: textColor } }, y: { grid: { color: gridColor }, ticks: { color: textColor, callback: function(v) { return v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v; } } } }
-      }
-    }));
-  }
+    var opts = {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: cfg.type !== 'line' && cfg.type !== 'bar' ? { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 10 } } } : { labels: { font: { size: 11 } } } },
+      scales: {}
+    };
 
-  var ctx5 = getCtx('chart-urbanisation');
-  if (ctx5) {
-    new Chart(ctx5, Object.assign({}, chartDefaults, {
-      type: 'line',
-      data: {
-        labels: demo.urbanisation.map(function(d) { return d.year; }),
-        datasets: [{
-          label: 'Taux d\'urbanisation (%)',
-          data: demo.urbanisation.map(function(d) { return d.value; }),
-          borderColor: color('--secondary') || '#1E88E5',
-          backgroundColor: (color('--secondary') || '#1E88E5') + '22',
-          fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: color('--secondary') || '#1E88E5'
-        }]
-      },
-      options: {
-        scales: { x: { grid: { color: gridColor }, ticks: { color: textColor } }, y: { grid: { color: gridColor }, ticks: { color: textColor, max: 100, callback: function(v) { return v + '%'; } } } }
-      }
-    }));
-  }
+    if (cfg.type !== 'doughnut' && cfg.type !== 'pie') {
+      var xKey = cfg.horizontal ? 'y' : 'x';
+      var yKey = cfg.horizontal ? 'x' : 'y';
+      opts.scales = {};
+      opts.scales[xKey] = { grid: { display: xKey === 'y' ? false : { color: gridColor } }, ticks: { color: textColor() } };
+      opts.scales[yKey] = { grid: { color: gridColor() }, ticks: { color: textColor() } };
+      if (id === 'chart-urbanisation') opts.scales[yKey].ticks.callback = function(v) { return v + '%'; };
+      if (id === 'chart-population') opts.scales[yKey].ticks.callback = function(v) { return v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v; };
+      if (cfg.horizontal) opts.indexAxis = 'y';
+    }
 
-  var ctx6 = getCtx('chart-ethnic');
-  if (ctx6) {
-    new Chart(ctx6, Object.assign({}, chartDefaults, {
-      type: 'pie',
-      data: {
-        labels: demo.ethnicGroups.map(function(d) { return d.group; }),
-        datasets: [{
-          data: demo.ethnicGroups.map(function(d) { return d.value; }),
-          backgroundColor: ['#0D8A3C','#1E88E5','#FF9800','#9C27B0','#E91E63','#00BCD4']
-        }]
-      },
-      options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 10 } } } } }
-    }));
-  }
+    var chart = new Chart(ctx, {
+      type: cfg.type === 'doughnut' ? 'doughnut' : cfg.type,
+      data: { labels: cfg.data.map(function(d) { return d[cfg.labelsKey]; }), datasets: data },
+      options: opts
+    });
+    createdCharts[id] = chart;
+
+    el.querySelector('.flip-back p').textContent = cfg.desc || '';
+  });
+
+  document.querySelectorAll('.chart-container').forEach(function(container) {
+    container.addEventListener('click', function() {
+      this.classList.toggle('flipped');
+      Object.keys(createdCharts).forEach(function(id) {
+        var ch = createdCharts[id];
+        if (ch && ch.resize) setTimeout(function() { ch.resize(); }, 350);
+      });
+    });
+  });
 })();

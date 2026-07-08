@@ -64,6 +64,7 @@ const MAURITANIA = {
       { year: '2023', value: 10.1 },
       { year: '2024', value: 10.4 }
     ],
+    gdpDesc: 'Le PIB mauritanien est passé de 5,8 à 10,4 milliards $ entre 2015 et 2024, soit une croissance moyenne de 6,7% par an. Cette progression est portée par l\'essor minier (fer, or, cuivre) et la hausse des investissements dans les infrastructures.',
     sectors: [
       { name: 'Mines (Fer, Or, Cuivre)', value: 35 },
       { name: 'Pêche', value: 20 },
@@ -71,6 +72,7 @@ const MAURITANIA = {
       { name: 'Services & Télécoms', value: 18 },
       { name: 'Construction & Énergie', value: 12 }
     ],
+    sectorsDesc: 'Le secteur minier domine avec 35% du PIB, grâce aux gisements de fer de Zouérate et aux mines d\'or de Tasiast. La pêche (20%) et les services (18%) complètent le tissu économique. L\'agriculture, bien que minoritaire en valeur, emploie une large part de la population rurale.',
     exports: [
       { product: 'Minerai de fer', value: 42 },
       { product: 'Or', value: 18 },
@@ -78,7 +80,8 @@ const MAURITANIA = {
       { product: 'Cuivre', value: 8 },
       { product: 'Produits pétroliers', value: 6 },
       { product: 'Autres', value: 10 }
-    ]
+    ],
+    exportsDesc: 'Le minerai de fer représente 42% des exportations totales, faisant de la Mauritanie l\'un des principaux exportateurs africains. L\'or (18%) et les produits de la pêche (16%) sont les deuxième et troisième postes, tandis que le cuivre et les hydrocarbures complètent le panier exportateur.'
   },
 
   demographics: {
@@ -92,6 +95,7 @@ const MAURITANIA = {
       { year: 2020, value: 4380000 },
       { year: 2024, value: 4620000 }
     ],
+    popDesc: 'La population mauritanienne est passée de 854 000 habitants en 1960 à 4,62 millions en 2024, soit une multiplication par 5,4 en 64 ans. La croissance démographique reste soutenue avec un taux de fécondité de 4,5 enfants par femme.',
     agePyramid: [
       { age: '0-14 ans', male: 20, female: 19 },
       { age: '15-24 ans', male: 10, female: 10 },
@@ -107,6 +111,7 @@ const MAURITANIA = {
       { group: 'Wolofs', value: 5 },
       { group: 'Bambaras', value: 2 }
     ],
+    ethnicDesc: 'Les Haratines (Maures noirs) forment le groupe le plus nombreux avec 40% de la population, suivis des Beidanes (Maures blancs) avec 30%. Les Peuls (15%), Soninkés (8%), Wolofs (5%) et Bambaras (2%) complètent la mosaïque ethnique du pays.',
     urbanisation: [
       { year: 1960, value: 5 },
       { year: 1970, value: 15 },
@@ -116,7 +121,8 @@ const MAURITANIA = {
       { year: 2010, value: 55 },
       { year: 2020, value: 60 },
       { year: 2024, value: 62 }
-    ]
+    ],
+    urbanDesc: 'L\'urbanisation est passée de 5% en 1960 à 62% en 2024. Nouakchott, partie d\'un petit village à l\'indépendance, concentre aujourd\'hui près d\'un tiers de la population nationale. Cette croissance rapide reflète l\'exode rural et la centralisation économique.'
   },
 
   tourism: [

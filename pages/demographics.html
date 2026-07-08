@@ -84,11 +84,23 @@
     <div class="grid-2">
       <div class="chart-container">
         <div class="chart-title">Évolution de la population</div>
-        <div id="chart-population" data-chart="population"></div>
+        <div class="flip-wrap">
+          <div class="flip-inner">
+            <div class="flip-front"><div id="chart-population" data-chart="population"></div></div>
+            <div class="flip-back"><div class="flip-label">Analyse</div><p></p></div>
+          </div>
+          <div class="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+        </div>
       </div>
       <div class="chart-container">
         <div class="chart-title">Taux d'urbanisation (%)</div>
-        <div id="chart-urbanisation" data-chart="urbanisation"></div>
+        <div class="flip-wrap">
+          <div class="flip-inner">
+            <div class="flip-front"><div id="chart-urbanisation" data-chart="urbanisation"></div></div>
+            <div class="flip-back"><div class="flip-label">Analyse</div><p></p></div>
+          </div>
+          <div class="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+        </div>
       </div>
     </div>
   </div>
@@ -99,7 +111,13 @@
     <div class="grid-2">
       <div class="chart-container">
         <div class="chart-title">Groupes ethniques</div>
-        <div id="chart-ethnic" data-chart="ethnic"></div>
+        <div class="flip-wrap">
+          <div class="flip-inner">
+            <div class="flip-front"><div id="chart-ethnic" data-chart="ethnic"></div></div>
+            <div class="flip-back"><div class="flip-label">Analyse</div><p></p></div>
+          </div>
+          <div class="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+        </div>
       </div>
       <div>
         <div class="chart-title" style="margin-bottom:16px;">Population historique</div>
