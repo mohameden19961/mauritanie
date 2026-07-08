@@ -6,7 +6,7 @@ import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
 
-const regionIcons = ['🏜️', '⛰️', '🌾', '🌿', '🏙️', '⚓'];
+const regionIcons = ['🏜️', '⛰️', '🌾', '⚓', '🌿', '🌴', '🌵', '🌾', '⛏️', '🏙️', '🏛️', '⛰️', '🌊'];
 
 const featureIcons = ['🏜️', '🌊', '🦩', '🏖️', '⛰️'];
 

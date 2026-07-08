@@ -139,11 +139,18 @@ export const MAURITANIA: MauritaniaData = {
   geography: {
     regions: [
       { name: 'Adrar', capital: 'Atar', desc: 'Région désertique avec des paysages spectaculaires de canyons et oasis.' },
-      { name: 'Tagant', capital: 'Tidjikja', desc: 'Région historique avec des plateaux rocheux et des vallées.' },
-      { name: 'Hodh El Chargui', capital: 'Néma', desc: 'Région frontalière à l\'est, zone de transition sahélienne.' },
+      { name: 'Assaba', capital: 'Kiffa', desc: 'Région sahélienne agricole, zone de production de céréales et d\'élevage.' },
       { name: 'Brakna', capital: 'Aleg', desc: 'Région agricole le long du fleuve Sénégal.' },
+      { name: 'Dakhlet Nouadhibou', capital: 'Nouadhibou', desc: 'Centre économique avec le port et l\'industrie de la pêche.' },
+      { name: 'Gorgol', capital: 'Kaédi', desc: 'Région fertile du sud, important bassin agricole et rizicole.' },
+      { name: 'Guidimaka', capital: 'Sélibabi', desc: 'Région méridionale verdoyante, zone de culture du mil et du maïs.' },
+      { name: 'Hodh Ech Chargui', capital: 'Néma', desc: 'Région frontalière à l\'est, zone de transition sahélienne.' },
+      { name: 'Hodh El Gharbi', capital: 'Ayoun el Atrouss', desc: 'Région pastorale et agricole au centre-sud du pays.' },
+      { name: 'Inchiri', capital: 'Akjoujt', desc: 'Région minière du nord-ouest, riche en gisements de cuivre et d\'or.' },
       { name: 'Nouakchott', capital: 'Nouakchott', desc: 'Capitale et plus grande ville, centre économique et politique.' },
-      { name: 'Dakhlet Nouadhibou', capital: 'Nouadhibou', desc: 'Centre économique avec le port et l\'industrie de la pêche.' }
+      { name: 'Tagant', capital: 'Tidjikja', desc: 'Région historique avec des plateaux rocheux et des vallées.' },
+      { name: 'Tiris Zemmour', capital: 'Zouérate', desc: 'Plus grande région, cœur de l\'industrie minière du fer.' },
+      { name: 'Trarza', capital: 'Rosso', desc: 'Région du sud-ouest, zone agricole et d\'élevage le long du fleuve.' }
     ],
     features: [
       { name: 'Désert du Sahara', desc: 'Couvre plus des deux tiers du territoire' },
