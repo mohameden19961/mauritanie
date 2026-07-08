@@ -35,6 +35,9 @@ export default function Cuisine() {
           <div className="cards-grid">
             {MAURITANIA.cuisine.map((item, i) => (
               <div key={i} className="info-card">
+                <figure style={{ margin: '0 0 18px' }}>
+                  <img className="card-image" src={item.image} alt={item.name} />
+                </figure>
                 <h3>{item.name}</h3>
                 <span className={`badge ${badgeClass(item.type)}`}>{item.type}</span>
                 <p style={{ marginTop: 12 }}>{item.desc}</p>

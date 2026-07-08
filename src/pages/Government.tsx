@@ -7,13 +7,13 @@ import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
 
 const govFields = [
-  { label: 'Type de régime', key: 'type' as const },
-  { label: 'Président', key: 'president' as const },
-  { label: 'Premier ministre', key: 'premier' as const },
-  { label: 'Constitution', key: 'constitution' as const },
-  { label: 'Capitale', key: 'capital' as const },
-  { label: 'Subdivisions', key: 'subdivisions' as const },
-  { label: 'Indépendance', key: 'independance' as const },
+  { label: 'Type de régime', key: 'type' as const, image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=420&fit=crop', alt: 'Bâtiment institutionnel' },
+  { label: 'Président', key: 'president' as const, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg/500px-Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg', alt: 'Mohamed Ould Cheikh El Ghazouani, président de la République' },
+  { label: 'Premier ministre', key: 'premier' as const, image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=420&fit=crop', alt: 'Documents gouvernementaux' },
+  { label: 'Constitution', key: 'constitution' as const, image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=420&fit=crop', alt: 'Livre de droit et constitution' },
+  { label: 'Capitale', key: 'capital' as const, image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&h=420&fit=crop', alt: 'Vue urbaine de capitale' },
+  { label: 'Subdivisions', key: 'subdivisions' as const, image: '/images/mauritanie-div-map.gif', alt: 'Carte des wilayas de Mauritanie' },
+  { label: 'Indépendance', key: 'independance' as const, image: '/images/drapeaumauritanie.png', alt: 'Drapeau de la Mauritanie' },
 ];
 
 const timelineEvents = [
@@ -22,6 +22,14 @@ const timelineEvents = [
   { year: '1991', title: 'Nouvelle Constitution', desc: 'Adoption de la Constitution du 20 juillet 1991 instaurant le multipartisme.' },
   { year: '2019', title: 'Transition pacifique', desc: 'Première transition pacifique du pouvoir avec l\'élection de Mohamed Ould Cheikh El Ghazouani.' },
   { year: '2024', title: 'Réélection', desc: 'Réélection de Mohamed Ould Cheikh El Ghazouani pour un second mandat.' },
+];
+
+const governmentHistory = [
+  { title: '1960 - Naissance de l\'État', desc: 'La Mauritanie proclame son indépendance le 28 novembre 1960. Mokhtar Ould Daddah devient le premier président et pose les bases des institutions nationales.' },
+  { title: '1978 - Période militaire', desc: 'Après la guerre du Sahara, un coup d\'État ouvre une longue période de gouvernements militaires et de comités de transition.' },
+  { title: '1991 - Constitution', desc: 'La Constitution du 20 juillet 1991 introduit le multipartisme et structure le régime autour de la présidence, du gouvernement et du parlement.' },
+  { title: '2019 - Alternance pacifique', desc: 'L\'élection de Mohamed Ould Cheikh El Ghazouani marque la première transition pacifique entre deux présidents élus depuis l\'indépendance.' },
+  { title: '2024 - Continuité institutionnelle', desc: 'La réélection du président Ghazouani confirme la continuité du régime semi-présidentiel et la stabilité des institutions contemporaines.' },
 ];
 
 const presidents = [
@@ -66,8 +74,26 @@ export default function Government() {
           <div className="cards-grid">
             {govFields.map((field) => (
               <div key={field.key} className="info-card">
+                <img className="card-image" src={field.image} alt={field.alt} />
                 <h3>{field.label}</h3>
                 <p>{MAURITANIA.government[field.key]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-title">
+            <h2>Historique du gouvernement</h2>
+            <p>Les grandes étapes de l'organisation politique mauritanienne depuis l'indépendance.</p>
+          </div>
+          <div className="cards-grid">
+            {governmentHistory.map((item, i) => (
+              <div key={i} className="info-card">
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
               </div>
             ))}
           </div>

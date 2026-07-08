@@ -36,11 +36,20 @@ const MAURITANIA = {
   geography: {
     regions: [
       { name: 'Adrar', capital: 'Atar', desc: 'Région désertique avec des paysages spectaculaires de canyons et oasis.' },
-      { name: 'Tagant', capital: 'Tidjikja', desc: 'Région historique avec des plateaux rocheux et des vallées.' },
-      { name: 'Hodh El Chargui', capital: 'Néma', desc: 'Région frontalière à l\'est, zone de transition sahélienne.' },
+      { name: 'Assaba', capital: 'Kiffa', desc: 'Région sahélienne du centre-sud, connue pour ses pâturages et ses zones agricoles.' },
       { name: 'Brakna', capital: 'Aleg', desc: 'Région agricole le long du fleuve Sénégal.' },
-      { name: 'Nouakchott', capital: 'Nouakchott', desc: 'Capitale et plus grande ville, centre économique et politique.' },
-      { name: 'Dakhlet Nouadhibou', capital: 'Nouadhibou', desc: 'Centre économique avec le port et l\'industrie de la pêche.' }
+      { name: 'Dakhlet Nouadhibou', capital: 'Nouadhibou', desc: 'Centre économique avec le port et l\'industrie de la pêche.' },
+      { name: 'Gorgol', capital: 'Kaédi', desc: 'Région fertile du sud, marquée par la vallée du fleuve Sénégal.' },
+      { name: 'Guidimakha', capital: 'Sélibaby', desc: 'Région méridionale humide, riche en cultures pluviales et en élevage.' },
+      { name: 'Hodh Ech Chargui', capital: 'Néma', desc: 'Grande région frontalière à l\'est, zone de transition saharo-sahélienne.' },
+      { name: 'Hodh El Gharbi', capital: 'Aïoun', desc: 'Région de l\'est mauritanien, entre plateaux, pâturages et axes caravaniers.' },
+      { name: 'Inchiri', capital: 'Akjoujt', desc: 'Région minière du nord-ouest, connue pour ses paysages arides et ses ressources.' },
+      { name: 'Nouakchott-Nord', capital: 'Dar-Naïm', desc: 'Wilaya urbaine du nord de la capitale, en forte croissance démographique.' },
+      { name: 'Nouakchott-Ouest', capital: 'Tevragh Zeina', desc: 'Wilaya centrale et administrative de la capitale, proche du littoral atlantique.' },
+      { name: 'Nouakchott-Sud', capital: 'Arafat', desc: 'Wilaya densément peuplée du sud de Nouakchott, avec de grands quartiers résidentiels.' },
+      { name: 'Tagant', capital: 'Tidjikja', desc: 'Région historique avec des plateaux rocheux et des vallées.' },
+      { name: 'Tiris Zemmour', capital: 'Zouérate', desc: 'Région minière du nord, au cœur de l\'exploitation du minerai de fer.' },
+      { name: 'Trarza', capital: 'Rosso', desc: 'Région du sud-ouest, ouverte sur le fleuve Sénégal et les échanges avec le Sénégal.' }
     ],
     features: [
       { name: 'Désert du Sahara', desc: 'Couvre plus des deux tiers du territoire' },
@@ -192,42 +201,50 @@ const MAURITANIA = {
     {
       name: 'Thiébou Djeune',
       desc: 'Plat national à base de riz, poisson frais, légumes et sauce tomate épicée.',
-      type: 'Plat principal'
+      type: 'Plat principal',
+      image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&h=420&fit=crop'
     },
     {
       name: 'Maffe',
       desc: 'Ragoût de viande (agneau ou bœuf) dans une sauce à l\'arachide, servi avec du riz.',
-      type: 'Plat principal'
+      type: 'Plat principal',
+      image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&h=420&fit=crop'
     },
     {
       name: 'Couscous',
       desc: 'Semoule de blé accompagnée de viande et légumes, souvent préparé pour les grandes occasions.',
-      type: 'Plat principal'
+      type: 'Plat principal',
+      image: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=800&h=420&fit=crop'
     },
     {
       name: 'Chébakhia',
       desc: 'Pâtisserie frite au miel et à l\'eau de fleur d\'oranger, très populaire pendant le Ramadan.',
-      type: 'Dessert'
+      type: 'Dessert',
+      image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&h=420&fit=crop'
     },
     {
       name: 'Lben',
       desc: 'Lait fermenté traditionnel, boisson rafraîchissante et nourrissante.',
-      type: 'Boisson'
+      type: 'Boisson',
+      image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=800&h=420&fit=crop'
     },
     {
       name: 'Thé à la menthe',
       desc: 'Boisson nationale, servi en trois verres : fort, doux, parfumé.',
-      type: 'Boisson'
+      type: 'Boisson',
+      image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&h=420&fit=crop'
     },
     {
       name: 'Gâteau au mil',
       desc: 'Préparation à base de mil, lait caillé et dattes, riche en saveurs.',
-      type: 'Dessert'
+      type: 'Dessert',
+      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=420&fit=crop'
     },
     {
       name: 'Méchoui',
       desc: 'Agneau rôti à la broche, plat de fête traditionnel.',
-      type: 'Plat principal'
+      type: 'Plat principal',
+      image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800&h=420&fit=crop'
     }
   ],
 

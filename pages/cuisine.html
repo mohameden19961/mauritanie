@@ -163,7 +163,7 @@
   MAURITANIA.cuisine.forEach(function(item) {
     var el = document.createElement('div');
     el.className = 'info-card';
-    el.innerHTML = '<h3>' + item.name + '</h3><span class="badge badge-green">' + item.type + '</span><p style="margin-top:12px;">' + item.desc + '</p>';
+    el.innerHTML = '<figure style="margin:0 0 18px;"><img class="card-image" src="' + item.image + '" alt="' + item.name + '"></figure><h3>' + item.name + '</h3><span class="badge badge-green">' + item.type + '</span><p style="margin-top:12px;">' + item.desc + '</p>';
     container.appendChild(el);
   });
 })();
