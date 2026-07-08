@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Informations — Mauritanie</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <meta name="description" content="Contactez-nous pour en savoir plus sur la Mauritanie. Informations touristiques, culturelles et pratiques sur ce joyau du Sahara ouest-africain.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/data.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+      <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="drapeaumauritanie.png" alt="Drapeau Mauritanie" style="height:24px;width:auto;border-radius:2px;">
+      Mauritanie
+    </a>
+    <button class="mobile-toggle" onclick="toggleMobileNav()"><span class="icon-open">&#8942;</span><span class="icon-close">&#10005;</span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="history.html">Histoire</a></li>
+      <li><a href="tourism.html">Tourisme</a></li>
+      <li><a href="economy.html">Économie</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-overlay" onclick="toggleMobileNav()"></div>
+    <button class="theme-toggle" aria-label="Mode sombre"></button>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span>/</span>
+      <span>Contact</span>
+    </div>
+    <h1>Contact & Informations</h1>
+    <p>Vous souhaitez en savoir plus sur la Mauritanie ? Contactez-nous et notre équipe vous répondra dans les plus brefs délais.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <h2 style="margin-bottom:24px;">Nos coordonnées</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon gold">&#127968;</div>
+            <div>
+              <h4>Adresse</h4>
+              <p>BP 184, Nouakchott, Mauritanie</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon green">&#128222;</div>
+            <div>
+              <h4>Téléphone</h4>
+              <p>+222 45 25 11 00</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon blue">&#9993;</div>
+            <div>
+              <h4>Email</h4>
+              <p>info@mauritanie.tourisme.mr</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon blue">&#127760;</div>
+            <div>
+              <h4>Site Web</h4>
+              <p>www.mauritanie.tourisme.mr</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin-bottom:24px;">Envoyez-nous un message</h2>
+        <form method="POST" action="#">
+          <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Sujet</label>
+            <select id="subject" name="subject" class="form-control" required>
+              <option value="">Choisissez un sujet</option>
+              <option value="tourisme">Tourisme</option>
+              <option value="culture">Culture</option>
+              <option value="investissement">Investissement</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Envoyer le message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt reveal">
+  <div class="container">
+    <div class="section-title">
+      <h2>Questions fréquentes</h2>
+      <p>Réponses aux questions les plus posées sur la Mauritanie.</p>
+    </div>
+    <div class="accordion" style="max-width:700px;margin:0 auto;">
+      <div class="accordion-item">
+        <button class="accordion-btn">Quelle est la meilleure période pour visiter la Mauritanie ?<span class="arrow">&#9660;</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner">La meilleure période s'étend de novembre à février, quand les températures sont clémentes (20-30°C). Évitez les mois d'été (juin-septembre) où la chaleur peut dépasser 45°C dans le nord.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn">Faut-il un visa pour voyager en Mauritanie ?<span class="arrow">&#9660;</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner">Oui, la plupart des visiteurs ont besoin d'un visa. Il peut être obtenu à l'avance auprès d'une ambassade mauritanienne ou à l'arrivée à l'aéroport de Nouakchott pour certains pays.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn">Quelles langues parle-t-on en Mauritanie ?<span class="arrow">&#9660;</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner">L'arabe est la langue officielle. Le français est largement utilisé dans l'administration et les affaires. Le pulaar, le soninké et le wolof sont également parlés.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn">Quelle monnaie utiliser en Mauritanie ?<span class="arrow">&#9660;</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner">La monnaie locale est l'ouguiya (MRU). Les cartes de crédit sont acceptées dans les hôtels et restaurants de Nouakchott. Prévoyez du liquide pour les zones rurales.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3><img src="drapeaumauritanie.png" alt="" style="height:20px;width:auto;vertical-align:middle;margin-right:6px;border-radius:2px;">Mauritanie</h3>
+        <p>Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Accueil</a>
+        <a href="history.html">Histoire</a>
+        <a href="geography.html">Géographie</a>
+        <a href="tourism.html">Tourisme</a>
+        <a href="economy.html">Économie</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="demographics.html">Démographie</a>
+        <a href="government.html">Gouvernement</a>
+        <a href="cuisine.html">Cuisine</a>
+        <a href="gallery.html">Galerie</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@mauritanie.tourisme.mr">info@mauritanie.tourisme.mr</a>
+        <a href="tel:+22245251100">+222 45 25 11 00</a>
+        <a href="#">Nouakchott, Mauritanie</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Mauritanie — Site éducatif. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Retour en haut">&#8593;</button>
+
+<div class="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <img src="" alt="">
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
