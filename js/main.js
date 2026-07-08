@@ -228,39 +228,11 @@ function buildSearchIndex() {
 }
 
 function initSearch() {
-  var toggle = document.querySelector('.search-toggle');
-  var dropdown = document.querySelector('.search-dropdown');
-  var input = document.querySelector('.search-input');
-  var results = document.querySelector('.search-results');
-  if (!toggle || !dropdown || !input || !results) return;
+  var input = document.querySelector('.search-section .search-input');
+  var results = document.querySelector('.search-section .search-results');
+  if (!input || !results) return;
 
   buildSearchIndex();
-
-  toggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    var open = dropdown.classList.contains('open');
-    if (open) {
-      dropdown.classList.remove('open');
-    } else {
-      /* On mobile, close nav menu first */
-      if (window.innerWidth <= 768) {
-        var nav = document.querySelector('.nav-links');
-        var btn = document.querySelector('.mobile-toggle');
-        var overlay = document.querySelector('.nav-overlay');
-        if (nav && nav.classList.contains('open')) {
-          nav.classList.remove('open');
-          if (btn) btn.classList.remove('open');
-          if (overlay) overlay.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-      }
-      dropdown.classList.add('open');
-      setTimeout(function() { input.focus(); }, 100);
-      input.value = '';
-      results.innerHTML = '';
-      results.classList.remove('has-results');
-    }
-  });
 
   input.addEventListener('input', function() {
     var q = input.value.trim().toLowerCase();
@@ -282,16 +254,6 @@ function initSearch() {
       return '<a href="' + h.url + '" class="search-item"><div class="si-title">' + h.title + '</div><div class="si-desc">' + h.desc + '</div></a>';
     }).join('');
     results.classList.add('has-results');
-  });
-
-  document.addEventListener('click', function(e) {
-    if (!dropdown.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
-  });
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') dropdown.classList.remove('open');
   });
 }
 document.addEventListener('DOMContentLoaded', initSearch);
