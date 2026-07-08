@@ -27,27 +27,39 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
 function initStatsCounter() {
   var counters = document.querySelectorAll('.stat-value');
   if (!counters.length) return;
-  counters.forEach(function(counter) {
-    var target = parseInt(counter.getAttribute('data-target'));
-    if (!target) return;
-    var increment = Math.ceil(target / 50);
-    var current = 0;
-    var update = function() {
-      current += increment;
-      if (current >= target) {
-        counter.textContent = target.toLocaleString() + (counter.getAttribute('data-suffix') || '');
-        return;
-      }
-      counter.textContent = current.toLocaleString() + (counter.getAttribute('data-suffix') || '');
-      requestAnimationFrame(update);
-    };
-    update();
-  });
+  var section = counters[0].closest('.stats');
+  if (!section) return;
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      obs.disconnect();
+
+      var duration = 2000;
+      counters.forEach(function(counter) {
+        var target = parseFloat(counter.getAttribute('data-target'));
+        if (!target) { counter.textContent = '0'; return; }
+        var suffix = counter.getAttribute('data-suffix') || '';
+        var startTime = null;
+
+        var step = function(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          counter.textContent = current.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        };
+
+        requestAnimationFrame(step);
+      });
+    });
+  }, { threshold: 0.3 });
+
+  obs.observe(section);
 }
 
-if (document.querySelector('.stat-value')) {
-  initStatsCounter();
-}
+document.addEventListener('DOMContentLoaded', initStatsCounter);
 
 /* ===== DARK MODE ===== */
 function initDarkMode() {
