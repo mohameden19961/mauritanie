@@ -26,8 +26,13 @@
       <li><a href="tourism.html">Tourisme</a></li>
       <li><a href="economy.html">Économie</a></li>
       <li><a href="contact.html" class="active">Contact</a></li>
+      <li class="nav-search"><button class="search-toggle" aria-label="Rechercher">🔍</button></li>
       <li class="nav-theme"><button class="theme-toggle" aria-label="Mode sombre"></button></li>
     </ul>
+    <div class="search-dropdown">
+      <input type="text" class="search-input" placeholder="Rechercher..." autocomplete="off">
+      <div class="search-results"></div>
+    </div>
     <div class="nav-overlay" onclick="toggleMobileNav()"></div>
   </div>
 </header>
