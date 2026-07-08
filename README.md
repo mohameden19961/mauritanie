@@ -54,11 +54,7 @@ npm i -g vercel
 vercel --prod .
 ```
 
-## 📸 Aperçu
 
-| Desktop | Mobile |
-|---|---|
-| ![Desktop](https://mauritanie.vercel.app/drapeaumauritanie.png) | ![Mobile](https://mauritanie.vercel.app/favicon.png) |
 
 ---
 
