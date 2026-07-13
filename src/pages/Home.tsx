@@ -132,41 +132,56 @@ export default function Home() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (heroRef.current) {
-        gsap.fromTo(heroRef.current.querySelector('.hero-content > div'),
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out', clearProps: 'all' }
-        );
-        gsap.fromTo(heroRef.current.querySelector('.hero-image'),
-          { x: 80, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: 'power3.out', clearProps: 'all' }
-        );
+        const heroText = heroRef.current.querySelector('.hero-content > div');
+        const heroGlobe = heroRef.current.querySelector('.hero-content > div:last-child');
+        if (heroText) {
+          gsap.fromTo(heroText,
+            { y: 60, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: 'power3.out', clearProps: 'all' }
+          );
+        }
+        if (heroGlobe) {
+          gsap.fromTo(heroGlobe,
+            { x: 80, opacity: 0 },
+            { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: 'power3.out', clearProps: 'all' }
+          );
+        }
       }
 
       if (featuresRef.current) {
-        gsap.fromTo(featuresRef.current.querySelectorAll('.feature-card'),
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out', clearProps: 'all',
-            scrollTrigger: { trigger: featuresRef.current, start: 'top 85%', once: true }
-          }
-        );
+        const featureCards = featuresRef.current.querySelectorAll('.feature-card');
+        if (featureCards.length) {
+          gsap.fromTo(featureCards,
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out', clearProps: 'all',
+              scrollTrigger: { trigger: featuresRef.current, start: 'top 85%', once: true }
+            }
+          );
+        }
       }
 
       if (newPagesRef.current) {
-        gsap.fromTo(newPagesRef.current.querySelectorAll('.feature-card'),
-          { scale: 0.85, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)', clearProps: 'all',
-            scrollTrigger: { trigger: newPagesRef.current, start: 'top 85%', once: true }
-          }
-        );
+        const newPageCards = newPagesRef.current.querySelectorAll('.feature-card');
+        if (newPageCards.length) {
+          gsap.fromTo(newPageCards,
+            { scale: 0.85, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)', clearProps: 'all',
+              scrollTrigger: { trigger: newPagesRef.current, start: 'top 85%', once: true }
+            }
+          );
+        }
       }
 
       if (testimonialsRef.current) {
-        gsap.fromTo(testimonialsRef.current.querySelectorAll('.card'),
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: 'power2.out', clearProps: 'all',
-            scrollTrigger: { trigger: testimonialsRef.current, start: 'top 85%', once: true }
-          }
-        );
+        const testimonialCards = testimonialsRef.current.querySelectorAll('.card');
+        if (testimonialCards.length) {
+          gsap.fromTo(testimonialCards,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: 'power2.out', clearProps: 'all',
+              scrollTrigger: { trigger: testimonialsRef.current, start: 'top 85%', once: true }
+            }
+          );
+        }
       }
     });
     return () => ctx.revert();
