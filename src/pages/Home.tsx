@@ -27,6 +27,17 @@ const testimonials = [
   { img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face', name: 'Aïcha K.', text: 'L\'accueil des Mauritaniens est chaleureux. Le thé à la menthe est une expérience à part entière.' },
 ];
 
+const newPages = [
+  { to: '/faune', icon: '🦎', title: 'Faune & Flore', desc: 'Espèces emblématiques du Sahara et du Sahel.', color: 'green' },
+  { to: '/langues', icon: '🗣️', title: 'Langues & Culture', desc: 'Cinq langues, cinq univers culturels.', color: 'blue' },
+  { to: '/artisanat', icon: '🧶', title: 'Artisanat', desc: 'Tapis maures, bijoux en argent, poteries.', color: 'gold' },
+  { to: '/musique', icon: '🎵', title: 'Musique & Danse', desc: 'Instruments traditionnels et griots.', color: 'green' },
+  { to: '/education', icon: '📚', title: 'Éducation', desc: 'Écoles coraniques, universités et défis.', color: 'blue' },
+  { to: '/transport', icon: '🚂', title: 'Transport', desc: 'Train des sables, routes et aéroports.', color: 'gold' },
+  { to: '/religion', icon: '🕌', title: 'Religion & Traditions', desc: 'Islam, confréries soufies et fêtes.', color: 'green' },
+  { to: '/sports', icon: '⚽', title: 'Sports', desc: 'Football, lutte et courses de dromadaires.', color: 'blue' },
+];
+
 const historyCards = [
   { icon: '🏛️', year: '1076', label: 'Empire almoravide' },
   { icon: '🇲🇷', year: '1960', label: 'Indépendance' },
@@ -88,6 +99,32 @@ export default function Home() {
       </section>
 
       <StatsSection stats={statsData} />
+
+      <section className="section-alt">
+        <div className="container">
+          <div className="section-title">
+            <h2>Explorer davantage</h2>
+            <p>Découvrez d'autres facettes de la Mauritanie à travers nos pages thématiques.</p>
+          </div>
+          <div className="grid-4">
+            {newPages.map((p) => (
+              <Link
+                key={p.to}
+                to={p.to}
+                className="card feature-card"
+                style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center' }}
+              >
+                <div className={`feature-icon ${p.color}`}>{p.icon}</div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <Link to="/pages" className="btn btn-secondary">Voir toutes les pages</Link>
+          </div>
+        </div>
+      </section>
 
       <section className="section">
         <div className="container">
