@@ -185,7 +185,7 @@ export default function Economy() {
         </div>
       </section>
 
-      <section className="section-alt reveal">
+      <section className="section-alt">
         <div className="container">
           <div className="section-title">
             <h2>Indicateurs économiques</h2>

@@ -207,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="features reveal" ref={featuresRef}>
+      <section className="features" ref={featuresRef}>
         <div className="container">
           <div className="section-title">
             <h2>Pourquoi visiter la Mauritanie ?</h2>

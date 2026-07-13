@@ -125,7 +125,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="section-alt reveal">
+      <section className="section-alt">
         <div className="container">
           <div className="section-title">
             <h2>Notre emplacement</h2>
