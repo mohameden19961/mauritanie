@@ -17,9 +17,17 @@ const pagesList = [
   { to: '/cuisine', icon: '\u{1F37D}\u{FE0F}', title: 'Cuisine', desc: 'Spécialités culinaires et traditions gastronomiques.' },
   { to: '/gallery', icon: '\u{1F5BC}\u{FE0F}', title: 'Galerie', desc: 'Photographies des paysages et scènes de vie.' },
   { to: '/contact', icon: '\u{1F4E7}', title: 'Contact', desc: 'Contactez-nous pour en savoir plus sur la Mauritanie.' },
+  { to: '/faune', icon: '\u{1F3DC}\u{FE0F}', title: 'Faune & Flore', desc: 'Espèces emblématiques et biodiversité du pays.' },
+  { to: '/langues', icon: '\u{1F4DD}', title: 'Langues & Culture', desc: 'Les langues et les traditions orales mauritaniennes.' },
+  { to: '/artisanat', icon: '\u{1F9F5}', title: 'Artisanat', desc: 'Tapis, bijoux, poteries et savoir-faire artisanal.' },
+  { to: '/musique', icon: '\u{1F3B6}', title: 'Musique & Danse', desc: 'Instruments, griots et traditions musicales.' },
+  { to: '/education', icon: '\u{1F4DA}', title: 'Éducation', desc: 'Système éducatif, écoles coraniques et universités.' },
+  { to: '/transport', icon: '\u{1F682}', title: 'Transport', desc: 'Routes, train des sables, aéroports et infrastructures.' },
+  { to: '/religion', icon: '\u{1F54C}', title: 'Religion & Traditions', desc: 'Islam, confréries soufies et fêtes religieuses.' },
+  { to: '/sports', icon: '\u26BD', title: 'Sports', desc: 'Football, lutte, courses de dromadaires et olympisme.' },
 ];
 
-const iconColors = ['green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', 'blue', 'gold', 'green'];
+const iconColors = ['green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', 'blue', 'gold'];
 
 export default function Pages() {
   const [lightboxOpen, setLightboxOpen] = useState(false);

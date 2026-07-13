@@ -10,6 +10,14 @@ import Cuisine from './pages/Cuisine';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import Pages from './pages/Pages';
+import Faune from './pages/Faune';
+import Langues from './pages/Langues';
+import Artisanat from './pages/Artisanat';
+import Musique from './pages/Musique';
+import Education from './pages/Education';
+import Transport from './pages/Transport';
+import Religion from './pages/Religion';
+import Sports from './pages/Sports';
 
 function App() {
   return (
@@ -26,6 +34,14 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/pages" element={<Pages />} />
+        <Route path="/faune" element={<Faune />} />
+        <Route path="/langues" element={<Langues />} />
+        <Route path="/artisanat" element={<Artisanat />} />
+        <Route path="/musique" element={<Musique />} />
+        <Route path="/education" element={<Education />} />
+        <Route path="/transport" element={<Transport />} />
+        <Route path="/religion" element={<Religion />} />
+        <Route path="/sports" element={<Sports />} />
       </Routes>
     </BrowserRouter>
   );

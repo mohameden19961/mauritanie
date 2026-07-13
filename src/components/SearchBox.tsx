@@ -27,6 +27,14 @@ export default function SearchBox() {
       { keywords: 'Galerie photos Mauritanie', title: 'Galerie', desc: 'Galerie photos de la Mauritanie', url: '/gallery' },
       { keywords: 'Contact informations pratiques Mauritanie', title: 'Contact', desc: 'Contact et informations pratiques sur la Mauritanie', url: '/contact' },
       { keywords: 'Toutes les pages plan du site', title: 'Toutes les pages', desc: 'Plan du site — toutes les pages disponibles', url: '/pages' },
+      { keywords: 'Faune flore animaux oiseaux Sahel Sahara Banc d\'Arguin', title: 'Faune & Flore', desc: 'Espèces emblématiques, ornithologie et flore désertique', url: '/faune' },
+      { keywords: 'Langues culture arabe français pulaar soninké wolof traditions orales', title: 'Langues & Culture', desc: 'Langues, traditions orales et proverbes mauritaniens', url: '/langues' },
+      { keywords: 'Artisanat tapis bijoux poterie cuir bois sculpture artisanal', title: 'Artisanat', desc: 'Tapis maures, bijoux en argent, poteries et cuirs', url: '/artisanat' },
+      { keywords: 'Musique danse instruments tidinit ardin tbal griots chants', title: 'Musique & Danse', desc: 'Instruments traditionnels, griots et danses', url: '/musique' },
+      { keywords: 'Éducation école université alphabétisation coranique mahadra', title: 'Éducation', desc: 'Système éducatif, universités et écoles coraniques', url: '/education' },
+      { keywords: 'Transport route train sable aéroport port dromadaire infrastructure', title: 'Transport & Infrastructures', desc: 'Routes, train des sables, aéroports et ports', url: '/transport' },
+      { keywords: 'Religion islam mosquée marabout Ramadan confrérie soufie fête', title: 'Religion & Traditions', desc: 'Islam, confréries soufies et fêtes religieuses', url: '/religion' },
+      { keywords: 'Sports football lutte dromadaire cyclisme olympique CAN', title: 'Sports', desc: 'Football, lutte traditionnelle, courses de chameaux', url: '/sports' },
     ];
 
     const d = MAURITANIA;
