@@ -56,110 +56,57 @@ function Globe() {
   useEffect(() => {
     if (!containerRef.current) return;
     const el = containerRef.current;
-    const w = 360, h = 360;
+    const w = 280, h = 280;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
-    camera.position.set(0, 0.3, 4);
+    const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
+    camera.position.z = 3.2;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
     el.appendChild(renderer.domElement);
 
-    const group = new THREE.Group();
-    scene.add(group);
-
-    const geo = new THREE.SphereGeometry(1.4, 128, 128);
-    const mat = new THREE.MeshStandardMaterial({
+    const geo = new THREE.SphereGeometry(1.2, 64, 64);
+    const mat = new THREE.MeshPhongMaterial({
       color: 0x0d8a3c,
-      roughness: 0.35,
-      metalness: 0.15,
-      emissive: 0x064d22,
-      emissiveIntensity: 0.3,
+      emissive: 0x1a5c3a,
+      shininess: 25,
+      transparent: true,
+      opacity: 0.85,
     });
     const globe = new THREE.Mesh(geo, mat);
-    group.add(globe);
+    scene.add(globe);
 
-    const landGeo = new THREE.SphereGeometry(1.405, 128, 128);
-    const landMat = new THREE.MeshStandardMaterial({
-      color: 0xd4af37,
-      roughness: 0.5,
-      metalness: 0.1,
-      transparent: true,
-      opacity: 0.4,
-    });
-    const landOverlay = new THREE.Mesh(landGeo, landMat);
-    group.add(landOverlay);
+    const wireGeo = new THREE.SphereGeometry(1.22, 32, 32);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.08 });
+    const wire = new THREE.Mesh(wireGeo, wireMat);
+    scene.add(wire);
 
-    const latLines = [0, 23.5, -23.5, 45, -45, 66.5, -66.5];
-    latLines.forEach(lat => {
-      const r = 1.42 * Math.cos(lat * Math.PI / 180);
-      const y = 1.42 * Math.sin(lat * Math.PI / 180);
-      const curve = new THREE.EllipseCurve(0, 0, r, r, 0, 2 * Math.PI, false, 0);
-      const points = curve.getPoints(64);
-      const lineGeo = new THREE.BufferGeometry().setFromPoints(points.map(p => new THREE.Vector3(p.x, y, p.y)));
-      const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 });
-      group.add(new THREE.Line(lineGeo, lineMat));
-    });
-
-    const lonLines = 12;
-    for (let i = 0; i < lonLines; i++) {
-      const angle = (i / lonLines) * Math.PI;
-      const pts: THREE.Vector3[] = [];
-      for (let j = 0; j <= 64; j++) {
-        const phi = (j / 64) * Math.PI;
-        pts.push(new THREE.Vector3(
-          1.42 * Math.sin(phi) * Math.cos(angle),
-          1.42 * Math.cos(phi),
-          1.42 * Math.sin(phi) * Math.sin(angle)
-        ));
-      }
-      const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
-      const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
-      group.add(new THREE.Line(lineGeo, lineMat));
-    }
-
-    const spotGeo = new THREE.SphereGeometry(0.05, 16, 16);
-    const spotMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, emissive: 0xd4af37, emissiveIntensity: 0.8 });
+    const spotGeo = new THREE.SphereGeometry(0.04, 16, 16);
+    const spotMat = new THREE.MeshBasicMaterial({ color: 0xd4af37 });
     const spot = new THREE.Mesh(spotGeo, spotMat);
     const phi = (90 - 18.07) * (Math.PI / 180);
     const theta = (-15.96) * (Math.PI / 180);
     spot.position.set(
-      1.44 * Math.sin(phi) * Math.cos(theta),
-      1.44 * Math.cos(phi),
-      1.44 * Math.sin(phi) * Math.sin(theta)
+      -1.22 * Math.sin(phi) * Math.cos(theta),
+      1.22 * Math.cos(phi),
+      1.22 * Math.sin(phi) * Math.sin(theta)
     );
-    group.add(spot);
+    scene.add(spot);
 
-    const ringGeo = new THREE.RingGeometry(0.08, 0.12, 32);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.copy(spot.position);
-    ring.lookAt(0, 0, 0);
-    group.add(ring);
-
-    const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    dirLight.position.set(5, 4, 5);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 3, 5);
     scene.add(dirLight);
-    const rimLight = new THREE.DirectionalLight(0x88bbff, 0.6);
-    rimLight.position.set(-3, 2, -4);
-    scene.add(rimLight);
-    const bottomLight = new THREE.PointLight(0xffffff, 0.3);
-    bottomLight.position.set(0, -3, 2);
-    scene.add(bottomLight);
 
     let animId: number;
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      group.rotation.y += 0.004;
-      spot.rotation.y += 0.004;
-      ring.rotation.y += 0.004;
-      group.rotation.x = Math.sin(Date.now() * 0.0003) * 0.05;
+      globe.rotation.y += 0.003;
+      wire.rotation.y += 0.003;
+      spot.rotation.y += 0.003;
       renderer.render(scene, camera);
     };
     animate();
@@ -171,17 +118,7 @@ function Globe() {
     };
   }, []);
 
-  return (
-    <div style={{ position: 'relative', width: 360, height: 360, margin: '0 auto' }}>
-      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
-      <div style={{
-        position: 'absolute', bottom: 10, left: '50%', transform: 'translateX(-50%)',
-        width: 180, height: 20, borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(13,138,60,0.25) 0%, transparent 70%)',
-        filter: 'blur(8px)', pointerEvents: 'none',
-      }} />
-    </div>
-  );
+  return <div ref={containerRef} style={{ width: 280, height: 280, margin: '0 auto' }} />;
 }
 
 export default function Home() {

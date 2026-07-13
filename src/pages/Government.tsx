@@ -193,7 +193,7 @@ export default function Government() {
           </div>
           <div className="accordion" style={{ maxWidth: 700, margin: '0 auto' }}>
             {faqItems.map((item, i) => (
-              <div key={i} className="accordion-item">
+              <div key={i} className={`accordion-item${openFaq === i ? ' open' : ''}`}>
                 <button
                   className="accordion-btn"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
