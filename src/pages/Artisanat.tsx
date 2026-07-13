@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import * as fabric from 'fabric';
+import Swal from 'sweetalert2';
 
 const crafts = [
   {
@@ -50,6 +52,169 @@ const crafts = [
   }
 ];
 
+function PatternEditor() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fabricRef = useRef<fabric.Canvas | null>(null);
+  const [tool, setTool] = useState<'rect' | 'circle' | 'line' | 'diamond' | 'zigzag'>('rect');
+  const [color, setColor] = useState('#0d8a3c');
+
+  const colors = ['#0d8a3c', '#1a73e8', '#d4af37', '#8B4513', '#2e8b57', '#cd853f', '#dc143c', '#4a4a4a', '#ffffff'];
+
+  useEffect(() => {
+    if (!canvasRef.current || fabricRef.current) return;
+    const canvas = new fabric.Canvas(canvasRef.current, {
+      width: 600,
+      height: 400,
+      backgroundColor: '#f5f0e8',
+    });
+    fabricRef.current = canvas;
+
+    const drawBasePattern = () => {
+      for (let x = 0; x < 600; x += 60) {
+        canvas.add(new fabric.Line([x, 0, x, 400], { stroke: '#d4c5a0', strokeWidth: 0.5, selectable: false }));
+      }
+      for (let y = 0; y < 400; y += 60) {
+        canvas.add(new fabric.Line([0, y, 600, y], { stroke: '#d4c5a0', strokeWidth: 0.5, selectable: false }));
+      }
+      const border = new fabric.Rect({
+        left: 15, top: 15, width: 570, height: 370,
+        fill: 'transparent', stroke: '#8B4513', strokeWidth: 3, selectable: false,
+      });
+      canvas.add(border);
+    };
+    drawBasePattern();
+
+    return () => { canvas.dispose(); fabricRef.current = null; };
+  }, []);
+
+  const addObject = () => {
+    const canvas = fabricRef.current;
+    if (!canvas) return;
+    const cx = 300, cy = 200;
+    let obj: fabric.Object;
+
+    switch (tool) {
+      case 'rect':
+        obj = new fabric.Rect({ left: cx - 40, top: cy - 25, width: 80, height: 50, fill: 'transparent', stroke: color, strokeWidth: 2, angle: 0 });
+        break;
+      case 'circle':
+        obj = new fabric.Circle({ left: cx - 30, top: cy - 30, radius: 30, fill: 'transparent', stroke: color, strokeWidth: 2 });
+        break;
+      case 'line':
+        obj = new fabric.Line([cx - 50, cy, cx + 50, cy], { stroke: color, strokeWidth: 2 });
+        break;
+      case 'diamond': {
+        const pts = [{ x: cx, y: cy - 35 }, { x: cx + 45, y: cy }, { x: cx, y: cy + 35 }, { x: cx - 45, y: cy }];
+        obj = new fabric.Polygon(pts, { fill: 'transparent', stroke: color, strokeWidth: 2 });
+        break;
+      }
+      case 'zigzag': {
+        const zigPts: { x: number; y: number }[] = [];
+        for (let i = 0; i <= 6; i++) {
+          zigPts.push({ x: cx - 90 + i * 30, y: cy + (i % 2 === 0 ? -20 : 20) });
+        }
+        obj = new fabric.Polyline(zigPts, { fill: 'transparent', stroke: color, strokeWidth: 2 });
+        break;
+      }
+      default:
+        return;
+    }
+    canvas.add(obj);
+    canvas.setActiveObject(obj);
+    canvas.renderAll();
+  };
+
+  const duplicatePattern = () => {
+    const canvas = fabricRef.current;
+    if (!canvas) return;
+    const json = canvas.toJSON();
+    const objects = json.objects || [];
+    objects.forEach((obj: Record<string, unknown>) => {
+      obj.left = ((obj.left as number) || 0) + 600;
+      obj.top = ((obj.top as number) || 0) + 400;
+    });
+    canvas.loadFromJSON({ version: json.version, objects }, () => {
+      canvas.renderAll();
+    });
+    Swal.fire({
+      title: 'Motif dupliqué !',
+      text: 'Le motif a été répété pour créer un effet de tissage.',
+      icon: 'info',
+      confirmButtonColor: '#0d8a3c',
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  };
+
+  const clearCanvas = () => {
+    const canvas = fabricRef.current;
+    if (!canvas) return;
+    canvas.clear();
+    canvas.backgroundColor = '#f5f0e8';
+    for (let x = 0; x < 600; x += 60) {
+      canvas.add(new fabric.Line([x, 0, x, 400], { stroke: '#d4c5a0', strokeWidth: 0.5, selectable: false }));
+    }
+    for (let y = 0; y < 400; y += 60) {
+      canvas.add(new fabric.Line([0, y, 600, y], { stroke: '#d4c5a0', strokeWidth: 0.5, selectable: false }));
+    }
+    canvas.add(new fabric.Rect({
+      left: 15, top: 15, width: 570, height: 370,
+      fill: 'transparent', stroke: '#8B4513', strokeWidth: 3, selectable: false,
+    }));
+    canvas.renderAll();
+  };
+
+  const exportCanvas = () => {
+    const canvas = fabricRef.current;
+    if (!canvas) return;
+    const dataURL = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.download = 'motif-mauritanien.png';
+    link.href = dataURL;
+    link.click();
+  };
+
+  return (
+    <div style={{ marginTop: 16 }}>
+      <div className="card" style={{ padding: 20, marginBottom: 16 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 16 }}>
+          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Forme :</span>
+          {(['rect', 'circle', 'line', 'diamond', 'zigzag'] as const).map(t => (
+            <button key={t} onClick={() => setTool(t)} className={`btn ${tool === t ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
+              {t === 'rect' ? '矩形' : t === 'circle' ? 'Cercle' : t === 'line' ? 'Ligne' : t === 'diamond' ? 'Losange' : 'Zigzag'}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 16 }}>
+          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Couleur :</span>
+          {colors.map(c => (
+            <button
+              key={c}
+              onClick={() => setColor(c)}
+              style={{
+                width: 28, height: 28, borderRadius: '50%', border: color === c ? '3px solid #333' : '2px solid #ccc',
+                background: c, cursor: 'pointer', transition: '0.2s',
+              }}
+            />
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          <button onClick={addObject} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Ajouter</button>
+          <button onClick={duplicatePattern} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Répéter le motif</button>
+          <button onClick={clearCanvas} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Effacer</button>
+          <button onClick={exportCanvas} className="btn btn-accent" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Télécharger PNG</button>
+        </div>
+      </div>
+      <div style={{ overflow: 'auto', border: '1px solid var(--glass-border)', borderRadius: 'var(--radius-md)' }}>
+        <canvas ref={canvasRef} />
+      </div>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 8, textAlign: 'center' }}>
+        Cliquez sur un objet pour le déplacer, redimensionner ou tourner. Glissez pour créer des motifs traditionnels mauritaniens.
+      </p>
+    </div>
+  );
+}
+
 export default function Artisanat() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
@@ -87,6 +252,16 @@ export default function Artisanat() {
       </section>
 
       <section className="section-alt">
+        <div className="container">
+          <div className="section-title">
+            <h2>Créez votre motif traditionnel</h2>
+            <p>Utilisez cet éditeur interactif pour créer des motifs inspirés de l'artisanat mauritanien.</p>
+          </div>
+          <PatternEditor />
+        </div>
+      </section>
+
+      <section className="section">
         <div className="container">
           <div className="section-title">
             <h2>Les marchés artisanaux</h2>

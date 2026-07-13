@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -6,6 +6,11 @@ import StatsSection from '../components/StatsSection';
 import SearchBox from '../components/SearchBox';
 import Lightbox from '../components/Lightbox';
 import BackToTop from '../components/BackToTop';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const statsData = [
   { value: '1 030 700 km²', label: 'Superficie', icon: '🌍', num: 1030700, suffix: ' km²' },
@@ -45,20 +50,125 @@ const historyCards = [
   { icon: '🎓', year: '2019', label: 'Transition démocratique' },
 ];
 
+function Globe() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const el = containerRef.current;
+    const w = 280, h = 280;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
+    camera.position.z = 3.2;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    el.appendChild(renderer.domElement);
+
+    const geo = new THREE.SphereGeometry(1.2, 64, 64);
+    const mat = new THREE.MeshPhongMaterial({
+      color: 0x0d8a3c,
+      emissive: 0x1a5c3a,
+      shininess: 25,
+      transparent: true,
+      opacity: 0.85,
+    });
+    const globe = new THREE.Mesh(geo, mat);
+    scene.add(globe);
+
+    const wireGeo = new THREE.SphereGeometry(1.22, 32, 32);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.08 });
+    const wire = new THREE.Mesh(wireGeo, wireMat);
+    scene.add(wire);
+
+    const spotGeo = new THREE.SphereGeometry(0.04, 16, 16);
+    const spotMat = new THREE.MeshBasicMaterial({ color: 0xd4af37 });
+    const spot = new THREE.Mesh(spotGeo, spotMat);
+    const phi = (90 - 18.07) * (Math.PI / 180);
+    const theta = (-15.96) * (Math.PI / 180);
+    spot.position.set(
+      -1.22 * Math.sin(phi) * Math.cos(theta),
+      1.22 * Math.cos(phi),
+      1.22 * Math.sin(phi) * Math.sin(theta)
+    );
+    scene.add(spot);
+
+    const ambLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 3, 5);
+    scene.add(dirLight);
+
+    let animId: number;
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      globe.rotation.y += 0.003;
+      wire.rotation.y += 0.003;
+      spot.rotation.y += 0.003;
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      renderer.dispose();
+      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
+    };
+  }, []);
+
+  return <div ref={containerRef} style={{ width: 280, height: 280, margin: '0 auto' }} />;
+}
+
 export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc, _setLightboxSrc] = useState('');
+  const heroRef = useRef<HTMLElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const newPagesRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
 
-  const openLightbox = (src: string) => {
-    _setLightboxSrc(src);
-    setLightboxOpen(true);
-  };
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (heroRef.current) {
+        gsap.from(heroRef.current.querySelector('.hero-content > div'), {
+          y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+        });
+        gsap.from(heroRef.current.querySelector('.hero-image'), {
+          x: 80, opacity: 0, duration: 1, delay: 0.3, ease: 'power3.out',
+        });
+      }
+
+      if (featuresRef.current) {
+        gsap.from(featuresRef.current.querySelectorAll('.feature-card'), {
+          scrollTrigger: { trigger: featuresRef.current, start: 'top 80%' },
+          y: 50, opacity: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out',
+        });
+      }
+
+      if (newPagesRef.current) {
+        gsap.from(newPagesRef.current.querySelectorAll('.feature-card'), {
+          scrollTrigger: { trigger: newPagesRef.current, start: 'top 80%' },
+          scale: 0.85, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)',
+        });
+      }
+
+      if (testimonialsRef.current) {
+        gsap.from(testimonialsRef.current.querySelectorAll('.card'), {
+          scrollTrigger: { trigger: testimonialsRef.current, start: 'top 80%' },
+          y: 40, opacity: 0, duration: 0.6, stagger: 0.2, ease: 'power2.out',
+        });
+      }
+    });
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
       <Header />
 
-      <section className="hero">
+      <section className="hero" ref={heroRef}>
         <div className="container">
           <div className="hero-content">
             <div>
@@ -69,18 +179,12 @@ export default function Home() {
                 <Link to="/history" className="btn btn-secondary">Découvrir l'histoire</Link>
               </div>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=420&fit=crop"
-              alt="Paysage mauritanien"
-              className="hero-image"
-              onClick={() => openLightbox('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop')}
-              style={{ cursor: 'pointer' }}
-            />
+            <Globe />
           </div>
         </div>
       </section>
 
-      <section className="features reveal">
+      <section className="features reveal" ref={featuresRef}>
         <div className="container">
           <div className="section-title">
             <h2>Pourquoi visiter la Mauritanie ?</h2>
@@ -100,7 +204,7 @@ export default function Home() {
 
       <StatsSection stats={statsData} />
 
-      <section className="section-alt">
+      <section className="section-alt" ref={newPagesRef}>
         <div className="container">
           <div className="section-title">
             <h2>Explorer davantage</h2>
@@ -150,7 +254,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-alt">
+      <section className="section-alt" ref={testimonialsRef}>
         <div className="container">
           <div className="section-title">
             <h2>Ce que disent les voyageurs</h2>

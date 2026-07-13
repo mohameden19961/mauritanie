@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { MAURITANIA } from '../types/data';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import Swal from 'sweetalert2';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { useEffect } from 'react';
 
 const contactItems = [
   { icon: '\u{1F3E0}', iconClass: 'gold', label: 'Adresse', value: MAURITANIA.contact.address },
@@ -13,9 +17,43 @@ const contactItems = [
   { icon: '\u{1F310}', iconClass: 'blue', label: 'Site Web', value: MAURITANIA.contact.website },
 ];
 
+function ContactMap() {
+  const mapRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const map = L.map(mapRef.current, { center: [18.09, -15.98], zoom: 13, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+    const icon = L.divIcon({
+      html: '<div style="width:20px;height:20px;background:#0d8a3c;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+      className: '', iconSize: [20, 20], iconAnchor: [10, 10],
+    });
+    L.marker([18.09, -15.98], { icon }).addTo(map).bindPopup('<b>Nouakchott, Mauritanie</b><br>BP 184');
+    setTimeout(() => map.invalidateSize(), 300);
+    return () => { map.remove(); };
+  }, []);
+  return <div ref={mapRef} style={{ width: '100%', height: 400, borderRadius: 'var(--radius-md)', border: '1px solid var(--glass-border)' }} />;
+}
+
 export default function Contact() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Message envoyé !',
+      html: `<p>Merci <b>${formData.name}</b> pour votre message.</p><p>Nous vous répondrons à <b>${formData.email}</b> dans les plus brefs délais.</p>`,
+      icon: 'success',
+      confirmButtonColor: '#0d8a3c',
+      confirmButtonText: 'Parfait !',
+      background: 'var(--card-bg)',
+      color: 'var(--text)',
+      customClass: { popup: 'swal-popup' },
+    }).then(() => {
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    });
+  };
 
   return (
     <>
@@ -45,18 +83,27 @@ export default function Contact() {
             </div>
             <div>
               <h2 style={{ marginBottom: 24 }}>Envoyez-nous un message</h2>
-              <form method="POST" action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Nom complet</label>
-                  <input type="text" id="name" name="name" className="form-control" placeholder="Votre nom" required />
+                  <input
+                    type="text" id="name" name="name" className="form-control" placeholder="Votre nom" required
+                    value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Adresse email</label>
-                  <input type="email" id="email" name="email" className="form-control" placeholder="votre@email.com" required />
+                  <input
+                    type="email" id="email" name="email" className="form-control" placeholder="votre@email.com" required
+                    value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="subject">Sujet</label>
-                  <select id="subject" name="subject" className="form-control" required>
+                  <select
+                    id="subject" name="subject" className="form-control" required
+                    value={formData.subject} onChange={e => setFormData(p => ({ ...p, subject: e.target.value }))}
+                  >
                     <option value="">Choisissez un sujet</option>
                     <option value="tourisme">Tourisme</option>
                     <option value="culture">Culture</option>
@@ -66,7 +113,10 @@ export default function Contact() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" className="form-control" placeholder="Votre message..." required></textarea>
+                  <textarea
+                    id="message" name="message" className="form-control" placeholder="Votre message..." required
+                    value={formData.message} onChange={e => setFormData(p => ({ ...p, message: e.target.value }))}
+                  ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Envoyer le message</button>
               </form>
@@ -81,22 +131,7 @@ export default function Contact() {
             <h2>Notre emplacement</h2>
             <p>Retrouvez-nous à Nouakchott, la capitale mauritanienne.</p>
           </div>
-          <div
-            style={{
-              width: '100%',
-              height: 400,
-              borderRadius: 'var(--radius-md)',
-              background: 'var(--card-bg)',
-              border: '1px solid var(--glass-border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--text-secondary)',
-              fontSize: '1.1rem',
-            }}
-          >
-            Carte interactive - Nouakchott, Mauritanie
-          </div>
+          <ContactMap />
         </div>
       </section>
 
