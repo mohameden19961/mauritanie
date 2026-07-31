@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer-brand">
             <h3>
               <img src="/images/drapeaumauritanie.png" alt="" style={{ height: 20, width: 'auto', verticalAlign: 'middle', marginRight: 6, borderRadius: 2 }} />
-              Mauritanie
+              {t('Mauritanie')}
             </h3>
             <p>{t("Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.")}</p>
             <a href="https://github.com/mohameden19961/mauritanie" target="_blank" rel="noopener" className="footer-github">
