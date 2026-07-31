@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const animals = [
   {
@@ -68,21 +69,22 @@ const birds = [
 export default function Faune() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Faune & Flore"
-        description="Du Sahara au littoral atlantique, la Mauritanie abrite une biodiversité surprenante entre désert brûlant, oasis verdoyantes et eaux poissonneuses."
+        title={t('Faune & Flore')}
+        description={t("Du Sahara au littoral atlantique, la Mauritanie abrite une biodiversité surprenante entre désert brûlant, oasis verdoyantes et eaux poissonneuses.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Espèces emblématiques</h2>
-            <p>La faune mauritanienne, mélange unique de espèces sahariennes et sahéliennes.</p>
+            <h2>{t('Espèces emblématiques')}</h2>
+            <p>{t("La faune mauritanienne, mélange unique de espèces sahariennes et sahéliennes.")}</p>
           </div>
           <div className="cards-grid">
             {animals.map((animal, i) => (
@@ -91,17 +93,17 @@ export default function Faune() {
                   style={{ margin: '0 0 18px', cursor: 'pointer' }}
                   onClick={() => { setLightboxSrc(animal.image); setLightboxOpen(true); }}
                 >
-                  <img className="card-image" src={animal.image} alt={animal.name} />
+                  <img className="card-image" src={animal.image} alt={t(animal.name)} />
                 </figure>
-                <h3>{animal.name}</h3>
+                <h3>{t(animal.name)}</h3>
                 <span className={`badge ${animal.status.includes('danger') ? 'badge-gold' : animal.status.includes('Vulnérable') ? 'badge-blue' : 'badge-green'}`}>
-                  {animal.status}
+                  {t(animal.status)}
                 </span>
-                <p style={{ marginTop: 12, fontSize: '0.95rem' }}>{animal.desc}</p>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 8 }}>{animal.habitat}</p>
+                <p style={{ marginTop: 12, fontSize: '0.95rem' }}>{t(animal.desc)}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 8 }}>{t(animal.habitat)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{animal.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(animal.detail)}</p>
                 </details>
               </div>
             ))}
@@ -112,21 +114,21 @@ export default function Faune() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Ornithologie au Banc d'Arguin</h2>
-            <p>Un paradis pour les ornithologues du monde entier.</p>
+            <h2>{t("Ornithologie au Banc d'Arguin")}</h2>
+            <p>{t('Un paradis pour les ornithologues du monde entier.')}</p>
           </div>
           <div style={{ marginBottom: 32 }}>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', marginBottom: 24 }}>
-              Le Parc National du Banc d'Arguin est l'un des sites ornithologiques les plus importants d'Afrique. Classé au patrimoine mondial de l'UNESCO depuis 1989, il accueille chaque année plus de 2 millions d'oiseaux migrateurs venus d'Europe et d'Asie. Les eaux peu profondes des lagons, riches en poissons et invertébrés, offrent un festin inégalé pour les flamants, pélicans, sternes, hérons et de nombreuses autres espèces.
+              {t("Le Parc National du Banc d'Arguin est l'un des sites ornithologiques les plus importants d'Afrique. Classé au patrimoine mondial de l'UNESCO depuis 1989, il accueille chaque année plus de 2 millions d'oiseaux migrateurs venus d'Europe et d'Asie. Les eaux peu profondes des lagons, riches en poissons et invertébrés, offrent un festin inégalé pour les flamants, pélicans, sternes, hérons et de nombreuses autres espèces.")}
             </p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
             {birds.map((bird, i) => (
               <div key={i} className="info-card" style={{ textAlign: 'center', padding: '24px 16px' }}>
                 <div className="feature-icon blue" style={{ margin: '0 auto 12px' }}>{'{ }\uFE0F'}</div>
-                <h3 style={{ fontSize: '1.1rem' }}>{bird.name}</h3>
+                <h3 style={{ fontSize: '1.1rem' }}>{t(bird.name)}</h3>
                 <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)', margin: '8px 0' }}>{bird.count}</div>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{bird.zone}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{t(bird.zone)}</p>
               </div>
             ))}
           </div>
@@ -136,19 +138,19 @@ export default function Faune() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Flore désertique</h2>
-            <p>La vie végétale s'adapte aux conditions extrêmes du Sahara.</p>
+            <h2>{t('Flore désertique')}</h2>
+            <p>{t("La vie végétale s'adapte aux conditions extrêmes du Sahara.")}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Malgré l'aridité extrême du Sahara, la Mauritanie abrite une flore surprenante. Les acacias, les tamaris et les dattiers d'Oasis forment des écrans de verdure au cœur du désert. Dans le sud, le long du fleuve Sénégal, une végétation plus dense se développe : baobabs, fromagers et manguiers créent une bordure verte qui contraste avec l'immensité sableuse. Les plantes médicinales traditionnelles, comme le guelguet et le moringa, jouent un rôle essentiel dans la pharmacopée locale.
+                {t("Malgré l'aridité extrême du Sahara, la Mauritanie abrite une flore surprenante. Les acacias, les tamaris et les dattiers d'Oasis forment des écrans de verdure au cœur du désert. Dans le sud, le long du fleuve Sénégal, une végétation plus dense se développe : baobabs, fromagers et manguiers créent une bordure verte qui contraste avec l'immensité sableuse. Les plantes médicinales traditionnelles, comme le guelguet et le moringa, jouent un rôle essentiel dans la pharmacopée locale.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop"
-                alt="Paysage désertique mauritanien"
+                alt={t('Paysage désertique mauritanien')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const indicators = [
   { label: 'Taux d\'alphabétisation', value: '52%', trend: '↑ en hausse', color: 'green' },
@@ -47,28 +48,29 @@ const universities = [
 export default function Education() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Éducation"
-        description="L'éducation en Mauritanie est en pleine transformation, entre héritage des écoles coraniques et modernisation du système scolaire."
+        title={t('Éducation')}
+        description={t("L'éducation en Mauritanie est en pleine transformation, entre héritage des écoles coraniques et modernisation du système scolaire.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Indicateurs clés</h2>
-            <p>État des lieux du système éducatif mauritanien.</p>
+            <h2>{t('Indicateurs clés')}</h2>
+            <p>{t('État des lieux du système éducatif mauritanien.')}</p>
           </div>
           <div className="stats-grid">
             {indicators.map((ind, i) => (
               <div key={i} className="stat-card">
                 <div className="stat-value">{ind.value}</div>
-                <div className="stat-label">{ind.label}</div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--accent)', marginTop: 4 }}>{ind.trend}</div>
+                <div className="stat-label">{t(ind.label)}</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--accent)', marginTop: 4 }}>{t(ind.trend)}</div>
               </div>
             ))}
           </div>
@@ -78,18 +80,18 @@ export default function Education() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Défis et enjeux</h2>
-            <p>Les obstacles à surmonter pour une éducation pour tous.</p>
+            <h2>{t('Défis et enjeux')}</h2>
+            <p>{t('Les obstacles à surmonter pour une éducation pour tous.')}</p>
           </div>
           <div className="cards-grid">
             {challenges.map((ch, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${i % 2 === 0 ? 'green' : 'blue'}`} style={{ margin: '0 0 16px' }}>{ch.icon}</div>
-                <h3>{ch.title}</h3>
-                <p style={{ marginTop: 8 }}>{ch.desc}</p>
+                <h3>{t(ch.title)}</h3>
+                <p style={{ marginTop: 8 }}>{t(ch.desc)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{ch.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(ch.detail)}</p>
                 </details>
               </div>
             ))}
@@ -100,17 +102,17 @@ export default function Education() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Universités du pays</h2>
-            <p>Le réseau universitaire mauritanien en pleine expansion.</p>
+            <h2>{t('Universités du pays')}</h2>
+            <p>{t('Le réseau universitaire mauritanien en pleine expansion.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
             {universities.map((uni, i) => (
               <div key={i} className="info-card">
                 <div className="feature-icon green" style={{ margin: '0 0 16px' }}>{'\u{1F3EB}'}</div>
-                <h3>{uni.name}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: 4 }}>{uni.city} · Fondée en {uni.founded}</p>
-                <p style={{ marginTop: 8 }}>{uni.specialties}</p>
-                <div style={{ marginTop: 8, fontSize: '0.9rem', fontWeight: 600, color: 'var(--accent)' }}>{uni.students} étudiants</div>
+                <h3>{t(uni.name)}</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: 4 }}>{uni.city} · {t('Fondée en')} {uni.founded}</p>
+                <p style={{ marginTop: 8 }}>{t(uni.specialties)}</p>
+                <div style={{ marginTop: 8, fontSize: '0.9rem', fontWeight: 600, color: 'var(--accent)' }}>{uni.students} {t('étudiants')}</div>
               </div>
             ))}
           </div>
@@ -120,19 +122,19 @@ export default function Education() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Éducation coranique</h2>
-            <p>Le fondement historique de l'apprentissage en Mauritanie.</p>
+            <h2>{t('Éducation coranique')}</h2>
+            <p>{t("Le fondement historique de l'apprentissage en Mauritanie.")}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                L'éducation coranique est la base historique de l'enseignement en Mauritanie. Les écoles coraniques (« mahadras ») ont formé des générations de lettrés dans les cités saintes de Chinguetti, Ouadane, Tichitt et Oualata. Les maîtres coraniques (« moualim ») enseignent la lecture du Coran, la grammaire arabe, le droit islamique et la logique. Aujourd'hui, le système éducatif modern cherche à intégrer les meilleures pratiques de l'enseignement coranique dans le cursus scolaire national.
+                {t("L'éducation coranique est la base historique de l'enseignement en Mauritanie. Les écoles coraniques (« mahadras ») ont formé des générations de lettrés dans les cités saintes de Chinguetti, Ouadane, Tichitt et Oualata. Les maîtres coraniques (« moualim ») enseignent la lecture du Coran, la grammaire arabe, le droit islamique et la logique. Aujourd'hui, le système éducatif modern cherche à intégrer les meilleures pratiques de l'enseignement coranique dans le cursus scolaire national.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&fit=crop"
-                alt="Éducation coranique"
+                alt={t('Éducation coranique')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

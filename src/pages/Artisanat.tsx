@@ -6,6 +6,7 @@ import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
 import * as fabric from 'fabric';
 import Swal from 'sweetalert2';
+import { useI18n } from '../i18n';
 
 const crafts = [
   {
@@ -57,6 +58,7 @@ function PatternEditor() {
   const fabricRef = useRef<fabric.Canvas | null>(null);
   const [tool, setTool] = useState<'rect' | 'circle' | 'line' | 'diamond' | 'zigzag'>('rect');
   const [color, setColor] = useState('#0d8a3c');
+  const { t } = useI18n();
 
   const colors = ['#0d8a3c', '#1a73e8', '#d4af37', '#8B4513', '#2e8b57', '#cd853f', '#dc143c', '#4a4a4a', '#ffffff'];
 
@@ -137,8 +139,8 @@ function PatternEditor() {
       canvas.renderAll();
     });
     Swal.fire({
-      title: 'Motif dupliqué !',
-      text: 'Le motif a été répété pour créer un effet de tissage.',
+      title: t('Motif dupliqué !'),
+      text: t('Le motif a été répété pour créer un effet de tissage.'),
       icon: 'info',
       confirmButtonColor: '#0d8a3c',
       timer: 2000,
@@ -178,15 +180,15 @@ function PatternEditor() {
     <div style={{ marginTop: 16 }}>
       <div className="card" style={{ padding: 20, marginBottom: 16 }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 16 }}>
-          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Forme :</span>
-          {(['rect', 'circle', 'line', 'diamond', 'zigzag'] as const).map(t => (
-            <button key={t} onClick={() => setTool(t)} className={`btn ${tool === t ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
-              {t === 'rect' ? '矩形' : t === 'circle' ? 'Cercle' : t === 'line' ? 'Ligne' : t === 'diamond' ? 'Losange' : 'Zigzag'}
+          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{t('Forme :')}</span>
+          {(['rect', 'circle', 'line', 'diamond', 'zigzag'] as const).map(toolName => (
+            <button key={toolName} onClick={() => setTool(toolName)} className={`btn ${tool === toolName ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
+              {toolName === 'rect' ? t('Rectangle') : toolName === 'circle' ? t('Cercle') : toolName === 'line' ? t('Ligne') : toolName === 'diamond' ? t('Losange') : t('Zigzag')}
             </button>
           ))}
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Couleur :</span>
+          <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{t('Couleur :')}</span>
           {colors.map(c => (
             <button
               key={c}
@@ -199,17 +201,17 @@ function PatternEditor() {
           ))}
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          <button onClick={addObject} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Ajouter</button>
-          <button onClick={duplicatePattern} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Répéter le motif</button>
-          <button onClick={clearCanvas} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Effacer</button>
-          <button onClick={exportCanvas} className="btn btn-accent" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Télécharger PNG</button>
+          <button onClick={addObject} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>{t('Ajouter')}</button>
+          <button onClick={duplicatePattern} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>{t('Répéter le motif')}</button>
+          <button onClick={clearCanvas} className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>{t('Effacer')}</button>
+          <button onClick={exportCanvas} className="btn btn-accent" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>{t('Télécharger PNG')}</button>
         </div>
       </div>
       <div style={{ overflow: 'auto', border: '1px solid var(--glass-border)', borderRadius: 'var(--radius-md)' }}>
         <canvas ref={canvasRef} />
       </div>
       <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 8, textAlign: 'center' }}>
-        Cliquez sur un objet pour le déplacer, redimensionner ou tourner. Glissez pour créer des motifs traditionnels mauritaniens.
+        {t('Cliquez sur un objet pour le déplacer, redimensionner ou tourner. Glissez pour créer des motifs traditionnels mauritaniens.')}
       </p>
     </div>
   );
@@ -218,32 +220,33 @@ function PatternEditor() {
 export default function Artisanat() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Artisanat"
-        description="L'artisanat mauritanien est le reflet d'un héritage culturel millénaire : tapisseries maures, bijoux en argent, poteries et objets nomades, chaque pièce raconte une histoire."
+        title={t('Artisanat')}
+        description={t("L'artisanat mauritanien est le reflet d'un héritage culturel millénaire : tapisseries maures, bijoux en argent, poteries et objets nomades, chaque pièce raconte une histoire.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Les métiers de l'artisanat</h2>
-            <p>Un savoir-faire transmis de génération en génération.</p>
+            <h2>{t("Les métiers de l'artisanat")}</h2>
+            <p>{t('Un savoir-faire transmis de génération en génération.')}</p>
           </div>
           <div className="cards-grid">
             {crafts.map((craft, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${craft.color}`} style={{ margin: '0 0 16px' }}>{'{ }\uFE0F'}</div>
-                <span className={`badge ${craft.color === 'green' ? 'badge-green' : craft.color === 'blue' ? 'badge-blue' : 'badge-gold'}`}>{craft.category}</span>
-                <h3 style={{ marginTop: 12 }}>{craft.name}</h3>
-                <p style={{ marginTop: 8 }}>{craft.desc}</p>
+                <span className={`badge ${craft.color === 'green' ? 'badge-green' : craft.color === 'blue' ? 'badge-blue' : 'badge-gold'}`}>{t(craft.category)}</span>
+                <h3 style={{ marginTop: 12 }}>{t(craft.name)}</h3>
+                <p style={{ marginTop: 8 }}>{t(craft.desc)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{craft.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(craft.detail)}</p>
                 </details>
               </div>
             ))}
@@ -254,8 +257,8 @@ export default function Artisanat() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Créez votre motif traditionnel</h2>
-            <p>Utilisez cet éditeur interactif pour créer des motifs inspirés de l'artisanat mauritanien.</p>
+            <h2>{t('Créez votre motif traditionnel')}</h2>
+            <p>{t("Utilisez cet éditeur interactif pour créer des motifs inspirés de l'artisanat mauritanien.")}</p>
           </div>
           <PatternEditor />
         </div>
@@ -264,19 +267,19 @@ export default function Artisanat() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Les marchés artisanaux</h2>
-            <p>Où trouver les trésors de l'artisanat mauritanien.</p>
+            <h2>{t('Les marchés artisanaux')}</h2>
+            <p>{t("Où trouver les trésors de l'artisanat mauritanien.")}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Le Grand Marché de Nouakchott est le cœur battant de l'artisanat mauritanien. Ses allées étroites regorgent de bijoux en argent, de tapis tissés à la main, de poteries colorées et de cuirs odorants. Les artisans viennent de tout le pays pour vendre leurs créations. À Nouadhibou, le marché aux poissons est accompagné d'un quartier artisanal spécialisé dans la maroquinerie et la bijouterie. Dans l'Adrar, les oasis de Chinguetti et d'Atar accueillent des foires artisanales où les tapis maures et les objets en bois sculpté sont reines.
+                {t("Le Grand Marché de Nouakchott est le cœur battant de l'artisanat mauritanien. Ses allées étroites regorgent de bijoux en argent, de tapis tissés à la main, de poteries colorées et de cuirs odorants. Les artisans viennent de tout le pays pour vendre leurs créations. À Nouadhibou, le marché aux poissons est accompagné d'un quartier artisanal spécialisé dans la maroquinerie et la bijouterie. Dans l'Adrar, les oasis de Chinguetti et d'Atar accueillent des foires artisanales où les tapis maures et les objets en bois sculpté sont reines.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&fit=crop"
-                alt="Marché artisanal"
+                alt={t('Marché artisanal')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

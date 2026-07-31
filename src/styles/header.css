@@ -57,6 +57,34 @@
 .mobile-toggle.open .icon-open { display: none; }
 .mobile-toggle.open .icon-close { display: block; font-size: 1.3rem; }
 
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-switcher { position: relative; margin-left: 14px; }
+.lang-trigger {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 50px; cursor: pointer; padding: 6px 12px;
+  font-size: 0.95rem; font-weight: 500; color: var(--text); font-family: inherit;
+  backdrop-filter: blur(12px); transition: var(--transition);
+}
+.lang-trigger:hover { background: rgba(255,255,255,0.3); }
+.lang-menu {
+  position: absolute; top: calc(100% + 8px); left: 0; min-width: 150px;
+  background: var(--background); border: 1px solid var(--glass-border);
+  border-radius: 14px; box-shadow: var(--shadow-lg); overflow: hidden;
+  opacity: 0; pointer-events: none; transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 105; list-style: none; padding: 6px;
+}
+.lang-switcher.open .lang-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.lang-option {
+  display: block; width: 100%; text-align: left; padding: 9px 12px;
+  background: none; border: none; cursor: pointer; border-radius: 8px;
+  font-size: 0.9rem; color: var(--text); font-family: inherit;
+  transition: var(--transition);
+}
+.lang-option:hover { background: rgba(13,138,60,0.08); }
+.lang-option.active { color: var(--primary); font-weight: 700; background: rgba(13,138,60,0.1); }
+
 /* ===== NAV THEME (desktop) ===== */
 .nav-theme { display: flex; align-items: center; }
 .nav-theme .theme-toggle {
@@ -73,6 +101,10 @@
 @media (max-width: 768px) {
   .site-header { padding: 0 8px; }
   .header-inner { border-radius: 50px; padding: 0 12px; }
+  .lang-switcher { margin-left: 6px; }
+  .lang-trigger { padding: 6px; width: 36px; height: 36px; justify-content: center; }
+  .lang-trigger-label { display: none; }
+  .lang-menu { min-width: 140px; }
   .mobile-toggle { display: flex; align-items: center; justify-content: center; }
   .header-theme-toggle {
     display: flex !important; align-items: center; justify-content: center;

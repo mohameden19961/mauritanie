@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const galleryItems = [
   { src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&h=450&fit=crop', title: 'Désert du Sahara' },
@@ -20,6 +21,7 @@ const galleryItems = [
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState('');
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false);
+  const { t } = useI18n();
 
   const openLightbox = (src: string) => {
     setSelectedImage(src);
@@ -31,8 +33,8 @@ export default function Gallery() {
       <Header />
 
       <PageHeader
-        title="Galerie"
-        description="Plongez dans l'âme mauritanienne à travers ces images captivantes : déserts infinis, cités millénaires, côtes sauvages et traditions vivantes."
+        title={t('Galerie')}
+        description={t("Plongez dans l'âme mauritanienne à travers ces images captivantes : déserts infinis, cités millénaires, côtes sauvages et traditions vivantes.")}
       />
 
       <section className="section">
@@ -45,8 +47,8 @@ export default function Gallery() {
                 style={{ cursor: 'pointer' }}
                 onClick={() => openLightbox(item.src)}
               >
-                <img src={item.src} alt={item.title} />
-                <div className="overlay">{item.title}</div>
+                <img src={item.src} alt={t(item.title)} />
+                <div className="overlay">{t(item.title)}</div>
               </div>
             ))}
           </div>

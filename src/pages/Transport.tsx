@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const transportModes = [
   {
@@ -67,32 +68,33 @@ const infrastructures = [
 export default function Transport() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Transport & Infrastructures"
-        description="Du train des sables le plus long du monde aux pistes du Sahara, la Mauritanie développe ses infrastructures pour connecter les villes et les cultures."
+        title={t('Transport & Infrastructures')}
+        description={t("Du train des sables le plus long du monde aux pistes du Sahara, la Mauritanie développe ses infrastructures pour connecter les villes et les cultures.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Moyens de transport</h2>
-            <p>Du dromadaire au train, comment se déplacer en Mauritanie.</p>
+            <h2>{t('Moyens de transport')}</h2>
+            <p>{t('Du dromadaire au train, comment se déplacer en Mauritanie.')}</p>
           </div>
           <div className="cards-grid">
             {transportModes.map((mode, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${mode.color}`} style={{ margin: '0 0 16px' }}>{mode.icon}</div>
-                <h3>{mode.name}</h3>
-                <p style={{ marginTop: 8 }}>{mode.desc}</p>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent)', marginTop: 12 }}>{mode.stats}</div>
+                <h3>{t(mode.name)}</h3>
+                <p style={{ marginTop: 8 }}>{t(mode.desc)}</p>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent)', marginTop: 12 }}>{t(mode.stats)}</div>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{mode.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(mode.detail)}</p>
                 </details>
               </div>
             ))}
@@ -103,15 +105,15 @@ export default function Transport() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Projets d'infrastructure</h2>
-            <p>Les grands chantiers qui transforment le pays.</p>
+            <h2>{t("Projets d'infrastructure")}</h2>
+            <p>{t('Les grands chantiers qui transforment le pays.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
             {infrastructures.map((infra, i) => (
               <div key={i} className="info-card" style={{ padding: '20px' }}>
-                <h3 style={{ fontSize: '1rem' }}>{infra.name}</h3>
-                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{infra.desc}</p>
-                <span className={`badge ${infra.status === 'En service' ? 'badge-green' : 'badge-blue'}`} style={{ marginTop: 12 }}>{infra.status}</span>
+                <h3 style={{ fontSize: '1rem' }}>{t(infra.name)}</h3>
+                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t(infra.desc)}</p>
+                <span className={`badge ${infra.status === 'En service' ? 'badge-green' : 'badge-blue'}`} style={{ marginTop: 12 }}>{t(infra.status)}</span>
               </div>
             ))}
           </div>
@@ -121,19 +123,19 @@ export default function Transport() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Le Train des Sables</h2>
-            <p>Une aventure unique à travers le Sahara.</p>
+            <h2>{t('Le Train des Sables')}</h2>
+            <p>{t('Une aventure unique à travers le Sahara.')}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Le Train des Sables est l'un des voyages les plus spectaculaires au monde. Long de 2,5 kilomètres, il transporte le minerai de fer de la mine de Zouérate au port de Nouadhibou depuis 1963. Les voyageurs audacieux montent à bord des wagons ouverts, assis sur les sacs de minerai, pour un voyage de 12 à 17 heures à travers le Sahara. Le spectacle des dunes dorées au coucher du soleil depuis un wagon de minerai est inoubliable. Ce train est également le plus long convoi ferroviaire au monde.
+                {t("Le Train des Sables est l'un des voyages les plus spectaculaires au monde. Long de 2,5 kilomètres, il transporte le minerai de fer de la mine de Zouérate au port de Nouadhibou depuis 1963. Les voyageurs audacieux montent à bord des wagons ouverts, assis sur les sacs de minerai, pour un voyage de 12 à 17 heures à travers le Sahara. Le spectacle des dunes dorées au coucher du soleil depuis un wagon de minerai est inoubliable. Ce train est également le plus long convoi ferroviaire au monde.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&fit=crop"
-                alt="Train des sables"
+                alt={t('Train des sables')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

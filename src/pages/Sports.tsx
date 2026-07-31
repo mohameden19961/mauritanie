@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const sports = [
   {
@@ -63,32 +64,33 @@ const olympicHistory = [
 export default function Sports() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Sports"
-        description="Du football au stade aux courses de dromadaires dans le Sahara, le sport mauritanien mêle passion moderne et traditions ancestrales."
+        title={t('Sports')}
+        description={t("Du football au stade aux courses de dromadaires dans le Sahara, le sport mauritanien mêle passion moderne et traditions ancestrales.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Disciplines populaires</h2>
-            <p>Les sports qui animent la Mauritanie.</p>
+            <h2>{t('Disciplines populaires')}</h2>
+            <p>{t('Les sports qui animent la Mauritanie.')}</p>
           </div>
           <div className="cards-grid">
             {sports.map((sport, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${i % 2 === 0 ? 'green' : 'blue'}`} style={{ margin: '0 0 16px' }}>{sport.icon}</div>
-                <h3>{sport.name}</h3>
-                <span className="badge badge-gold">{sport.participants}</span>
-                <p style={{ marginTop: 12 }}>{sport.desc}</p>
+                <h3>{t(sport.name)}</h3>
+                <span className="badge badge-gold">{t(sport.participants)}</span>
+                <p style={{ marginTop: 12 }}>{t(sport.desc)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{sport.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(sport.detail)}</p>
                 </details>
               </div>
             ))}
@@ -99,16 +101,16 @@ export default function Sports() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Mauritanie aux Jeux Olympiques</h2>
-            <p>Représenter le pays sur la scène mondiale.</p>
+            <h2>{t('Mauritanie aux Jeux Olympiques')}</h2>
+            <p>{t('Représenter le pays sur la scène mondiale.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
             {olympicHistory.map((o, i) => (
               <div key={i} className="info-card" style={{ textAlign: 'center', padding: '20px 16px' }}>
                 <div className="feature-icon green" style={{ margin: '0 auto 12px', width: 'fit-content' }}>{'\u{1F3C5}'}</div>
                 <h3 style={{ fontSize: '1rem' }}>{o.city} {o.year}</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 4 }}>{o.athletes} athlètes · {o.sport}</p>
-                <p style={{ fontSize: '0.8rem', color: 'var(--accent)', marginTop: 4 }}>{o.highlight}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 4 }}>{o.athletes} {t('athlètes')} · {t(o.sport)}</p>
+                <p style={{ fontSize: '0.8rem', color: 'var(--accent)', marginTop: 4 }}>{t(o.highlight)}</p>
               </div>
             ))}
           </div>
@@ -118,19 +120,19 @@ export default function Sports() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>La lutte : un sport de champions</h2>
-            <p>La discipline la plus traditional de Mauritanie.</p>
+            <h2>{t('La lutte : un sport de champions')}</h2>
+            <p>{t('La discipline la plus traditional de Mauritanie.')}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                La lutte traditionnelle mauritanienne est bien plus qu'un sport : c'est un rituel social qui perpétue les valeurs de bravoure, d'honneur et de respect. Les combats se déroulent sur un ring de sable, sans temps limite, jusqu'à ce qu'un combattant soit mis dos au sol. Les champions de lutte sont des figures vénérées de la société, et les tournois attirent des milliers de spectateurs. Les « maâlems » (maîtres de lutte) transmettent leur savoir de père en fils depuis des générations.
+                {t("La lutte traditionnelle mauritanienne est bien plus qu'un sport : c'est un rituel social qui perpétue les valeurs de bravoure, d'honneur et de respect. Les combats se déroulent sur un ring de sable, sans temps limite, jusqu'à ce qu'un combattant soit mis dos au sol. Les champions de lutte sont des figures vénérées de la société, et les tournois attirent des milliers de spectateurs. Les « maâlems » (maîtres de lutte) transmettent leur savoir de père en fils depuis des générations.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=800&fit=crop"
-                alt="Lutte traditionnelle"
+                alt={t('Lutte traditionnelle')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

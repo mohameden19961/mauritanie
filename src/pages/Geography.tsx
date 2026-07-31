@@ -7,6 +7,7 @@ import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useI18n } from '../i18n';
 
 const regionIcons = ['🏜️', '🌾', '🌿', '⚓', '🌊', '🌱', '🏜️', '🌵', '⛏️', '🏙️', '🏛️', '🏘️', '⛰️', '⛏️', '🌾'];
 const featureIcons = ['🏜️', '🌊', '🦩', '🏖️', '⛰️'];
@@ -43,9 +44,15 @@ const touristSites = [
 function MapComponent() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
-    if (!mapRef.current || mapInstance.current) return;
+    if (!mapRef.current) return;
+
+    if (mapInstance.current) {
+      mapInstance.current.remove();
+      mapInstance.current = null;
+    }
 
     const map = L.map(mapRef.current, {
       center: [18.07, -15.96],
@@ -78,21 +85,21 @@ function MapComponent() {
       if (coords) {
         L.marker(coords, { icon: markerIcon })
           .addTo(map)
-          .bindPopup(`<div style="font-family:sans-serif"><b>${regionIcons[i]} ${region.name}</b><br><small>Capitale: ${region.capital}</small><br>${region.desc}</div>`);
+          .bindPopup(`<div style="font-family:sans-serif"><b>${regionIcons[i]} ${t(region.name)}</b><br><small>${t('Capitale')}: ${region.capital}</small><br>${t(region.desc)}</div>`);
       }
     });
 
     touristSites.forEach(site => {
       L.marker([site.lat, site.lng], { icon: tourIcon })
         .addTo(map)
-        .bindPopup(`<div style="font-family:sans-serif"><b>📍 ${site.name}</b><br>${site.desc}</div>`);
+        .bindPopup(`<div style="font-family:sans-serif"><b>📍 ${t(site.name)}</b><br>${t(site.desc)}</div>`);
     });
 
     const LegendControl = L.Control.extend({
       onAdd: function() {
         const div = L.DomUtil.create('div');
         div.style.cssText = 'background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-family:sans-serif;font-size:12px;line-height:1.8';
-        div.innerHTML = '<b>Légende</b><br><span style="display:inline-block;width:10px;height:10px;background:#0d8a3c;border-radius:50%;margin-right:6px"></span>Capitale de wilaya<br><span style="display:inline-block;width:10px;height:10px;background:#d4af37;border-radius:50%;margin-right:6px"></span>Site touristique';
+        div.innerHTML = `<b>${t('Légende')}</b><br><span style="display:inline-block;width:10px;height:10px;background:#0d8a3c;border-radius:50%;margin-right:6px"></span>${t('Capitale de wilaya')}<br><span style="display:inline-block;width:10px;height:10px;background:#d4af37;border-radius:50%;margin-right:6px"></span>${t('Site touristique')}`;
         return div;
       }
     });
@@ -105,7 +112,7 @@ function MapComponent() {
       map.remove();
       mapInstance.current = null;
     };
-  }, []);
+  }, [t]);
 
   return <div ref={mapRef} style={{ width: '100%', height: 500, borderRadius: 'var(--radius-md)', border: '1px solid var(--glass-border)' }} />;
 }
@@ -113,14 +120,15 @@ function MapComponent() {
 export default function Geography() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Géographie & Culture"
-        description="Immensité saharienne, côte atlantique et richesses culturelles — la Mauritanie offre une diversité géographique exceptionnelle."
+        title={t('Géographie & Culture')}
+        description={t("Immensité saharienne, côte atlantique et richesses culturelles — la Mauritanie offre une diversité géographique exceptionnelle.")}
       />
 
       <section className="section" style={{ paddingTop: 0 }}>
@@ -129,22 +137,22 @@ export default function Geography() {
             <div className="card" style={{ textAlign: 'center', padding: '24px 16px' }}>
               <div style={{ fontSize: '2rem', marginBottom: 8 }}>🌍</div>
               <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--primary)' }}>1 030 700</div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>km² de superficie</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('km² de superficie')}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '24px 16px' }}>
               <div style={{ fontSize: '2rem', marginBottom: 8 }}>🏜️</div>
               <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--secondary)' }}>75%</div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>couvert par le Sahara</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('couvert par le Sahara')}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '24px 16px' }}>
               <div style={{ fontSize: '2rem', marginBottom: 8 }}>🌊</div>
               <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--accent-dark)' }}>754</div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>km de côte atlantique</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('km de côte atlantique')}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '24px 16px' }}>
               <div style={{ fontSize: '2rem', marginBottom: 8 }}>🏛️</div>
               <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--primary)' }}>15</div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>wilayas (régions)</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('wilayas (régions)')}</div>
             </div>
           </div>
         </div>
@@ -153,8 +161,8 @@ export default function Geography() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Régions de Mauritanie</h2>
-            <p>Le pays est divisé en 15 wilayas (régions), chacune avec ses particularités.</p>
+            <h2>{t('Régions de Mauritanie')}</h2>
+            <p>{t('Le pays est divisé en 15 wilayas (régions), chacune avec ses particularités.')}</p>
           </div>
           <div className="cards-grid">
             {MAURITANIA.geography.regions.map((region, i) => (
@@ -162,11 +170,11 @@ export default function Geography() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
                   <div className="feature-icon green" style={{ margin: 0, fontSize: '1.3rem' }}>{regionIcons[i]}</div>
                   <div>
-                    <h3 style={{ margin: 0, fontSize: '1.05rem' }}>{region.name}</h3>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Capitale : {region.capital}</div>
+                    <h3 style={{ margin: 0, fontSize: '1.05rem' }}>{t(region.name)}</h3>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('Capitale :')} {region.capital}</div>
                   </div>
                 </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>{region.desc}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>{t(region.desc)}</p>
               </div>
             ))}
           </div>
@@ -176,8 +184,8 @@ export default function Geography() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Carte interactive Leaflet</h2>
-            <p>Cliquez sur les marqueurs pour explorer les wilayas et sites touristiques.</p>
+            <h2>{t('Carte interactive Leaflet')}</h2>
+            <p>{t('Cliquez sur les marqueurs pour explorer les wilayas et sites touristiques.')}</p>
           </div>
           <MapComponent />
         </div>
@@ -186,8 +194,8 @@ export default function Geography() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Caractéristiques naturelles</h2>
-            <p>Des paysages variés entre désert, fleuve et océan.</p>
+            <h2>{t('Caractéristiques naturelles')}</h2>
+            <p>{t('Des paysages variés entre désert, fleuve et océan.')}</p>
           </div>
           <div className="two-col">
             <div>
@@ -197,8 +205,8 @@ export default function Geography() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                       <div className="feature-icon green" style={{ width: 40, height: 40, borderRadius: 10, fontSize: '1.1rem', margin: 0, flexShrink: 0 }}>{featureIcons[i]}</div>
                       <div>
-                        <h3 style={{ fontSize: '0.95rem', margin: '0 0 2px' }}>{feature.name}</h3>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', margin: 0 }}>{feature.desc}</p>
+                        <h3 style={{ fontSize: '0.95rem', margin: '0 0 2px' }}>{t(feature.name)}</h3>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', margin: 0 }}>{t(feature.desc)}</p>
                       </div>
                     </div>
                   </div>
@@ -206,7 +214,7 @@ export default function Geography() {
               </div>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop" alt="Désert du Sahara" style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }} />
+              <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop" alt={t('Désert du Sahara')} style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }} />
             </div>
           </div>
         </div>
@@ -215,23 +223,23 @@ export default function Geography() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Climat et environnement</h2>
-            <p>Un climat aride à désertique avec des variations nord-sud marquées.</p>
+            <h2>{t('Climat et environnement')}</h2>
+            <p>{t('Un climat aride à désertique avec des variations nord-sud marquées.')}</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
             <div className="card" style={{ padding: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
                 <div className="feature-icon green" style={{ margin: 0 }}>☀️</div>
-                <h3 style={{ margin: 0 }}>Climat du Nord</h3>
+                <h3 style={{ margin: 0 }}>{t('Climat du Nord')}</h3>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>Désertique hyper-aride avec des températures atteignant 45°C en été et des précipitations inférieures à 50 mm par an. Les nuits peuvent être très froides en hiver, descendant jusqu'à 5°C dans l'Adrar.</p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>{t("Désertique hyper-aride avec des températures atteignant 45°C en été et des précipitations inférieures à 50 mm par an. Les nuits peuvent être très froides en hiver, descendant jusqu'à 5°C dans l'Adrar.")}</p>
             </div>
             <div className="card" style={{ padding: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
                 <div className="feature-icon blue" style={{ margin: 0 }}>🌦️</div>
-                <h3 style={{ margin: 0 }}>Climat du Sud</h3>
+                <h3 style={{ margin: 0 }}>{t('Climat du Sud')}</h3>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>Sahélien avec une saison des pluies de juillet à septembre (200-600 mm/an). La région du fleuve Sénégal bénéficie d'un climat plus humide propice à l'agriculture et aux pâturages.</p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>{t("Sahélien avec une saison des pluies de juillet à septembre (200-600 mm/an). La région du fleuve Sénégal bénéficie d'un climat plus humide propice à l'agriculture et aux pâturages.")}</p>
             </div>
           </div>
         </div>

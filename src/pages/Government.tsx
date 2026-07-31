@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const govFields = [
   { label: 'Type de régime', key: 'type' as const, image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=420&fit=crop', alt: 'Bâtiment institutionnel', badge: 'Régime', desc: 'La Mauritanie est une république islamique semi-présidentielle.', detail: 'Le président de la République, élu au suffrage universel direct pour 5 ans, partage le pouvoir exécutif avec le Premier ministre et le gouvernement. Le régime combine les caractéristiques du régime présidentiel — un chef d\'État élu disposant de pouvoirs étendus — et parlementaires, avec un gouvernement responsable devant l\'Assemblée nationale.' },
@@ -61,6 +62,7 @@ export default function Government() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedField, setSelectedField] = useState<number | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { t } = useI18n();
 
   const openDetail = (i: number) => {
     setSelectedField(i);
@@ -77,8 +79,8 @@ export default function Government() {
       <Header />
 
       <PageHeader
-        title="Gouvernement & Politique"
-        description="La République Islamique de Mauritanie est un État semi-présidentiel où le président et le parlement partagent le pouvoir exécutif et législatif."
+        title={t('Gouvernement & Politique')}
+        description={t("La République Islamique de Mauritanie est un État semi-présidentiel où le président et le parlement partagent le pouvoir exécutif et législatif.")}
       />
 
       <section className="section">
@@ -93,13 +95,13 @@ export default function Government() {
               >
                 <img
                   src={field.image}
-                  alt={field.alt}
+                  alt={t(field.alt)}
                   style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 'var(--radius-md) var(--radius-md) 0 0' }}
                 />
                 <div style={{ padding: 20 }}>
-                  <span className="badge badge-green">{field.badge}</span>
-                  <h3 style={{ fontSize: '1.1rem', margin: '12px 0 8px' }}>{field.label}</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{MAURITANIA.government[field.key]}</p>
+                  <span className="badge badge-green">{t(field.badge)}</span>
+                  <h3 style={{ fontSize: '1.1rem', margin: '12px 0 8px' }}>{t(field.label)}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{t(MAURITANIA.government[field.key])}</p>
                 </div>
               </div>
             ))}
@@ -116,13 +118,13 @@ export default function Government() {
             <button className="detail-modal-close" onClick={closeModal}>&times;</button>
             <div className="detail-modal-body">
               <div className="dm-img">
-                <img src={govFields[selectedField].image} alt={govFields[selectedField].alt} />
+                <img src={govFields[selectedField].image} alt={t(govFields[selectedField].alt)} />
               </div>
               <div className="dm-body">
-                <div className="dm-badge">{govFields[selectedField].badge}</div>
-                <h2>{govFields[selectedField].label}</h2>
-                <div className="dm-desc">{govFields[selectedField].desc}</div>
-                <div className="dm-detail">{govFields[selectedField].detail}</div>
+                <div className="dm-badge">{t(govFields[selectedField].badge)}</div>
+                <h2>{t(govFields[selectedField].label)}</h2>
+                <div className="dm-desc">{t(govFields[selectedField].desc)}</div>
+                <div className="dm-detail">{t(govFields[selectedField].detail)}</div>
               </div>
             </div>
           </div>
@@ -132,14 +134,14 @@ export default function Government() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Historique du gouvernement</h2>
-            <p>Les grandes étapes de l'organisation politique mauritanienne depuis l'indépendance.</p>
+            <h2>{t('Historique du gouvernement')}</h2>
+            <p>{t("Les grandes étapes de l'organisation politique mauritanienne depuis l'indépendance.")}</p>
           </div>
           <div className="cards-grid">
             {governmentHistory.map((item, i) => (
               <div key={i} className="info-card">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+                <h3>{t(item.title)}</h3>
+                <p>{t(item.desc)}</p>
               </div>
             ))}
           </div>
@@ -150,15 +152,15 @@ export default function Government() {
         <div className="container">
           <div className="two-col">
             <div>
-              <h2 style={{ marginBottom: 16 }}>Système politique</h2>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>La Mauritanie est une république islamique dont le système politique repose sur la Constitution du 20 juillet 1991. Le président de la République, élu au suffrage universel direct pour un mandat de cinq ans renouvelable une fois, est le chef de l'État et dispose de pouvoirs exécutifs étendus. Il nomme le Premier ministre et le gouvernement.</p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>Le parlement est bicaméral, composé de l'Assemblée nationale (157 députés élus pour 5 ans) et du Sénat (supprimé en 2017 puis rétabli). Le pouvoir judiciaire est indépendant, avec la Cour suprême comme plus haute juridiction. L'islam est la religion d'État, et la charia est une source du droit.</p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>Depuis l'indépendance en 1960, le pays a connu plusieurs régimes militaires et des transitions démocratiques. L'élection de 2019 a marqué la première transition pacifique du pouvoir, avec l'élection de Mohamed Ould Cheikh El Ghazouani, réélu en 2024.</p>
+              <h2 style={{ marginBottom: 16 }}>{t('Système politique')}</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>{t("La Mauritanie est une république islamique dont le système politique repose sur la Constitution du 20 juillet 1991. Le président de la République, élu au suffrage universel direct pour un mandat de cinq ans renouvelable une fois, est le chef de l'État et dispose de pouvoirs exécutifs étendus. Il nomme le Premier ministre et le gouvernement.")}</p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>{t("Le parlement est bicaméral, composé de l'Assemblée nationale (157 députés élus pour 5 ans) et du Sénat (supprimé en 2017 puis rétabli). Le pouvoir judiciaire est indépendant, avec la Cour suprême comme plus haute juridiction. L'islam est la religion d'État, et la charia est une source du droit.")}</p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>{t("Depuis l'indépendance en 1960, le pays a connu plusieurs régimes militaires et des transitions démocratiques. L'élection de 2019 a marqué la première transition pacifique du pouvoir, avec l'élection de Mohamed Ould Cheikh El Ghazouani, réélu en 2024.")}</p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&fit=crop"
-                alt="Assemblée parlementaire"
+                alt={t('Assemblée parlementaire')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>
@@ -169,15 +171,15 @@ export default function Government() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Chronologie politique</h2>
-            <p>Les événements marquants de l'histoire politique de la Mauritanie.</p>
+            <h2>{t('Chronologie politique')}</h2>
+            <p>{t("Les événements marquants de l'histoire politique de la Mauritanie.")}</p>
           </div>
           <div className="timeline">
             {timelineEvents.map((event, i) => (
               <div key={i} className="info-card timeline-item">
                 <div className="timeline-year">{event.year}</div>
-                <h3>{event.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>{event.desc}</p>
+                <h3>{t(event.title)}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>{t(event.desc)}</p>
               </div>
             ))}
           </div>
@@ -187,16 +189,16 @@ export default function Government() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Liste des présidents</h2>
-            <p>Les chefs d'État de la Mauritanie depuis l'indépendance.</p>
+            <h2>{t('Liste des présidents')}</h2>
+            <p>{t("Les chefs d'État de la Mauritanie depuis l'indépendance.")}</p>
           </div>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: 'var(--card-bg)', borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
               <thead>
                 <tr style={{ background: 'var(--primary)', color: '#fff' }}>
-                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>Président</th>
-                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>Période</th>
-                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>Notes</th>
+                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>{t('Président')}</th>
+                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>{t('Période')}</th>
+                  <th style={{ padding: '12px 16px', textAlign: 'left' }}>{t('Notes')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -204,7 +206,7 @@ export default function Government() {
                   <tr key={i} style={{ borderBottom: '1px solid var(--glass-border)' }}>
                     <td style={{ padding: '10px 16px', fontWeight: 600 }}>{p.name}</td>
                     <td style={{ padding: '10px 16px', color: 'var(--text-secondary)' }}>{p.period}</td>
-                    <td style={{ padding: '10px 16px', color: 'var(--text-secondary)' }}>{p.notes}</td>
+                    <td style={{ padding: '10px 16px', color: 'var(--text-secondary)' }}>{t(p.notes)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -216,15 +218,15 @@ export default function Government() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Structure politique</h2>
-            <p>Les trois pouvoirs qui constituent l'État mauritanien.</p>
+            <h2>{t('Structure politique')}</h2>
+            <p>{t("Les trois pouvoirs qui constituent l'État mauritanien.")}</p>
           </div>
           <div className="cards-grid">
             {structureCards.map((card, i) => (
               <div key={i} className="info-card">
                 <div className="feature-icon gold" style={{ margin: '0 0 16px', fontSize: '1.5rem' }}>{card.icon}</div>
-                <h3>{card.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{card.desc}</p>
+                <h3>{t(card.title)}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{t(card.desc)}</p>
               </div>
             ))}
           </div>
@@ -234,8 +236,8 @@ export default function Government() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Questions fréquentes</h2>
-            <p>Réponses aux questions les plus posées sur le gouvernement mauritanien.</p>
+            <h2>{t('Questions fréquentes')}</h2>
+            <p>{t('Réponses aux questions les plus posées sur le gouvernement mauritanien.')}</p>
           </div>
           <div className="accordion" style={{ maxWidth: 700, margin: '0 auto' }}>
             {faqItems.map((item, i) => (
@@ -244,14 +246,14 @@ export default function Government() {
                   className="accordion-btn"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  {item.q}
+                  {t(item.q)}
                   <span className="arrow">{'\u25BC'}</span>
                 </button>
                 <div
                   className="accordion-panel"
                   style={{ display: openFaq === i ? 'block' : 'none' }}
                 >
-                  <div className="accordion-panel-inner">{item.a}</div>
+                  <div className="accordion-panel-inner">{t(item.a)}</div>
                 </div>
               </div>
             ))}

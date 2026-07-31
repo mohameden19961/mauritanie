@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const languages = [
   {
@@ -65,33 +66,34 @@ const proverbs = [
 export default function Langues() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Langues & Culture"
-        description="La Mauritanie est un carrefour linguistique unique où coexistent arabe hassaniya, français, pulaar, soninké et wolof — chacun porteur d'une richesse culturelle spécifique."
+        title={t('Langues & Culture')}
+        description={t("La Mauritanie est un carrefour linguistique unique où coexistent arabe hassaniya, français, pulaar, soninké et wolof — chacun porteur d'une richesse culturelle spécifique.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Les langues de Mauritanie</h2>
-            <p>Un pays, cinq langues, cinq univers culturels.</p>
+            <h2>{t('Les langues de Mauritanie')}</h2>
+            <p>{t('Un pays, cinq langues, cinq univers culturels.')}</p>
           </div>
           <div className="cards-grid">
             {languages.map((lang, i) => (
               <div key={i} className="info-card">
                 <div className="feature-icon green" style={{ margin: '0 0 16px' }}>{lang.icon}</div>
-                <h3>{lang.name}</h3>
+                <h3>{t(lang.name)}</h3>
                 <span className="badge badge-blue">{lang.speakers}</span>
-                <p style={{ fontSize: '0.9rem', color: 'var(--accent)', margin: '8px 0' }}>{lang.role}</p>
-                <p style={{ marginTop: 8 }}>{lang.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--accent)', margin: '8px 0' }}>{t(lang.role)}</p>
+                <p style={{ marginTop: 8 }}>{t(lang.desc)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{lang.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(lang.detail)}</p>
                 </details>
               </div>
             ))}
@@ -102,15 +104,15 @@ export default function Langues() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Traditions orales</h2>
-            <p>La richesse culturelle se transmet de bouche à oreille depuis des siècles.</p>
+            <h2>{t('Traditions orales')}</h2>
+            <p>{t('La richesse culturelle se transmet de bouche à oreille depuis des siècles.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
             {culturalElements.map((el, i) => (
               <div key={i} className="info-card" style={{ textAlign: 'center', padding: '24px 16px' }}>
                 <div className="feature-icon gold" style={{ margin: '0 auto 12px' }}>{el.icon}</div>
-                <h3 style={{ fontSize: '1.05rem' }}>{el.title}</h3>
-                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{el.desc}</p>
+                <h3 style={{ fontSize: '1.05rem' }}>{t(el.title)}</h3>
+                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t(el.desc)}</p>
               </div>
             ))}
           </div>
@@ -120,15 +122,15 @@ export default function Langues() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Proverbes mauritaniens</h2>
-            <p>La sagesse du peuple mauritanien en quelques mots.</p>
+            <h2>{t('Proverbes mauritaniens')}</h2>
+            <p>{t('La sagesse du peuple mauritanien en quelques mots.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
             {proverbs.map((p, i) => (
               <div key={i} className="info-card" style={{ padding: '24px' }}>
                 <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--accent)', marginBottom: 8, direction: 'rtl', fontFamily: 'serif' }}>{p.original}</div>
-                <p style={{ fontStyle: 'italic', color: 'var(--text-secondary)', marginBottom: 8 }}>"{p.translation}"</p>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{p.meaning}</p>
+                <p style={{ fontStyle: 'italic', color: 'var(--text-secondary)', marginBottom: 8 }}>"{t(p.translation)}"</p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{t(p.meaning)}</p>
               </div>
             ))}
           </div>

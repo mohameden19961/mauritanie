@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const facts = [
   { label: 'Religion officielle', value: 'Islam sunnite (rite malékite)', icon: '\u{1F54C}' },
@@ -63,28 +64,29 @@ const holidays = [
 export default function Religion() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Religion & Traditions"
-        description="L'islam sunnite de rite malékite est la religion de la totalité de la population. Les confréries soufies, les marabouts et les écoles coraniques structurent la vie spirituelle et sociale."
+        title={t('Religion & Traditions')}
+        description={t("L'islam sunnite de rite malékite est la religion de la totalité de la population. Les confréries soufies, les marabouts et les écoles coraniques structurent la vie spirituelle et sociale.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>L'islam en Mauritanie</h2>
-            <p>Une foi profonde au quotidien.</p>
+            <h2>{t("L'islam en Mauritanie")}</h2>
+            <p>{t('Une foi profonde au quotidien.')}</p>
           </div>
           <div className="stats-grid">
             {facts.map((fact, i) => (
               <div key={i} className="stat-card">
                 <div className="stat-icon">{fact.icon}</div>
-                <div className="stat-value" style={{ fontSize: '1rem' }}>{fact.value}</div>
-                <div className="stat-label">{fact.label}</div>
+                <div className="stat-value" style={{ fontSize: '1rem' }}>{t(fact.value)}</div>
+                <div className="stat-label">{t(fact.label)}</div>
               </div>
             ))}
           </div>
@@ -94,18 +96,18 @@ export default function Religion() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Pratiques religieuses</h2>
-            <p>Comment la foi façonne la vie quotidienne.</p>
+            <h2>{t('Pratiques religieuses')}</h2>
+            <p>{t('Comment la foi façonne la vie quotidienne.')}</p>
           </div>
           <div className="cards-grid">
             {practices.map((pr, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${i % 2 === 0 ? 'green' : 'blue'}`} style={{ margin: '0 0 16px' }}>{pr.icon}</div>
-                <h3>{pr.name}</h3>
-                <p style={{ marginTop: 8 }}>{pr.desc}</p>
+                <h3>{t(pr.name)}</h3>
+                <p style={{ marginTop: 8 }}>{t(pr.desc)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{pr.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(pr.detail)}</p>
                 </details>
               </div>
             ))}
@@ -116,17 +118,17 @@ export default function Religion() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Calendrier des fêtes</h2>
-            <p>Les moments forts de l'année religieuse et nationale.</p>
+            <h2>{t('Calendrier des fêtes')}</h2>
+            <p>{t("Les moments forts de l'année religieuse et nationale.")}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
             {holidays.map((h, i) => (
               <div key={i} className="info-card" style={{ padding: '20px' }}>
                 <div className="feature-icon gold" style={{ margin: '0 auto 12px', width: 'fit-content' }}>{'\u{1F389}'}</div>
-                <h3 style={{ textAlign: 'center', fontSize: '1rem' }}>{h.name}</h3>
-                <span className={`badge ${h.type === 'Religieuse' ? 'badge-blue' : 'badge-green'}`} style={{ margin: '8px auto', display: 'block', width: 'fit-content' }}>{h.type}</span>
-                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', textAlign: 'center' }}>{h.description}</p>
-                <p style={{ marginTop: 8, fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }}>{h.month}</p>
+                <h3 style={{ textAlign: 'center', fontSize: '1rem' }}>{t(h.name)}</h3>
+                <span className={`badge ${h.type === 'Religieuse' ? 'badge-blue' : 'badge-green'}`} style={{ margin: '8px auto', display: 'block', width: 'fit-content' }}>{t(h.type)}</span>
+                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', textAlign: 'center' }}>{t(h.description)}</p>
+                <p style={{ marginTop: 8, fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }}>{t(h.month)}</p>
               </div>
             ))}
           </div>

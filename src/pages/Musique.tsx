@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const instruments = [
   {
@@ -68,6 +69,7 @@ export default function Musique() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
   const { hash } = useLocation();
+  const { t } = useI18n();
 
   useEffect(() => {
     if (hash === '#videos') {
@@ -80,27 +82,27 @@ export default function Musique() {
       <Header />
 
       <PageHeader
-        title="Musique & Danse"
-        description="La musique mauritanienne est un univers de cordes vibrantes, de percussions puissantes et de chants ancestraux, porté par la tradition orale des griots."
+        title={t('Musique & Danse')}
+        description={t("La musique mauritanienne est un univers de cordes vibrantes, de percussions puissantes et de chants ancestraux, porté par la tradition orale des griots.")}
       />
 
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Instruments traditionnels</h2>
-            <p>Le son de la Mauritanie se joue sur des instruments ancestraux.</p>
+            <h2>{t('Instruments traditionnels')}</h2>
+            <p>{t('Le son de la Mauritanie se joue sur des instruments ancestraux.')}</p>
           </div>
           <div className="cards-grid">
             {instruments.map((inst, i) => (
               <div key={i} className="info-card">
                 <div className={`feature-icon ${i % 2 === 0 ? 'green' : 'blue'}`} style={{ margin: '0 0 16px' }}>{'{ }\uFE0F'}</div>
-                <span className={`badge ${inst.type === 'Cordes' ? 'badge-blue' : 'badge-green'}`}>{inst.type}</span>
-                <h3 style={{ marginTop: 12 }}>{inst.name}</h3>
-                <p style={{ marginTop: 8 }}>{inst.desc}</p>
-                <p style={{ fontSize: '0.85rem', color: 'var(--accent)', marginTop: 8, fontStyle: 'italic' }}>{inst.sound}</p>
+                <span className={`badge ${inst.type === 'Cordes' ? 'badge-blue' : 'badge-green'}`}>{t(inst.type)}</span>
+                <h3 style={{ marginTop: 12 }}>{t(inst.name)}</h3>
+                <p style={{ marginTop: 8 }}>{t(inst.desc)}</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--accent)', marginTop: 8, fontStyle: 'italic' }}>{t(inst.sound)}</p>
                 <details style={{ marginTop: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>En savoir plus</summary>
-                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{inst.detail}</p>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--accent)' }}>{t('En savoir plus')}</summary>
+                  <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{t(inst.detail)}</p>
                 </details>
               </div>
             ))}
@@ -111,15 +113,15 @@ export default function Musique() {
       <section className="section-alt">
         <div className="container">
           <div className="section-title">
-            <h2>Traditions musicales</h2>
-            <p>Les dimensions sociales et spirituelles de la musique.</p>
+            <h2>{t('Traditions musicales')}</h2>
+            <p>{t('Les dimensions sociales et spirituelles de la musique.')}</p>
           </div>
           <div className="cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
-            {traditions.map((t, i) => (
+            {traditions.map((tr, i) => (
               <div key={i} className="info-card" style={{ textAlign: 'center', padding: '24px 16px' }}>
-                <div className="feature-icon gold" style={{ margin: '0 auto 12px' }}>{t.icon}</div>
-                <h3 style={{ fontSize: '1.05rem' }}>{t.title}</h3>
-                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
+                <div className="feature-icon gold" style={{ margin: '0 auto 12px' }}>{tr.icon}</div>
+                <h3 style={{ fontSize: '1.05rem' }}>{t(tr.title)}</h3>
+                <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t(tr.desc)}</p>
               </div>
             ))}
           </div>
@@ -129,8 +131,8 @@ export default function Musique() {
       <section className="section-alt" id="videos">
         <div className="container">
           <div className="section-title">
-            <h2>Vidéos</h2>
-            <p>L'hymne national et les grandes voix de la musique mauritanienne.</p>
+            <h2>{t('Vidéos')}</h2>
+            <p>{t("L'hymne national et les grandes voix de la musique mauritanienne.")}</p>
           </div>
           <div className="grid-3">
             {videos.map((v, i) => (
@@ -138,15 +140,15 @@ export default function Musique() {
                 <div className="video-frame">
                   <iframe
                     src={v.src}
-                    title={v.title}
+                    title={t(v.title)}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     loading="lazy"
                   ></iframe>
                 </div>
                 <div style={{ padding: 16 }}>
-                  <h3 style={{ fontSize: '1rem', marginBottom: 6 }}>{v.title}</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{v.desc}</p>
+                  <h3 style={{ fontSize: '1rem', marginBottom: 6 }}>{t(v.title)}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{t(v.desc)}</p>
                 </div>
               </div>
             ))}
@@ -157,19 +159,19 @@ export default function Musique() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>La femme et la musique</h2>
-            <p>Un rôle central dans la transmission culturelle.</p>
+            <h2>{t('La femme et la musique')}</h2>
+            <p>{t('Un rôle central dans la transmission culturelle.')}</p>
           </div>
           <div className="two-col">
             <div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Les femmes jouent un rôle fondamental dans la musique mauritanien. Les artistes féminines, notamment les « layalat » (chanteuses), sont les gardiennes de la tradition orale féminine. Elles chantent lors des mariages, des naissances et des cérémonies de coiffure. Les chanteuses contemporaines comme Dimi Mint Abba et Malouma Mattala ont porté la musique mauritanienne sur la scène internationale, mêlant les traditions anciennes aux influences modernes. L'ardin, exclusivement joué par les femmes, est le symbole de cette tradition musicale féminine.
+                {t("Les femmes jouent un rôle fondamental dans la musique mauritanien. Les artistes féminines, notamment les « layalat » (chanteuses), sont les gardiennes de la tradition orale féminine. Elles chantent lors des mariages, des naissances et des cérémonies de coiffure. Les chanteuses contemporaines comme Dimi Mint Abba et Malouma Mattala ont porté la musique mauritanienne sur la scène internationale, mêlant les traditions anciennes aux influences modernes. L'ardin, exclusivement joué par les femmes, est le symbole de cette tradition musicale féminine.")}
               </p>
             </div>
             <div>
               <img
                 src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&fit=crop"
-                alt="Musique traditionnelle"
+                alt={t('Musique traditionnelle')}
                 style={{ width: '100%', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)', aspectRatio: '4/3', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
               />
             </div>

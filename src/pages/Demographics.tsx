@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
+import { useI18n } from '../i18n';
 
 function color(c: string): string {
   if (typeof document === 'undefined') return '#0D8A3C';
@@ -21,6 +22,7 @@ function textColor(): string {
 
 export default function Demographics() {
   const createdCharts = useRef<Record<string, any>>({});
+  const { t } = useI18n();
 
   useEffect(() => {
 
@@ -41,8 +43,8 @@ export default function Demographics() {
 
       const demo = MAURITANIA.demographics;
       const chartMap: Record<string, any> = {
-        'chart-population': { type: 'bar', data: demo.population, labelsKey: 'year', valueKey: 'value', label: 'Population', colorKey: '--primary', desc: demo.popDesc },
-        'chart-urbanisation': { type: 'line', data: demo.urbanisation, labelsKey: 'year', valueKey: 'value', label: "Taux d'urbanisation (%)", colorKey: '--secondary', desc: demo.urbanDesc },
+        'chart-population': { type: 'bar', data: demo.population, labelsKey: 'year', valueKey: 'value', label: t('Population'), colorKey: '--primary', desc: demo.popDesc },
+        'chart-urbanisation': { type: 'line', data: demo.urbanisation, labelsKey: 'year', valueKey: 'value', label: t("Taux d'urbanisation (%)"), colorKey: '--secondary', desc: demo.urbanDesc },
         'chart-ethnic': { type: 'pie', data: demo.ethnicGroups, labelsKey: 'group', valueKey: 'value', colors: ['#0D8A3C', '#1E88E5', '#FF9800', '#9C27B0', '#E91E63', '#00BCD4'], desc: demo.ethnicDesc }
       };
 
@@ -53,6 +55,9 @@ export default function Demographics() {
         const container = el.closest('.chart-container');
         const front = container ? container.querySelector('.flip-front') : el;
         if (!front) return;
+
+        const existingCanvas = front.querySelector('canvas');
+        if (existingCanvas) existingCanvas.remove();
 
         const canvas = document.createElement('canvas');
         front.appendChild(canvas);
@@ -114,7 +119,7 @@ export default function Demographics() {
         const chart = new Chart(ctx, {
           type: cfg.type === 'doughnut' ? 'doughnut' : cfg.type,
           data: {
-            labels: cfg.data.map((d: any) => d[cfg.labelsKey]),
+            labels: cfg.data.map((d: any) => t(d[cfg.labelsKey])),
             datasets
           },
           options: opts
@@ -123,11 +128,13 @@ export default function Demographics() {
 
         if (container) {
           const backP = container.querySelector('.flip-back p');
-          if (backP) backP.textContent = cfg.desc || '';
+          if (backP) backP.textContent = t(cfg.desc) || '';
         }
       });
 
       document.querySelectorAll('.chart-container').forEach((container) => {
+        if ((container as HTMLElement).dataset.flipBound === '1') return;
+        (container as HTMLElement).dataset.flipBound = '1';
         container.addEventListener('click', function (this: HTMLElement) {
           this.classList.toggle('flipped');
           Object.keys(createdCharts.current).forEach((id) => {
@@ -147,16 +154,16 @@ export default function Demographics() {
       });
       createdCharts.current = {};
     };
-  }, []);
+  }, [t]);
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Démographie"
-        description="La Mauritanie compte environ 4,6 millions d'habitants. Sa population est jeune et majoritairement urbaine, avec une diversité ethnique riche reflétant son histoire de carrefour entre l'Afrique du Nord et l'Afrique subsaharienne."
-        breadcrumbItems={[{ label: 'Démographie' }]}
+        title={t('Démographie')}
+        description={t("La Mauritanie compte environ 4,6 millions d'habitants. Sa population est jeune et majoritairement urbaine, avec une diversité ethnique riche reflétant son histoire de carrefour entre l'Afrique du Nord et l'Afrique subsaharienne.")}
+        breadcrumbItems={[{ label: t('Démographie') }]}
       />
 
       <section className="section" style={{ paddingTop: 0 }}>
@@ -165,12 +172,12 @@ export default function Demographics() {
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
               <div style={{ fontSize: '1.8rem', marginBottom: 4 }}>👥</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)' }}>4,62 M</div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Population 2024</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{t('Population 2024')}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
               <div style={{ fontSize: '1.8rem', marginBottom: 4 }}>📊</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--secondary)' }}>62%</div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Taux d'urbanisation</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{t("Taux d'urbanisation")}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
               <div style={{ fontSize: '1.8rem', marginBottom: 4 }}>🧑‍🌾</div>
@@ -180,7 +187,7 @@ export default function Demographics() {
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
               <div style={{ fontSize: '1.8rem', marginBottom: 4 }}>🧑‍🤝‍🧑</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)' }}>6</div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>groupes ethniques</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{t('groupes ethniques')}</div>
             </div>
           </div>
         </div>
@@ -190,23 +197,23 @@ export default function Demographics() {
         <div className="container">
           <div className="grid-2">
             <div className="chart-container">
-              <div className="chart-title">Évolution de la population</div>
+              <div className="chart-title">{t('Évolution de la population')}</div>
               <div className="flip-wrap">
                 <div className="flip-inner">
                   <div className="flip-front"><div id="chart-population" data-chart="population"></div></div>
-                  <div className="flip-back"><div className="flip-label">Analyse</div><p></p></div>
+                  <div className="flip-back"><div className="flip-label">{t('Analyse')}</div><p></p></div>
                 </div>
-                <div className="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+                <div className="flip-hint">&#x21bb; {t("Cliquez pour l'analyse")}</div>
               </div>
             </div>
             <div className="chart-container">
-              <div className="chart-title">Taux d'urbanisation (%)</div>
+              <div className="chart-title">{t("Taux d'urbanisation (%)")}</div>
               <div className="flip-wrap">
                 <div className="flip-inner">
                   <div className="flip-front"><div id="chart-urbanisation" data-chart="urbanisation"></div></div>
-                  <div className="flip-back"><div className="flip-label">Analyse</div><p></p></div>
+                  <div className="flip-back"><div className="flip-label">{t('Analyse')}</div><p></p></div>
                 </div>
-                <div className="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+                <div className="flip-hint">&#x21bb; {t("Cliquez pour l'analyse")}</div>
               </div>
             </div>
           </div>
@@ -217,23 +224,23 @@ export default function Demographics() {
         <div className="container">
           <div className="grid-2">
             <div className="chart-container">
-              <div className="chart-title">Groupes ethniques</div>
+              <div className="chart-title">{t('Groupes ethniques')}</div>
               <div className="flip-wrap">
                 <div className="flip-inner">
                   <div className="flip-front"><div id="chart-ethnic" data-chart="ethnic"></div></div>
-                  <div className="flip-back"><div className="flip-label">Analyse</div><p></p></div>
+                  <div className="flip-back"><div className="flip-label">{t('Analyse')}</div><p></p></div>
                 </div>
-                <div className="flip-hint">&#x21bb; Cliquez pour l'analyse</div>
+                <div className="flip-hint">&#x21bb; {t("Cliquez pour l'analyse")}</div>
               </div>
             </div>
             <div>
-              <div className="chart-title" style={{ marginBottom: 16 }}>Population historique</div>
+              <div className="chart-title" style={{ marginBottom: 16 }}>{t('Population historique')}</div>
               <div className="table-container">
                 <table>
                   <thead>
                     <tr>
-                      <th>Année</th>
-                      <th>Population</th>
+                      <th>{t('Année')}</th>
+                      <th>{t('Population')}</th>
                     </tr>
                   </thead>
                   <tbody>

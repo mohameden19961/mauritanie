@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 const pagesList = [
   { to: '/', icon: '\u{1F3E0}', title: 'Accueil', desc: 'Page d\'accueil du site dédié à la Mauritanie.' },
@@ -32,14 +33,15 @@ const iconColors = ['green', 'blue', 'gold', 'green', 'blue', 'gold', 'green', '
 export default function Pages() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   return (
     <>
       <Header />
 
       <PageHeader
-        title="Toutes les pages"
-        description="Explorez chaque facette de la Mauritanie à travers nos pages dédiées."
+        title={t('Toutes les pages')}
+        description={t('Explorez chaque facette de la Mauritanie à travers nos pages dédiées.')}
       />
 
       <section className="section">
@@ -53,8 +55,8 @@ export default function Pages() {
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <div className={`feature-icon ${iconColors[i]}`} style={{ margin: '0 0 16px' }}>{page.icon}</div>
-                <h3>{page.title}</h3>
-                <p>{page.desc}</p>
+                <h3>{t(page.title)}</h3>
+                <p>{t(page.desc)}</p>
               </Link>
             ))}
           </div>

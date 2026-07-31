@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useI18n } from '../i18n';
 
 interface StatItem {
   value: string;
@@ -17,6 +18,7 @@ export default function StatsSection({ stats }: StatsSectionProps) {
   const [counts, setCounts] = useState<number[]>(stats.map(() => 0));
   const [animated, setAnimated] = useState(false);
   const ref = useRef<HTMLElement | null>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,7 +79,7 @@ export default function StatsSection({ stats }: StatsSectionProps) {
           {stats.map((stat, i) => (
             <div key={i}>
               <div className="stat-value">{stat.icon} {formatDisplay(stat, i)}</div>
-              <div className="stat-label">{stat.label}</div>
+              <div className="stat-label">{t(stat.label)}</div>
             </div>
           ))}
         </div>

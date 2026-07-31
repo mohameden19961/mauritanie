@@ -1,3 +1,5 @@
+import { useI18n } from '../i18n';
+
 interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -8,13 +10,14 @@ interface BreadcrumbProps {
 }
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
+  const { t } = useI18n();
   return (
     <div className="breadcrumb">
-      <a href="/">Accueil</a>
+      <a href="/">{t('Accueil')}</a>
       {items.map((item, i) => (
         <span key={i}>
           <span>/</span>
-          {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
+          {item.href ? <a href={item.href}>{t(item.label)}</a> : <span>{t(item.label)}</span>}
         </span>
       ))}
     </div>

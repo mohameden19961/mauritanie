@@ -9,6 +9,7 @@ import BackToTop from '../components/BackToTop';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
+import { useI18n } from '../i18n';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -177,6 +178,7 @@ export default function Home() {
   const featuresRef = useRef<HTMLDivElement>(null);
   const newPagesRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -246,12 +248,12 @@ export default function Home() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
-              <span className="hero-badge">🇲🇷 Le Trésor du Sahara</span>
-              <h1>Bienvenue en <span>Mauritanie</span></h1>
-              <p>Explorez un pays aux mille visages : des dunes dorées du Sahara aux eaux poissonneuses de l'Atlantique, des cités anciennes aux marchés animés de Nouakchott.</p>
+              <span className="hero-badge">🇲🇷 {t('Le Trésor du Sahara')}</span>
+              <h1>{t('Bienvenue en')} <span>{t('Mauritanie')}</span></h1>
+              <p>{t("Explorez un pays aux mille visages : des dunes dorées du Sahara aux eaux poissonneuses de l'Atlantique, des cités anciennes aux marchés animés de Nouakchott.")}</p>
               <div className="hero-actions">
-                <Link to="/tourism" className="btn btn-accent">Explorer les destinations</Link>
-                <Link to="/history" className="btn btn-outline-light">Découvrir l'histoire</Link>
+                <Link to="/tourism" className="btn btn-accent">{t('Explorer les destinations')}</Link>
+                <Link to="/history" className="btn btn-outline-light">{t("Découvrir l'histoire")}</Link>
               </div>
             </div>
             <div className="hero-globe">
@@ -264,15 +266,15 @@ export default function Home() {
       <section className="features" ref={featuresRef}>
         <div className="container">
           <div className="section-title">
-            <h2>Pourquoi visiter la Mauritanie ?</h2>
-            <p>Une destination unique où le désert rencontre l'océan, riche d'une histoire millénaire et de traditions vivantes.</p>
+            <h2>{t('Pourquoi visiter la Mauritanie ?')}</h2>
+            <p>{t("Une destination unique où le désert rencontre l'océan, riche d'une histoire millénaire et de traditions vivantes.")}</p>
           </div>
           <div className="grid-4">
             {features.map((f, i) => (
               <div key={i} className="card feature-card">
                 <div className={`feature-icon ${f.iconClass}`}>{f.icon}</div>
-                <h3>{f.title}</h3>
-                <p>{f.desc}</p>
+                <h3>{t(f.title)}</h3>
+                <p>{t(f.desc)}</p>
               </div>
             ))}
           </div>
@@ -284,8 +286,8 @@ export default function Home() {
       <section className="section-alt" ref={newPagesRef}>
         <div className="container">
           <div className="section-title">
-            <h2>Explorer davantage</h2>
-            <p>Découvrez d'autres facettes de la Mauritanie à travers nos pages thématiques.</p>
+            <h2>{t('Explorer davantage')}</h2>
+            <p>{t("Découvrez d'autres facettes de la Mauritanie à travers nos pages thématiques.")}</p>
           </div>
           <div className="grid-4">
             {newPages.map((p) => (
@@ -296,13 +298,13 @@ export default function Home() {
                 style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center' }}
               >
                 <div className={`feature-icon ${p.color}`}>{p.icon}</div>
-                <h3>{p.title}</h3>
-                <p>{p.desc}</p>
+                <h3>{t(p.title)}</h3>
+                <p>{t(p.desc)}</p>
               </Link>
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
-            <Link to="/pages" className="btn btn-secondary">Voir toutes les pages</Link>
+            <Link to="/pages" className="btn btn-secondary">{t('Voir toutes les pages')}</Link>
           </div>
         </div>
       </section>
@@ -310,20 +312,20 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Une brève histoire</h2>
-            <p>Des empires anciens aux temps modernes, la Mauritanie est riche d'un passé fascinant.</p>
+            <h2>{t('Une brève histoire')}</h2>
+            <p>{t("Des empires anciens aux temps modernes, la Mauritanie est riche d'un passé fascinant.")}</p>
           </div>
           <div className="grid-2">
             <div>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>La Mauritanie est un carrefour de civilisations. Terre des Almoravides qui ont marqué l'histoire de l'Afrique du Nord et de l'Andalousie, elle a vu se succéder empires, émirats et colonisation. Depuis son indépendance en 1960, elle construit une nation moderne tout en préservant ses traditions ancestrales.</p>
-              <Link to="/history" className="btn btn-primary" style={{ marginTop: 16 }}>Voir la frise chronologique</Link>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>{t("La Mauritanie est un carrefour de civilisations. Terre des Almoravides qui ont marqué l'histoire de l'Afrique du Nord et de l'Andalousie, elle a vu se succéder empires, émirats et colonisation. Depuis son indépendance en 1960, elle construit une nation moderne tout en préservant ses traditions ancestrales.")}</p>
+              <Link to="/history" className="btn btn-primary" style={{ marginTop: 16 }}>{t('Voir la frise chronologique')}</Link>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {historyCards.map((c, i) => (
                 <div key={i} className="card" style={{ textAlign: 'center', padding: 20 }}>
                   <div style={{ fontSize: '2rem', marginBottom: 4 }}>{c.icon}</div>
                   <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{c.year}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{c.label}</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{t(c.label)}</div>
                 </div>
               ))}
             </div>
@@ -344,12 +346,12 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 20, flex: 1, minWidth: 260 }}>
               <div className="feature-icon gold" style={{ margin: 0, width: 64, height: 64, fontSize: '1.8rem' }}>{'\u{1F3B5}'}</div>
               <div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: 4 }}>L'hymne national de la Mauritanie</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Écoutez l'hymne « Nechid El Watani » et découvrez la section vidéos de la musique mauritanienne.</p>
+                <h3 style={{ fontSize: '1.25rem', marginBottom: 4 }}>{t("L'hymne national de la Mauritanie")}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t("Écoutez l'hymne « Nechid El Watani » et découvrez la section vidéos de la musique mauritanienne.")}</p>
               </div>
             </div>
             <Link to="/musique#videos" className="btn btn-accent" style={{ flexShrink: 0 }}>
-              Écouter l'hymne {'\u25B6'}
+              {t("Écouter l'hymne")} {'\u25B6'}
             </Link>
           </div>
         </div>
@@ -358,19 +360,19 @@ export default function Home() {
       <section className="section-alt" ref={testimonialsRef}>
         <div className="container">
           <div className="section-title">
-            <h2>Ce que disent les voyageurs</h2>
+            <h2>{t('Ce que disent les voyageurs')}</h2>
           </div>
           <div className="grid-3">
-            {testimonials.map((t, i) => (
+            {testimonials.map((tm, i) => (
               <div key={i} className="card" style={{ textAlign: 'center', padding: 32 }}>
                 <img
-                  src={t.img}
-                  alt={t.name}
+                  src={tm.img}
+                  alt={tm.name}
                   style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', margin: '0 auto 12px', border: '3px solid var(--glass-border)' }}
                 />
                 <div style={{ fontSize: '2rem', marginBottom: 8, color: 'var(--accent)', lineHeight: 1 }}>"</div>
-                <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: 16 }}>{t.text}</p>
-                <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>— {t.name}</div>
+                <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic', marginBottom: 16 }}>{t(tm.text)}</p>
+                <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>— {tm.name}</div>
               </div>
             ))}
           </div>
@@ -380,11 +382,11 @@ export default function Home() {
       <section className="section search-section">
         <div className="container">
           <div className="section-title">
-            <h2>Rechercher sur le site</h2>
-            <p>Trouvez rapidement une destination, un plat, une date historique ou une information.</p>
+            <h2>{t('Rechercher sur le site')}</h2>
+            <p>{t('Trouvez rapidement une destination, un plat, une date historique ou une information.')}</p>
           </div>
           <div className="card" style={{ padding: 24, maxWidth: 600, margin: '0 auto' }}>
-            <h2>Recherche</h2>
+            <h2>{t('Recherche')}</h2>
             <SearchBox />
           </div>
         </div>
@@ -393,11 +395,11 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Prêt à découvrir la Mauritanie ?</h2>
-            <p>Planifiez votre voyage dès maintenant et partez à l'aventure dans ce joyau du Sahara.</p>
+            <h2>{t('Prêt à découvrir la Mauritanie ?')}</h2>
+            <p>{t("Planifiez votre voyage dès maintenant et partez à l'aventure dans ce joyau du Sahara.")}</p>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Link to="/contact" className="btn btn-accent" style={{ fontSize: '1.1rem', padding: '16px 36px' }}>Contactez-nous</Link>
+            <Link to="/contact" className="btn btn-accent" style={{ fontSize: '1.1rem', padding: '16px 36px' }}>{t('Contactez-nous')}</Link>
           </div>
         </div>
       </section>

@@ -6,11 +6,13 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
+import { useI18n } from '../i18n';
 
 export default function History() {
   const [selected, setSelected] = useState<HistoryEntry | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { t } = useI18n();
 
   const defaultImg = 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&fit=crop';
 
@@ -19,8 +21,8 @@ export default function History() {
       <Header />
 
       <PageHeader
-        title="Histoire de la Mauritanie"
-        description="Voyage à travers les millénaires : des premières civilisations du Sahara à la République islamique moderne, la Mauritanie possède un patrimoine historique riche et fascinant."
+        title={t('Histoire de la Mauritanie')}
+        description={t("Voyage à travers les millénaires : des premières civilisations du Sahara à la République islamique moderne, la Mauritanie possède un patrimoine historique riche et fascinant.")}
       />
 
       <section className="section">
@@ -34,8 +36,8 @@ export default function History() {
                 onClick={() => setSelected(item)}
               >
                 <div className="timeline-year">{item.year}</div>
-                <h3>{item.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>{item.desc}</p>
+                <h3>{t(item.title)}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>{t(item.desc)}</p>
               </div>
             ))}
           </div>
@@ -51,13 +53,13 @@ export default function History() {
             <button className="detail-modal-close" onClick={() => setSelected(null)}>&times;</button>
             <div className="detail-modal-body">
               <div className="dm-img">
-                <img src={defaultImg} alt={selected.title} />
+                <img src={defaultImg} alt={t(selected.title)} />
               </div>
               <div className="dm-body">
                 <div className="dm-badge">{selected.year}</div>
-                <h2>{selected.title}</h2>
-                <div className="dm-desc">{selected.desc}</div>
-                <div className="dm-detail">{selected.detail}</div>
+                <h2>{t(selected.title)}</h2>
+                <div className="dm-desc">{t(selected.desc)}</div>
+                <div className="dm-detail">{t(selected.detail)}</div>
               </div>
             </div>
           </div>

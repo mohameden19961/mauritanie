@@ -82,3 +82,18 @@ img { max-width: 100%; height: auto; }
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
+
+/* ===== RTL & ARABIC ===== */
+[dir="rtl"] body,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select,
+[dir="rtl"] button {
+  font-family: 'Plus Jakarta Sans', 'Noto Kufi Arabic', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+  letter-spacing: 0;
+}
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4 { letter-spacing: 0; }
+[dir="rtl"] .lang-menu { left: auto; right: 0; }
