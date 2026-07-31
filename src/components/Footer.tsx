@@ -17,7 +17,7 @@ export default function Footer() {
             </a>
           </div>
           <div className="footer-col">
-            <h4>Pages</h4>
+            <h4>Découvrir</h4>
             <a href="/">Accueil</a>
             <a href="/history">Histoire</a>
             <a href="/geography">Géographie</a>
@@ -25,7 +25,7 @@ export default function Footer() {
             <a href="/economy">Économie</a>
           </div>
           <div className="footer-col">
-            <h4>Pages</h4>
+            <h4>Informations</h4>
             <a href="/demographics">Démographie</a>
             <a href="/government">Gouvernement</a>
             <a href="/cuisine">Cuisine</a>
