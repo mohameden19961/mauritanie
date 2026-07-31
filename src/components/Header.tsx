@@ -36,8 +36,8 @@ export default function Header() {
     <header className="site-header">
       <div className="header-inner">
         <Link to="/" className="logo" onClick={() => setLangOpen(false)}>
-          <img src="/images/drapeaumauritanie.png" alt="Drapeau Mauritanie" style={{ height: 24, width: 'auto', borderRadius: 2 }} />
-          Mauritanie
+          <img src="/images/drapeaumauritanie.png" alt={t('Drapeau de la Mauritanie')} style={{ height: 24, width: 'auto', borderRadius: 2 }} />
+          {t('Mauritanie')}
         </Link>
         <ul className={`nav-links${mobileOpen ? ' open' : ''}`}>
           {navItems.map((item) => (
