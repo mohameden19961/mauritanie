@@ -110,6 +110,7 @@
   .site-header { padding: 0 8px; }
   .header-inner { border-radius: 50px; padding: 0 12px; }
   .header-actions { margin-left: auto; gap: 6px; }
+  [dir="rtl"] .header-actions { margin-left: 0; margin-right: auto; }
   .lang-switcher { margin-left: 0; }
   .lang-trigger { padding: 6px; width: 36px; height: 36px; justify-content: center; }
   .lang-trigger-label { display: none; }
