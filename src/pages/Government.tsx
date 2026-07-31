@@ -118,10 +118,12 @@ export default function Government() {
               <div className="dm-img">
                 <img src={govFields[selectedField].image} alt={govFields[selectedField].alt} />
               </div>
-              <div className="dm-badge">{govFields[selectedField].badge}</div>
-              <h2>{govFields[selectedField].label}</h2>
-              <div className="dm-desc">{govFields[selectedField].desc}</div>
-              <div className="dm-detail">{govFields[selectedField].detail}</div>
+              <div className="dm-body">
+                <div className="dm-badge">{govFields[selectedField].badge}</div>
+                <h2>{govFields[selectedField].label}</h2>
+                <div className="dm-desc">{govFields[selectedField].desc}</div>
+                <div className="dm-detail">{govFields[selectedField].detail}</div>
+              </div>
             </div>
           </div>
         </div>

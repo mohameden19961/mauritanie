@@ -67,18 +67,20 @@ export default function Tourism() {
               <div className="dm-img">
                 <img src={selectedTourismItem.image} alt={selectedTourismItem.name} />
               </div>
-              <div className="dm-badge">{selectedTourismItem.type}</div>
-              <div className="dm-stars">
-                {Array.from({ length: selectedTourismItem.rating }, (_, i) => (
-                  <span key={i}>★</span>
-                ))}
+              <div className="dm-body">
+                <div className="dm-badge">{selectedTourismItem.type}</div>
+                <div className="dm-stars">
+                  {Array.from({ length: selectedTourismItem.rating }, (_, i) => (
+                    <span key={i}>★</span>
+                  ))}
+                </div>
+                <h2>{selectedTourismItem.name}</h2>
+                <div className="dm-desc">{selectedTourismItem.desc}</div>
+                <div className="dm-detail">{selectedTourismItem.detail}</div>
+                <p style={{ marginTop: 16, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                  <strong>Meilleure période :</strong> {selectedTourismItem.bestTime}
+                </p>
               </div>
-              <h2>{selectedTourismItem.name}</h2>
-              <div className="dm-desc">{selectedTourismItem.desc}</div>
-              <div className="dm-detail">{selectedTourismItem.detail}</div>
-              <p style={{ marginTop: 16, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                <strong>Meilleure période :</strong> {selectedTourismItem.bestTime}
-              </p>
             </div>
           </div>
         </div>

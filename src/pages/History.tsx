@@ -53,10 +53,12 @@ export default function History() {
               <div className="dm-img">
                 <img src={defaultImg} alt={selected.title} />
               </div>
-              <div className="dm-badge">{selected.year}</div>
-              <h2>{selected.title}</h2>
-              <div className="dm-desc">{selected.desc}</div>
-              <div className="dm-detail">{selected.detail}</div>
+              <div className="dm-body">
+                <div className="dm-badge">{selected.year}</div>
+                <h2>{selected.title}</h2>
+                <div className="dm-desc">{selected.desc}</div>
+                <div className="dm-detail">{selected.detail}</div>
+              </div>
             </div>
           </div>
         </div>
