@@ -27,8 +27,8 @@
   color: var(--text); text-decoration: none;
 }
 .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; margin-left: auto; }
-.nav-plus { display: none; }
-.nav-mobile-hide { display: list-item; }
+[dir="rtl"] .nav-links { margin-left: 0; margin-right: auto; }
+.nav-mobile-hide { display: none; }
 .nav-links a {
   color: var(--text-secondary); font-weight: 500; font-size: 0.9rem;
   position: relative; padding: 4px 0; transition: var(--transition);
@@ -97,6 +97,14 @@
 .lang-option:hover { background: rgba(13,138,60,0.08); }
 .lang-option.active { color: var(--primary); font-weight: 700; background: rgba(13,138,60,0.1); }
 
+/* ===== TABLET (769–1024) : resserrer la nav pour garder l'espace logo/nav ===== */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 0.82rem; }
+  .header-actions { gap: 6px; margin-left: 8px; }
+  .lang-trigger { padding: 5px 9px; font-size: 0.85rem; }
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .site-header { padding: 0 8px; }
@@ -139,8 +147,6 @@
     overflow: hidden;
   }
   .nav-links.open { display: flex; }
-  .nav-plus { display: block; }
-  .nav-mobile-hide { display: none; }
 
   .nav-links li { border-bottom: 1px solid #F0F0F0; }
   .nav-links li:last-child { border-bottom: none; }
