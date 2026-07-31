@@ -39,34 +39,6 @@ export default function Header() {
           <img src="/images/drapeaumauritanie.png" alt="Drapeau Mauritanie" style={{ height: 24, width: 'auto', borderRadius: 2 }} />
           Mauritanie
         </Link>
-        <button className="theme-toggle header-theme-toggle" aria-label="Mode sombre" onClick={toggleTheme}>
-          {theme === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}'}
-        </button>
-        <div className={`lang-switcher${langOpen ? ' open' : ''}`}>
-          <button
-            className="lang-trigger"
-            aria-label="Changer de langue"
-            aria-haspopup="true"
-            aria-expanded={langOpen}
-            onClick={() => setLangOpen(prev => !prev)}
-          >
-            {'\u{1F310}'}
-            <span className="lang-trigger-label">{LANGUAGES.find(l => l.code === lang)?.native}</span>
-          </button>
-          <ul className="lang-menu">
-            {LANGUAGES.map((l) => (
-              <li key={l.code}>
-                <button className={`lang-option${l.code === lang ? ' active' : ''}`} onClick={() => chooseLang(l.code)}>
-                  {l.native}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button className={`mobile-toggle${mobileOpen ? ' open' : ''}`} onClick={toggleMobile}>
-          <span className="icon-open">{'\u22EE'}</span>
-          <span className="icon-close">{'\u2715'}</span>
-        </button>
         <ul className={`nav-links${mobileOpen ? ' open' : ''}`}>
           {navItems.map((item) => (
             <li key={item.to} className={item.className || ''}>
@@ -81,12 +53,37 @@ export default function Header() {
               </Link>
             </li>
           ))}
-          <li className="nav-theme">
-            <button className="theme-toggle" aria-label="Mode sombre" onClick={toggleTheme}>
-              {theme === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}'}
-            </button>
-          </li>
         </ul>
+        <div className="header-actions">
+          <button className="theme-toggle header-theme-toggle" aria-label="Mode sombre" onClick={toggleTheme}>
+            {theme === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}'}
+          </button>
+          <div className={`lang-switcher${langOpen ? ' open' : ''}`}>
+            <button
+              className="lang-trigger"
+              aria-label="Changer de langue"
+              aria-haspopup="true"
+              aria-expanded={langOpen}
+              onClick={() => setLangOpen(prev => !prev)}
+            >
+              {'\u{1F310}'}
+              <span className="lang-trigger-label">{LANGUAGES.find(l => l.code === lang)?.native}</span>
+            </button>
+            <ul className="lang-menu">
+              {LANGUAGES.map((l) => (
+                <li key={l.code}>
+                  <button className={`lang-option${l.code === lang ? ' active' : ''}`} onClick={() => chooseLang(l.code)}>
+                    {l.native}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <button className={`mobile-toggle${mobileOpen ? ' open' : ''}`} onClick={toggleMobile}>
+          <span className="icon-open">{'\u22EE'}</span>
+          <span className="icon-close">{'\u2715'}</span>
+        </button>
         <div className={`nav-overlay${mobileOpen ? ' open' : ''}`} onClick={toggleMobile}></div>
       </div>
     </header>
