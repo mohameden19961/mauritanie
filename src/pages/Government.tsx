@@ -7,13 +7,13 @@ import BackToTop from '../components/BackToTop';
 import Lightbox from '../components/Lightbox';
 
 const govFields = [
-  { label: 'Type de régime', key: 'type' as const, image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=420&fit=crop', alt: 'Bâtiment institutionnel' },
-  { label: 'Président', key: 'president' as const, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg/500px-Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg', alt: 'Mohamed Ould Cheikh El Ghazouani, président de la République' },
-  { label: 'Premier ministre', key: 'premier' as const, image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=420&fit=crop', alt: 'Documents gouvernementaux' },
-  { label: 'Constitution', key: 'constitution' as const, image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=420&fit=crop', alt: 'Livre de droit et constitution' },
-  { label: 'Capitale', key: 'capital' as const, image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&h=420&fit=crop', alt: 'Vue urbaine de capitale' },
-  { label: 'Subdivisions', key: 'subdivisions' as const, image: '/images/mauritanie-div-map.gif', alt: 'Carte des wilayas de Mauritanie' },
-  { label: 'Indépendance', key: 'independance' as const, image: '/images/drapeaumauritanie.png', alt: 'Drapeau de la Mauritanie' },
+  { label: 'Type de régime', key: 'type' as const, image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=420&fit=crop', alt: 'Bâtiment institutionnel', badge: 'Régime', desc: 'La Mauritanie est une république islamique semi-présidentielle.', detail: 'Le président de la République, élu au suffrage universel direct pour 5 ans, partage le pouvoir exécutif avec le Premier ministre et le gouvernement. Le régime combine les caractéristiques du régime présidentiel — un chef d\'État élu disposant de pouvoirs étendus — et parlementaires, avec un gouvernement responsable devant l\'Assemblée nationale.' },
+  { label: 'Président', key: 'president' as const, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg/500px-Mohamed_Ould_Ghazouani_2025_%28alt_crop%29.jpg', alt: 'Mohamed Ould Cheikh El Ghazouani, président de la République', badge: 'Chef de l\'État', desc: 'Mohamed Ould Cheikh El Ghazouani est le président actuel de la République.', detail: 'Élu en 2019 puis réélu en 2024 pour un second mandat, il est le 9e président de la Mauritanie. Ancien général et ministre de la Défense, il a incarné la première transition pacifique du pouvoir depuis l\'indépendance.' },
+  { label: 'Premier ministre', key: 'premier' as const, image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=420&fit=crop', alt: 'Documents gouvernementaux', badge: 'Gouvernement', desc: 'Mokhtar Ould Djay est l\'actuel Premier ministre.', detail: 'Nommé par le président de la République, il dirige le gouvernement et coordonne l\'action des ministères. Le Premier ministre est responsable devant l\'Assemblée nationale, qui peut engager sa responsabilité.' },
+  { label: 'Constitution', key: 'constitution' as const, image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=420&fit=crop', alt: 'Livre de droit et constitution', badge: 'Institutions', desc: 'La Constitution du 20 juillet 1991 régit l\'État mauritanien.', detail: 'Elle a instauré le multipartisme et structuré le régime autour de la présidence, du gouvernement et du parlement. Plusieurs révisions ont suivi, notamment pour rétablir le Sénat et encadrer les mandats présidentiels.' },
+  { label: 'Capitale', key: 'capital' as const, image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&h=420&fit=crop', alt: 'Vue urbaine de capitale', badge: 'Géographie', desc: 'Nouakchott, fondée en 1958, est la capitale de la Mauritanie.', detail: 'Située sur la côte atlantique, elle concentre environ un tiers de la population du pays. Elle abrite l\'ensemble des institutions : présidence, gouvernement, Assemblée nationale et Cour suprême.' },
+  { label: 'Subdivisions', key: 'subdivisions' as const, image: '/images/mauritanie-div-map.gif', alt: 'Carte des wilayas de Mauritanie', badge: 'Administration', desc: 'Le pays est découpé en 15 wilayas (régions).', detail: 'Chaque wilaya est administrée par un wali nommé par l\'État et subdivisée en moughataas (départements). La ville de Nouakchott dispose d\'un statut particulier de district.' },
+  { label: 'Indépendance', key: 'independance' as const, image: '/images/drapeaumauritanie.png', alt: 'Drapeau de la Mauritanie', badge: 'Histoire', desc: 'La Mauritanie proclame son indépendance le 28 novembre 1960.', detail: 'Sous la présidence de Mokhtar Ould Daddah, le pays devient une république islamique indépendante de la France. Cette date est célébrée chaque année comme fête nationale.' },
 ];
 
 const timelineEvents = [
@@ -59,6 +59,18 @@ export default function Government() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [selectedField, setSelectedField] = useState<number | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openDetail = (i: number) => {
+    setSelectedField(i);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setTimeout(() => setSelectedField(null), 300);
+  };
 
   return (
     <>
@@ -72,16 +84,48 @@ export default function Government() {
       <section className="section">
         <div className="container">
           <div className="cards-grid">
-            {govFields.map((field) => (
-              <div key={field.key} className="info-card">
-                <img className="card-image" src={field.image} alt={field.alt} />
-                <h3>{field.label}</h3>
-                <p>{MAURITANIA.government[field.key]}</p>
+            {govFields.map((field, i) => (
+              <div
+                key={field.key}
+                className="info-card"
+                style={{ padding: 0, cursor: 'pointer' }}
+                onClick={() => openDetail(i)}
+              >
+                <img
+                  src={field.image}
+                  alt={field.alt}
+                  style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 'var(--radius-md) var(--radius-md) 0 0' }}
+                />
+                <div style={{ padding: 20 }}>
+                  <span className="badge badge-green">{field.badge}</span>
+                  <h3 style={{ fontSize: '1.1rem', margin: '12px 0 8px' }}>{field.label}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{MAURITANIA.government[field.key]}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {modalIsOpen && selectedField !== null && (
+        <div
+          className="detail-modal open"
+          onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
+        >
+          <div className="detail-modal-content">
+            <button className="detail-modal-close" onClick={closeModal}>&times;</button>
+            <div className="detail-modal-body">
+              <div className="dm-img">
+                <img src={govFields[selectedField].image} alt={govFields[selectedField].alt} />
+              </div>
+              <div className="dm-badge">{govFields[selectedField].badge}</div>
+              <h2>{govFields[selectedField].label}</h2>
+              <div className="dm-desc">{govFields[selectedField].desc}</div>
+              <div className="dm-detail">{govFields[selectedField].detail}</div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="section">
         <div className="container">

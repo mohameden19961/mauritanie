@@ -23,6 +23,26 @@ export default function Economy() {
   const createdCharts = useRef<Record<string, any>>({});
 
   useEffect(() => {
+    const section = document.querySelector('.progress-section');
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          section.querySelectorAll<HTMLElement>('.progress-fill').forEach((fill) => {
+            const width = fill.dataset.width;
+            if (width) fill.style.width = width;
+          });
+          observer.disconnect();
+        });
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const loadChartJS = () => {
       if ((window as any).Chart) {
         initCharts();
@@ -190,7 +210,7 @@ export default function Economy() {
           <div className="section-title">
             <h2>Indicateurs économiques</h2>
           </div>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <div style={{ maxWidth: 600, margin: '0 auto' }} className="progress-section">
             <div className="progress-group">
               <div className="progress-label"><span>Mines</span><span>35%</span></div>
               <div className="progress-track"><div className="progress-fill" data-width="35%"></div></div>

@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const statsData = [
   { value: '1 030 700 km²', label: 'Superficie', icon: '🌍', num: 1030700, suffix: ' km²' },
-  { value: '4,62 millions', label: 'Habitants', icon: '👥', num: 462, suffix: ' M' },
+  { value: '4,62 millions', label: 'Habitants', icon: '👥', num: 4.62, suffix: ' M', decimals: 2 },
   { value: '754 km', label: 'Côte Atlantique', icon: '🌊', num: 754, suffix: ' km' },
   { value: '1960', label: 'Indépendance', icon: '🇲🇷', num: 1960 },
 ];
@@ -50,6 +50,58 @@ const historyCards = [
   { icon: '🎓', year: '2019', label: 'Transition démocratique' },
 ];
 
+function drawStar(ctx: CanvasRenderingContext2D, cx: number, cy: number, outer: number, inner: number) {
+  const spikes = 5;
+  const step = Math.PI / spikes;
+  let rot = -Math.PI / 2;
+  ctx.beginPath();
+  for (let i = 0; i < spikes; i++) {
+    ctx.lineTo(cx + Math.cos(rot) * outer, cy + Math.sin(rot) * outer);
+    rot += step;
+    ctx.lineTo(cx + Math.cos(rot) * inner, cy + Math.sin(rot) * inner);
+    rot += step;
+  }
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawFlagEmblem(ctx: CanvasRenderingContext2D, cx: number) {
+  ctx.fillStyle = '#F5C518';
+  ctx.beginPath();
+  ctx.arc(cx, 270, 85, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#0D8A3C';
+  ctx.beginPath();
+  ctx.arc(cx, 236, 62, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#F5C518';
+  drawStar(ctx, cx, 198, 24, 10);
+}
+
+function createFlagTexture(): THREE.Texture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d')!;
+
+  ctx.fillStyle = '#0D8A3C';
+  ctx.fillRect(0, 0, 1024, 512);
+
+  ctx.fillStyle = '#D32F2F';
+  ctx.fillRect(0, 0, 1024, 110);
+  ctx.fillRect(0, 402, 1024, 110);
+
+  drawFlagEmblem(ctx, 256);
+  drawFlagEmblem(ctx, 768);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.RepeatWrapping;
+  return texture;
+}
+
 function Globe() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -69,11 +121,8 @@ function Globe() {
 
     const geo = new THREE.SphereGeometry(1.2, 64, 64);
     const mat = new THREE.MeshPhongMaterial({
-      color: 0x0d8a3c,
-      emissive: 0x1a5c3a,
-      shininess: 25,
-      transparent: true,
-      opacity: 0.85,
+      map: createFlagTexture(),
+      shininess: 30,
     });
     const globe = new THREE.Mesh(geo, mat);
     scene.add(globe);
@@ -132,8 +181,8 @@ export default function Home() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (heroRef.current) {
-        const heroText = heroRef.current.querySelector('.hero-content > div');
-        const heroGlobe = heroRef.current.querySelector('.hero-content > div:last-child');
+        const heroText = heroRef.current.querySelector('.hero-text');
+        const heroGlobe = heroRef.current.querySelector('.hero-globe');
         if (heroText) {
           gsap.fromTo(heroText,
             { y: 60, opacity: 0 },
@@ -192,17 +241,22 @@ export default function Home() {
       <Header />
 
       <section className="hero" ref={heroRef}>
+        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-overlay" aria-hidden="true" />
         <div className="container">
           <div className="hero-content">
-            <div>
+            <div className="hero-text">
+              <span className="hero-badge">🇲🇷 Le Trésor du Sahara</span>
               <h1>Bienvenue en <span>Mauritanie</span></h1>
               <p>Explorez un pays aux mille visages : des dunes dorées du Sahara aux eaux poissonneuses de l'Atlantique, des cités anciennes aux marchés animés de Nouakchott.</p>
               <div className="hero-actions">
-                <Link to="/tourism" className="btn btn-primary">Explorer les destinations</Link>
-                <Link to="/history" className="btn btn-secondary">Découvrir l'histoire</Link>
+                <Link to="/tourism" className="btn btn-accent">Explorer les destinations</Link>
+                <Link to="/history" className="btn btn-outline-light">Découvrir l'histoire</Link>
               </div>
             </div>
-            <Globe />
+            <div className="hero-globe">
+              <Globe />
+            </div>
           </div>
         </div>
       </section>

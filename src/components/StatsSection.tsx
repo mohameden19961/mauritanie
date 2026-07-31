@@ -6,6 +6,7 @@ interface StatItem {
   icon: string;
   num?: number;
   suffix?: string;
+  decimals?: number;
 }
 
 interface StatsSectionProps {
@@ -40,6 +41,7 @@ export default function StatsSection({ stats }: StatsSectionProps) {
       const match = st.value.match(/^[\d.,]+/);
       return match ? parseFloat(match[0].replace(',', '.')) : 0;
     });
+    const decimals = stats.map(st => st.decimals ?? 0);
 
     function animate() {
       const newCounts = stats.map((_, i) => {
@@ -47,7 +49,7 @@ export default function StatsSection({ stats }: StatsSectionProps) {
         const duration = durations[i] || 1000;
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        return Math.round(targets[i] * eased);
+        return parseFloat((targets[i] * eased).toFixed(decimals[i]));
       });
       setCounts(newCounts);
       if (newCounts.some((c, i) => c < targets[i])) {
@@ -59,7 +61,10 @@ export default function StatsSection({ stats }: StatsSectionProps) {
 
   function formatDisplay(stat: StatItem, i: number) {
     if (stat.num !== undefined) {
-      const val = counts[i].toLocaleString('fr-FR');
+      const decimals = stat.decimals ?? 0;
+      const val = decimals > 0
+        ? counts[i].toFixed(decimals).replace('.', ',')
+        : counts[i].toLocaleString('fr-FR');
       return stat.suffix ? `${val}${stat.suffix}` : val;
     }
     return stat.value;
