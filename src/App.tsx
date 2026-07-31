@@ -18,6 +18,7 @@ import Education from './pages/Education';
 import Transport from './pages/Transport';
 import Religion from './pages/Religion';
 import Sports from './pages/Sports';
+import InstallPrompt from './components/InstallPrompt';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/religion" element={<Religion />} />
         <Route path="/sports" element={<Sports />} />
       </Routes>
+      <InstallPrompt />
     </BrowserRouter>
   );
 }
