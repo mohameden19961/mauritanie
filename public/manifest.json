@@ -1,0 +1,15 @@
+{
+  "name": "Mauritanie — Découvrez le Trésor du Sahara",
+  "short_name": "Mauritanie",
+  "description": "Guide complet sur la Mauritanie : histoire, géographie, tourisme, économie, culture.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00A651",
+  "icons": [
+    { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
