@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
@@ -43,6 +44,19 @@ const instruments = [
   }
 ];
 
+const videos = [
+  {
+    src: 'https://www.youtube.com/embed/qxqaHhcyGwU',
+    title: 'Hymne national de la Mauritanie',
+    desc: 'An-Nashīd Al-waṭanī Al-Mūrītānī — l\'hymne officiel de la République Islamique de Mauritanie, en musique et paroles.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/O6zQxtCxUqo',
+    title: 'Noura Mint Seymali — chant traditionnel des griots',
+    desc: 'Reportage sur la griotte mauritanienne Noura Mint Seymali et la tradition du chant arabe.',
+  },
+];
+
 const traditions = [
   { title: 'Griots et poètes', desc: 'Les griots (« maâlem ») sont les dépositaires de la mémoire orale. Ils chantent les exploits des ancêtres, les lignées tribales et les événements historiques lors de cérémonies officielles et privées.', icon: '\u{1F3AD}' },
   { title: 'Chants de mariage', desc: 'Les mariages mauritaniens sont accompagnés de chants spécifiques : les chants de la dot (« sdaq »), les chants de joie et les berceuses nuptiales.', icon: '\u{1F492}' },
@@ -53,6 +67,13 @@ const traditions = [
 export default function Musique() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSrc] = useState('');
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash === '#videos') {
+      document.getElementById('videos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [hash]);
 
   return (
     <>
@@ -99,6 +120,34 @@ export default function Musique() {
                 <div className="feature-icon gold" style={{ margin: '0 auto 12px' }}>{t.icon}</div>
                 <h3 style={{ fontSize: '1.05rem' }}>{t.title}</h3>
                 <p style={{ marginTop: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-alt" id="videos">
+        <div className="container">
+          <div className="section-title">
+            <h2>Vidéos</h2>
+            <p>L'hymne national et les grandes voix de la musique mauritanienne.</p>
+          </div>
+          <div className="grid-3">
+            {videos.map((v, i) => (
+              <div key={i} className="info-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <div className="video-frame">
+                  <iframe
+                    src={v.src}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+                <div style={{ padding: 16 }}>
+                  <h3 style={{ fontSize: '1rem', marginBottom: 6 }}>{v.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{v.desc}</p>
+                </div>
               </div>
             ))}
           </div>

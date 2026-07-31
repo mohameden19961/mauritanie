@@ -331,6 +331,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-alt">
+        <div className="container">
+          <div
+            className="card"
+            style={{
+              display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap',
+              justifyContent: 'space-between', padding: '32px 36px',
+              background: 'linear-gradient(135deg, rgba(13,138,60,0.10), rgba(212,168,67,0.14))',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20, flex: 1, minWidth: 260 }}>
+              <div className="feature-icon gold" style={{ margin: 0, width: 64, height: 64, fontSize: '1.8rem' }}>{'\u{1F3B5}'}</div>
+              <div>
+                <h3 style={{ fontSize: '1.25rem', marginBottom: 4 }}>L'hymne national de la Mauritanie</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Écoutez l'hymne « Nechid El Watani » et découvrez la section vidéos de la musique mauritanienne.</p>
+              </div>
+            </div>
+            <Link to="/musique#videos" className="btn btn-accent" style={{ flexShrink: 0 }}>
+              Écouter l'hymne {'\u25B6'}
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section-alt" ref={testimonialsRef}>
         <div className="container">
           <div className="section-title">
