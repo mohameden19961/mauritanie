@@ -34,9 +34,15 @@ export default function Header() {
 
   return (
     <header className="site-header">
+      {/* Bande orange charte en haut de l'en-tête */}
+      <div className="header-band" />
       <div className="header-inner">
         <Link to="/" className="logo" onClick={() => setLangOpen(false)}>
-          <img src="/images/drapeaumauritanie.png" alt={t('Drapeau de la Mauritanie')} style={{ height: 24, width: 'auto', borderRadius: 2 }} />
+          {/* Cercle vert charte (#0F5132) avec élément orange (#C9792C) */}
+          <div className="logo-mark">
+            <div className="logo-circle" />
+            <div className="logo-dot" />
+          </div>
           {t('Mauritanie')}
         </Link>
         <ul className={`nav-links${mobileOpen ? ' open' : ''}`}>

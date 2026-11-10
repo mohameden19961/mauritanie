@@ -1,25 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-/* ===== CSS VARIABLES & RESET ===== */
+
+/* ===== CSS VARIABLES & RESET — Charte graphique Mauritanie =====
+   Couleurs extraites de exports/charte-svg/ (02-couleurs.svg) */
 
 :root {
-  --primary: #0D8A3C;
-  --primary-dark: #0A6B2F;
-  --secondary: #1E88E5;
-  --accent: #D4A843;
-  --accent-dark: #B8860B;
-  --red: #D32F2F;
-  --background: #F5F0E8;
-  --text: #1A1A2E;
-  --text-secondary: #4A4A6A;
+  /* ---------- Couleurs charte ---------- */
+  --primary: #C9792C;        /* orange cuivré — bande en-tête, pied de page, accents principaux */
+  --primary-dark: #B86A1A;
+  --secondary: #0F5132;      /* vert foncé — logo, texte fort */
+  --accent: #2E9E4F;         /* vert moyen */
+  --accent-dark: #14221B;    /* noir vert */
+  --red: #C0392B;
+  --yellow: #EAB308;
+
+  /* ---------- Fonds ---------- */
+  --background: #F4F8F5;     /* fond clair pages */
+  --surface: #FFFFFF;
+  --surface-alpha: rgba(255,255,255,0.6);
+
+  /* ---------- Textes ---------- */
+  --text: #1A1A2E;           /* texte principal */
+  --text-secondary: #566B5F; /* texte secondaire */
   --text-muted: #8A8AA8;
+
+  /* ---------- Bordures / ombres ---------- */
+  --border: #DCE5DF;
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
   --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
+
+  /* ---------- Rayons ---------- */
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 28px;
+  --radius-pill: 100px;
+
+  /* ---------- Transitions ---------- */
   --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---------- Header ---------- */
   --header-height: 64px;
+  --header-band-height: 4px; /* bande orange en haut de l'en-tête */
+
+  /* ---------- Glass (retenu pour compatibilité composants existants) ---------- */
   --glass: rgba(255,255,255,0.18);
   --glass-border: rgba(255,255,255,0.35);
   --glass-shadow: 0 8px 32px rgba(0,0,0,0.04);
@@ -27,7 +50,6 @@
 
 [data-theme="dark"] {
   --background: #0F0F1A;
-  --background-image: none;
   --text: #E8E8F0;
   --text-secondary: #A0A0B8;
   --text-muted: #6A6A8A;
@@ -43,13 +65,11 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--typography-font-family, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif);
   background: var(--background);
   background-image: var(--background-image,
-    radial-gradient(ellipse at 15% 30%, rgba(13,138,60,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 25%, rgba(30,136,229,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 75%, rgba(212,168,67,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 60%, rgba(13,138,60,0.03) 0%, transparent 40%));
+    radial-gradient(ellipse at 15% 30%, rgba(201,121,44,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 25%, rgba(15,81,50,0.05) 0%, transparent 50%));
   color: var(--text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -62,7 +82,8 @@ body {
 h1, h2, h3 { font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
 h1 { font-size: 3rem; }
 h2 { font-size: 2rem; }
-h3 { font-size: 1.25rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
 
 a { color: var(--primary); text-decoration: none; transition: var(--transition); }
 a:hover { color: var(--primary-dark); }
