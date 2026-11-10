@@ -1,21 +1,21 @@
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; border-radius: 14px;
+  padding: 14px 28px; border-radius: var(--radius-md);
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 600; font-size: 15px;
   border: none; cursor: pointer;
   transition: var(--transition); text-decoration: none;
 }
 .btn-primary { background: var(--primary); color: white; }
-.btn-primary:hover { background: var(--primary-dark); transform: scale(1.02); box-shadow: 0 8px 24px rgba(13,138,60,0.3); }
+.btn-primary:hover { background: var(--primary-dark); transform: scale(1.02); box-shadow: 0 8px 24px rgba(201,121,44,0.3); }
 .btn-secondary {
   background: var(--glass); backdrop-filter: blur(12px);
   color: var(--text); border: 1px solid var(--glass-border);
 }
 .btn-secondary:hover { background: rgba(255,255,255,0.3); }
 .btn-accent { background: var(--accent); color: white; }
-.btn-accent:hover { background: var(--accent-dark); transform: scale(1.02); box-shadow: 0 8px 24px rgba(212,168,67,0.3); }
+.btn-accent:hover { background: var(--accent-dark); transform: scale(1.02); box-shadow: 0 8px 24px rgba(46,158,79,0.3); }
 
 /* ===== SECTION TITLE ===== */
 .section-title { text-align: center; margin-bottom: 32px; }
@@ -36,9 +36,9 @@
   font-size: 0.78rem; font-weight: 600;
   backdrop-filter: blur(8px);
 }
-.badge-green { background: rgba(13,138,60,0.12); color: var(--primary); border: 1px solid rgba(13,138,60,0.08); }
-.badge-blue { background: rgba(30,136,229,0.12); color: var(--secondary); border: 1px solid rgba(30,136,229,0.08); }
-.badge-gold { background: rgba(212,168,67,0.12); color: var(--accent-dark); border: 1px solid rgba(212,168,67,0.08); }
+.badge-green { background: rgba(201,121,44,0.12); color: var(--primary); border: 1px solid rgba(201,121,44,0.08); }
+.badge-blue { background: rgba(15,81,50,0.12); color: var(--secondary); border: 1px solid rgba(15,81,50,0.08); }
+.badge-gold { background: rgba(46,158,79,0.12); color: var(--accent); border: 1px solid rgba(46,158,79,0.08); }
 
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
