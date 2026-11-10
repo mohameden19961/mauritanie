@@ -1,0 +1,288 @@
+CHARTE GRAPHIQUE — MAURITANIA EXPLORER
+Version : 1.0
+Projet : Mauritania Explorer — Application web de découverte de la Mauritanie
+Référence projet : 24068 24139
+
+============================================================
+SOMMAIRE
+============================================================
+01. LOGO
+02. COULEURS
+03. TYPOGRAPHIE
+04. ESPACEMENTS ET RAYONS
+05. COMPOSANTS
+06. ICÔNES
+07. TON DES TEXTES
+
+============================================================
+01. LOGO
+============================================================
+
+Règle générale
+- Toujours partir des fichiers officiels.
+- Ne pas redessiner le logo.
+- Ne pas modifier les couleurs du logo.
+
+Versions du logo
+- Version horizontale : usage principal.
+- Version verticale : formats carrés.
+- Icône seule : avatar, favicon et application.
+- Version blanche : utilisation sur fonds foncés.
+
+Zone de protection
+- Conserver autour du logo un espace vide égal à la hauteur de la lettre « M ».
+
+Tailles minimales
+- Logo horizontal : 160 px de large.
+- Icône seule : 24 px.
+- La note du document associe la mesure « x » à la hauteur du « M » (indication OCR : « 18 px » ; à vérifier sur le visuel original).
+
+À ne pas faire
+- Ne pas déformer le logo.
+- Ne pas recolorer le logo.
+- Ne pas le placer sur un fond manquant de contraste.
+
+============================================================
+02. COULEURS
+============================================================
+
+La charte prévoit 9 couleurs au total :
+- 1 couleur principale ;
+- 1 couleur secondaire ;
+- 4 couleurs neutres ;
+- 3 couleurs d'état.
+Chaque couleur doit devenir un style Figma.
+
+2.1. Couleur primaire
+Nom : Vert Oasis
+HEX : #0F5132
+RGB : 15, 81, 50
+Utilisations :
+- Titres ;
+- Boutons principaux ;
+- En-têtes ;
+- Barre d'onglets.
+
+2.2. Couleur secondaire
+Nom : Ocre Sahara
+HEX : #C9792C
+RGB : 201, 121, 44
+Utilisations :
+- Accents ;
+- Détails.
+Règle : ne jamais utiliser cette couleur pour du texte sur fond blanc.
+
+2.3. Couleurs neutres
+Neutre/900
+- HEX : #14221B
+- Usage : texte principal.
+
+Neutre/600
+- HEX : #566B5F
+- Usage : texte secondaire.
+
+Neutre/200
+- HEX : #DCE5DF
+- Usage : bordures.
+
+Neutre/50
+- HEX : #F4F8F5
+- Usage : fonds de section.
+
+2.4. Couleurs d'état
+Alerte
+- HEX : #EAB308
+- Exemple de libellé associé dans le document : « Haute saison, à vérifier ».
+
+Le document annonce trois couleurs d'état, mais l'extraction du texte ne permet d'identifier lisiblement que la couleur Alerte (#EAB308). Les deux autres couleurs d'état ne sont pas précisées dans le texte récupéré.
+
+2.5. Répartition des couleurs
+Répartition recommandée : 60 / 30 / 10
+- 60 % : blanc et couleurs neutres.
+- 30 % : vert.
+- 10 % : ocre.
+
+2.6. Contrastes
+Contraste minimum indiqué pour le texte normal : 4,5:1.
+Exemples du document :
+- Vert sur blanc : 9,4:1 — texte OK.
+- Neutre/600 sur blanc : 5,7:1 — texte OK.
+- Blanc sur vert : 9,4:1 — texte OK.
+- Ocre sur blanc : 3,4:1 — accent et grands titres seulement.
+
+============================================================
+03. TYPOGRAPHIE
+============================================================
+
+Police unique : Nunito
+- Source : Google Fonts.
+- Gratuite.
+- Ronde et lisible sur écran comme sur mobile.
+
+Graisses disponibles et usages
+- Regular : 400.
+- Medium : 500.
+- SemiBold : 600.
+- Bold : 700.
+
+Styles typographiques
+
+Texte/Titre
+- Taille : 32 px.
+- Hauteur de ligne : 40 px.
+- Graisse : Bold (700).
+- Exemple : « Découvre la Mauritanie ».
+
+Texte/Titre-section
+- Taille : 24 px.
+- Hauteur de ligne : 32 px.
+- Graisse : SemiBold (600).
+- Exemple : « Nos destinations ».
+
+Texte/Sous-titre
+- Taille : 20 px.
+- Hauteur de ligne : 28 px.
+- Graisse : SemiBold (600).
+- Exemple visible : « Les oasis et cités anciennes de l'Adrar » (lecture OCR à confirmer).
+
+Texte/Corps
+- Taille : 16 px.
+- Hauteur de ligne : 24 px.
+- Graisse : Regular (400).
+- Exemple : « Un seul site pour explorer l'histoire, la culture et les infos utiles. »
+
+Texte/Secondaire
+- Taille : 14 px.
+- Hauteur de ligne : 20 px.
+- Graisse : Regular (400).
+- Exemple : « Photos et détails pratiques pour chaque lieu. »
+
+Texte/Légende
+- Taille : 12 px.
+- Hauteur de ligne : 16 px.
+- Graisse : Medium (500).
+- Présentation : majuscules.
+- Exemples : « DESTINATIONS », « HISTOIRE », « CULTURE ».
+
+============================================================
+04. ESPACEMENTS ET RAYONS
+============================================================
+
+Règle générale
+- Tous les espacements sont des multiples de 8 px.
+- Utiliser seulement deux rayons, de manière cohérente.
+
+Échelle des espacements
+- 8 px : espace dans un bouton.
+- 16 px : marges mobiles.
+- 24 px : espace entre les blocs.
+- 32 px : espace entre les sections.
+
+Rayons
+- Rayon 8 px : boutons et champs (et éléments indiqués dans le visuel).
+- Rayon 16 px : cartes et images (selon le visuel de la charte).
+
+============================================================
+05. COMPOSANTS
+============================================================
+
+Règle générale
+- Les composants doivent être construits uniquement avec les styles définis dans la charte.
+- Hauteur minimale d'une cible interactive : 44 px.
+
+5.1. Boutons
+- Hauteur : 48 px.
+- Rayon : 8 px.
+
+Variantes illustrées
+- Primaire : « Découvrir Chinguetti ».
+- Secondaire : « Voir la carte ».
+- Accent : « Envoyer » — texte sombre sur fond ocre.
+- Désactivé : état désactivé.
+
+5.2. Champs de saisie
+- Hauteur : 48 px.
+- Rayon : 8 px.
+
+États illustrés
+- Normal.
+- Focus.
+- Introuvable.
+
+Exemple de champ : « Destination ».
+Exemples de saisie visibles : « Ex. Chinguetti », « Chingu… » (certaines lettres sont difficiles à lire sur l'image).
+Exemple de message : « Introuvable. Exemple : Ouadane ».
+
+5.3. Badges de statut
+- Le visuel présente des badges de statut.
+- L'espacement entre les lignes indiqué est de 8 px.
+
+5.4. Carte de destination
+Contenu visible dans l'exemple :
+- Chinguetti.
+- Adrar — Cité du patrimoine.
+- Action : « Voir la destination ».
+
+5.5. Barre d'onglets
+Libellés présentés :
+- Accueil.
+- Destinations.
+- Histoire.
+- Culture.
+- Infos.
+
+============================================================
+06. ICÔNES
+============================================================
+
+Règles de conception
+- Épaisseur du trait : 2 px.
+- Coins arrondis.
+- Grille : 24 px.
+- Couleur : Vert Oasis.
+- Sur fond vert : utiliser des icônes blanches.
+- Toujours accompagner l'icône d'un libellé.
+
+Catégories d'icônes présentées
+- Destination.
+- Carte.
+- Histoire.
+- Culture.
+- Infos.
+- Photos.
+- Recherche.
+- Explorer.
+
+============================================================
+07. TON DES TEXTES
+============================================================
+
+Personnalité éditoriale
+Mauritania Explorer s'adresse à un voyageur curieux de 22 ans.
+- Tutoiement : s'adresser à l'utilisateur avec « tu ».
+- Donner envie d'explorer.
+
+Trois qualités du ton
+- Curieux.
+- Clair.
+- Chaleureux.
+
+Principes rédactionnels
+1. Des phrases qui donnent envie de découvrir un lieu de plus.
+2. Des phrases courtes.
+3. Un verbe sur chaque bouton.
+4. Éviter le jargon.
+5. Accueillir et guider l'utilisateur.
+6. Dire où aller et quoi voir.
+
+Exemple à écrire
+« Découvre les oasis de l'Adrar en 3 minutes. »
+
+Exemple à éviter
+« Les informations afférentes aux sites sont consultables ici. »
+
+Exemple de bouton recommandé
+« Découvrir Chinguetti »
+
+Exemple de bouton à éviter
+« Valider »
