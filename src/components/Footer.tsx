@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <h3>
-              <img src="/images/logo-mauritanie.svg" alt="Logo Mauritanie" style={{ height: 28, width: 'auto', verticalAlign: 'middle', marginRight: 8 }} />
+              <img src="/images/mauritanie-explorer.png" alt="Logo Mauritanie" style={{ height: 28, width: 'auto', verticalAlign: 'middle', marginRight: 8 }} />
               {t('Mauritanie')}
             </h3>
             <p>{t("Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.")}</p>
