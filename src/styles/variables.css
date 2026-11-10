@@ -1,47 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
 
 /* ===== CSS VARIABLES & RESET — Charte graphique Mauritanie =====
-   Couleurs extraites de exports/charte-svg/ (02-couleurs.svg)
-   Espacements & rayons extraits de 04-espacements-rayons.svg */
+   Police : Nunito (Google Fonts, gratuite, ronde et lisible)
+   Couleurs : 9 couleurs (1 primaire, 1 secondaire, 4 neutres, 3 états)
+   Espacements : multiples de 8 px
+   Rayons : 8 px (boutons/champs) et 16 px (cartes/images) */
 
 :root {
   /* ---------- Couleurs charte ---------- */
-  --primary: #C9792C;        /* orange cuivré — bande en-tête, pied de page, accents principaux */
-  --primary-dark: #B86A1A;
-  --secondary: #0F5132;      /* vert foncé — logo, texte fort */
-  --accent: #2E9E4F;         /* vert moyen */
-  --accent-dark: #14221B;    /* noir vert */
+  --primary: #0F5132;        /* Vert Oasis — titres, boutons principaux, en-têtes */
+  --primary-dark: #0A3D26;
+  --secondary: #C9792C;      /* Ocre Sahara — accents, détails. JAMAIS pour texte sur fond blanc */
+  --secondary-dark: #B86A1A;
+  --accent: #2E9E4F;         /* Vert moyen — accent */
+  --accent-dark: #14221B;    /* Noir vert */
   --red: #C0392B;
-  --yellow: #EAB308;
+  --yellow: #EAB308;         /* Alerte */
 
   /* ---------- Fonds ---------- */
-  --background: #F4F8F5;     /* fond clair pages */
+  --background: #F4F8F5;     /* Neutre/50 — fonds de section */
   --surface: #FFFFFF;
   --surface-alpha: rgba(255,255,255,0.6);
 
   /* ---------- Textes ---------- */
-  --text: #1A1A2E;           /* texte principal */
-  --text-secondary: #566B5F; /* texte secondaire */
+  --text: #14221B;           /* Neutre/900 — texte principal */
+  --text-secondary: #566B5F; /* Neutre/600 — texte secondaire */
   --text-muted: #8A8AA8;
 
   /* ---------- Bordures / ombres ---------- */
-  --border: #DCE5DF;
+  --border: #DCE5DF;         /* Neutre/200 — bordures */
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
   --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
 
-  /* ---------- Espacements charte (04-espacements-rayons.svg) ---------- */
-  --spacing-xs: 8px;
-  --spacing-sm: 16px;
-  --spacing-md: 24px;
-  --spacing-lg: 32px;
+  /* ---------- Espacements charte (multiples de 8 px) ---------- */
+  --spacing-xs: 8px;   /* espace dans un bouton */
+  --spacing-sm: 16px;  /* marges mobiles */
+  --spacing-md: 24px;  /* espace entre les blocs */
+  --spacing-lg: 32px;  /* espace entre les sections */
   --spacing-xl: 48px;
   --spacing-xxl: 64px;
 
-  /* ---------- Rayons charte (04-espacements-rayons.svg) ---------- */
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 28px;
+  /* ---------- Rayons charte (8 px et 16 px uniquement) ---------- */
+  --radius-sm: 8px;    /* boutons et champs */
+  --radius-md: 16px;   /* cartes et images */
+  --radius-lg: 16px;   /* cartes et images */
   --radius-pill: 100px;
 
   /* ---------- Transitions ---------- */
@@ -49,9 +52,9 @@
 
   /* ---------- Header ---------- */
   --header-height: 64px;
-  --header-band-height: 4px; /* bande orange en haut de l'en-tête */
+  --header-band-height: 4px;
 
-  /* ---------- Glass (retenu pour compatibilité composants existants) ---------- */
+  /* ---------- Glass ---------- */
   --glass: rgba(255,255,255,0.18);
   --glass-border: rgba(255,255,255,0.35);
   --glass-shadow: 0 8px 32px rgba(0,0,0,0.04);
@@ -74,11 +77,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--background);
-  background-image: var(--background-image,
-    radial-gradient(ellipse at 15% 30%, rgba(201,121,44,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 25%, rgba(15,81,50,0.05) 0%, transparent 50%));
   color: var(--text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -88,11 +88,12 @@ body {
   width: 100%;
 }
 
-h1, h2, h3 { font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
-h1 { font-size: 3rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
+/* Typographie charte : Nunito */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+h1 { font-size: 32px; line-height: 40px; font-weight: 700; }   /* Titre */
+h2 { font-size: 24px; line-height: 32px; font-weight: 600; }   /* Titre-section */
+h3 { font-size: 20px; line-height: 28px; font-weight: 600; }   /* Sous-titre */
+h4 { font-size: 16px; line-height: 24px; font-weight: 400; }   /* Corps */
 
 a { color: var(--primary); text-decoration: none; transition: var(--transition); }
 a:hover { color: var(--primary-dark); }
@@ -119,7 +120,7 @@ img { max-width: 100%; height: auto; }
 [dir="rtl"] textarea,
 [dir="rtl"] select,
 [dir="rtl"] button {
-  font-family: 'Plus Jakarta Sans', 'Noto Kufi Arabic', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-family: 'Nunito', 'Noto Kufi Arabic', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
   letter-spacing: 0;
 }
 [dir="rtl"] h1,
