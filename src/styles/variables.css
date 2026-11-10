@@ -7,15 +7,24 @@
    Rayons : 8 px (boutons/champs) et 16 px (cartes/images) */
 
 :root {
-  /* ---------- Couleurs charte ---------- */
-  --primary: #0F5132;        /* Vert Oasis — titres, boutons principaux, en-têtes */
+  /* ---------- Couleurs officielles charte ---------- */
+  --primary: #0F5132;        /* Vert Oasis — titres, boutons principaux, en-têtes, navigation */
   --primary-dark: #0A3D26;
   --secondary: #C9792C;      /* Ocre Sahara — accents, détails. JAMAIS pour texte sur fond blanc */
   --secondary-dark: #B86A1A;
-  --accent: #2E9E4F;         /* Vert moyen — accent */
-  --accent-dark: #14221B;    /* Noir vert */
-  --red: #C0392B;
+  --accent: #C9792C;         /* Accent officiel : Ocre Sahara */
+  --accent-dark: #14221B;    /* Neutre 900 */
   --yellow: #EAB308;         /* Alerte */
+  --alert: #EAB308;          /* Alerte */
+
+  /* Aliases conformes */
+  --color-primary: #0F5132;
+  --color-secondary: #C9792C;
+  --color-neutral-900: #14221B;
+  --color-neutral-600: #566B5F;
+  --color-neutral-200: #DCE5DF;
+  --color-neutral-50: #F4F8F5;
+  --color-alert: #EAB308;
 
   /* ---------- Fonds ---------- */
   --background: #F4F8F5;     /* Neutre/50 — fonds de section */
@@ -25,7 +34,7 @@
   /* ---------- Textes ---------- */
   --text: #14221B;           /* Neutre/900 — texte principal */
   --text-secondary: #566B5F; /* Neutre/600 — texte secondaire */
-  --text-muted: #8A8AA8;
+  --text-muted: #566B5F;     /* Neutre/600 */
 
   /* ---------- Bordures / ombres ---------- */
   --border: #DCE5DF;         /* Neutre/200 — bordures */
@@ -33,18 +42,25 @@
   --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
 
-  /* ---------- Espacements charte (multiples de 8 px) ---------- */
-  --spacing-xs: 8px;   /* espace dans un bouton */
-  --spacing-sm: 16px;  /* marges mobiles */
-  --spacing-md: 24px;  /* espace entre les blocs */
-  --spacing-lg: 32px;  /* espace entre les sections */
+  /* ---------- Espacements charte (grille de 8 px) ---------- */
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-xs: 8px;   /* 8px : espace dans un bouton */
+  --spacing-sm: 16px;  /* 16px : marges mobiles */
+  --spacing-md: 24px;  /* 24px : espace entre les blocs */
+  --spacing-lg: 32px;  /* 32px : espace entre les sections */
   --spacing-xl: 48px;
   --spacing-xxl: 64px;
 
   /* ---------- Rayons charte (8 px et 16 px uniquement) ---------- */
-  --radius-sm: 8px;    /* boutons et champs */
-  --radius-md: 16px;   /* cartes et images */
-  --radius-lg: 16px;   /* cartes et images */
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --radius-card: 16px;
+  --radius-sm: 8px;    /* 8px : boutons et champs */
+  --radius-md: 16px;   /* 16px : cartes et images */
+  --radius-lg: 16px;   /* 16px : cartes et images */
   --radius-pill: 100px;
 
   /* ---------- Transitions ---------- */

@@ -40,7 +40,7 @@ textarea.form-control { min-height: 120px; resize: vertical; }
 }
 .contact-icon.green { background: rgba(15,81,50,0.12); color: var(--primary); border: 1px solid rgba(15,81,50,0.1); }
 .contact-icon.blue { background: rgba(201,121,44,0.12); color: var(--secondary); border: 1px solid rgba(201,121,44,0.1); }
-.contact-icon.gold { background: rgba(46,158,79,0.12); color: var(--accent); border: 1px solid rgba(46,158,79,0.1); }
+.contact-icon.gold { background: rgba(234,179,8,0.15); color: #9A6700; border: 1px solid rgba(234,179,8,0.25); }
 .contact-item h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
 .contact-item p { font-size: 0.85rem; color: var(--text-secondary); }
 

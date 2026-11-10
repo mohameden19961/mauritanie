@@ -1,11 +1,12 @@
 /* ===== FOOTER — Charte graphique Mauritanie ===== */
-/* Fond plein #C9792C (08-pied-de-page.svg) */
+/* Fond Vert Oasis #0F5132 avec accents Ocre Sahara #C9792C */
 
 .site-footer {
-  background: var(--primary); /* #C9792C */
-  color: rgba(255,255,255,0.95);
+  background: var(--primary); /* #0F5132 */
+  color: #FFFFFF;
   padding: 56px 0 32px;
   margin-top: 0;
+  border-top: 4px solid var(--secondary); /* Accent Ocre Sahara */
 }
 .footer-grid {
   display: grid;
@@ -16,50 +17,53 @@
 .footer-logo-box {
   background: #FFFFFF;
   padding: 10px 14px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   display: inline-block;
   margin-bottom: 12px;
 }
 .footer-brand p {
   font-size: 0.9rem;
-  opacity: 0.85;
+  opacity: 0.9;
   max-width: 300px;
   line-height: 1.6;
+  color: #DCE5DF;
 }
 .footer-github {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: rgba(255,255,255,0.8);
+  color: #DCE5DF;
   font-size: 0.85rem;
   margin-top: 12px;
   transition: var(--transition);
   text-decoration: none;
 }
-.footer-github:hover { color: white; }
+.footer-github:hover { color: #FFFFFF; }
 .footer-github svg { filter: brightness(0) invert(1); }
 
 .footer-col h4 {
-  color: white;
+  color: #FFFFFF;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 16px;
+  letter-spacing: 0.02em;
 }
 .footer-col a {
   display: block;
-  color: rgba(255,255,255,0.7);
+  color: #DCE5DF;
   font-size: 0.87rem;
   margin-bottom: 10px;
   transition: var(--transition);
 }
-.footer-col a:hover { color: white; }
+.footer-col a:hover { color: #FFFFFF; transform: translateX(2px); }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(220,229,223,0.2);
   padding-top: 20px;
   text-align: center;
   font-size: 0.85rem;
-  opacity: 0.8;
+  color: #DCE5DF;
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {

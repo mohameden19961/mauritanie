@@ -134,7 +134,7 @@ function Globe() {
     scene.add(wire);
 
     const spotGeo = new THREE.SphereGeometry(0.04, 16, 16);
-    const spotMat = new THREE.MeshBasicMaterial({ color: 0xd4af37 });
+    const spotMat = new THREE.MeshBasicMaterial({ color: 0xC9792C });
     const spot = new THREE.Mesh(spotGeo, spotMat);
     const phi = (90 - 18.07) * (Math.PI / 180);
     const theta = (-15.96) * (Math.PI / 180);
@@ -252,7 +252,7 @@ export default function Home() {
               <h1>{t('Bienvenue en')} <span>{t('Mauritanie')}</span></h1>
               <p>{t("Explorez un pays aux mille visages : des dunes dorées du Sahara aux eaux poissonneuses de l'Atlantique, des cités anciennes aux marchés animés de Nouakchott.")}</p>
               <div className="hero-actions">
-                <Link to="/tourism" className="btn btn-accent">{t('Explorer les destinations')}</Link>
+                <Link to="/tourism" className="btn btn-primary">{t('Explorer les destinations')}</Link>
                 <Link to="/history" className="btn btn-outline-light">{t("Découvrir l'histoire")}</Link>
               </div>
             </div>
