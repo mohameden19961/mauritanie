@@ -7,10 +7,9 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <h3>
-              <img src="/images/mauritanie-explorer.png" alt="Logo Mauritanie" style={{ height: 28, width: 'auto', verticalAlign: 'middle', marginRight: 8 }} />
-              {t('Mauritanie')}
-            </h3>
+            <div className="footer-logo-box">
+              <img src="/images/mauritanie-explorer.png" alt="Logo Mauritanie" style={{ height: 32, width: 'auto', display: 'block' }} />
+            </div>
             <p>{t("Guide complet sur la République Islamique de Mauritanie — culture, histoire, tourisme et traditions.")}</p>
             <a href="https://github.com/mohameden19961/mauritanie" target="_blank" rel="noopener" className="footer-github">
               <svg viewBox="0 0 16 16" fill="currentColor" style={{ height: 36, width: 'auto', verticalAlign: 'middle', marginRight: 10 }}>

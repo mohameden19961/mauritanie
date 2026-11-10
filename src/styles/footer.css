@@ -13,11 +13,12 @@
   gap: 40px;
   margin-bottom: 32px;
 }
-.footer-brand h3 {
-  color: white;
-  font-size: 1.2rem;
+.footer-logo-box {
+  background: #FFFFFF;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  display: inline-block;
   margin-bottom: 12px;
-  font-weight: 800;
 }
 .footer-brand p {
   font-size: 0.9rem;
