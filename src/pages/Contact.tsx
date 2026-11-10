@@ -26,7 +26,7 @@ function ContactMap() {
     const map = L.map(mapRef.current, { center: [18.09, -15.98], zoom: 13, scrollWheelZoom: false });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
     const icon = L.divIcon({
-      html: '<div style="width:20px;height:20px;background:#0d8a3c;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="width:20px;height:20px;background:#0F5132;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
       className: '', iconSize: [20, 20], iconAnchor: [10, 10],
     });
     L.marker([18.09, -15.98], { icon }).addTo(map).bindPopup(`<b>${t('Nouakchott, Mauritanie')}</b><br>BP 184`);
@@ -48,7 +48,7 @@ export default function Contact() {
       title: t('Message envoyé !'),
       html: tpl('Merci <b>{name}</b> pour votre message.', { name: formData.name }) + '<p>' + tpl('Nous vous répondrons à <b>{email}</b> dans les plus brefs délais.', { email: formData.email }) + '</p>',
       icon: 'success',
-      confirmButtonColor: '#0d8a3c',
+      confirmButtonColor: '#0F5132',
       confirmButtonText: t('Parfait !'),
       background: 'var(--card-bg)',
       color: 'var(--text)',

@@ -67,14 +67,14 @@ function MapComponent() {
     }).addTo(map);
 
     const markerIcon = L.divIcon({
-      html: '<div style="width:12px;height:12px;background:#0d8a3c;border-radius:50%;border:2px solid white;box-shadow:0 0 6px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="width:12px;height:12px;background:#0F5132;border-radius:50%;border:2px solid white;box-shadow:0 0 6px rgba(0,0,0,0.3)"></div>',
       className: '',
       iconSize: [12, 12],
       iconAnchor: [6, 6],
     });
 
     const tourIcon = L.divIcon({
-      html: '<div style="width:14px;height:14px;background:#d4af37;border-radius:50%;border:2px solid white;box-shadow:0 0 8px rgba(0,0,0,0.4)"></div>',
+      html: '<div style="width:14px;height:14px;background:#C9792C;border-radius:50%;border:2px solid white;box-shadow:0 0 8px rgba(0,0,0,0.4)"></div>',
       className: '',
       iconSize: [14, 14],
       iconAnchor: [7, 7],
@@ -99,7 +99,7 @@ function MapComponent() {
       onAdd: function() {
         const div = L.DomUtil.create('div');
         div.style.cssText = 'background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-family:sans-serif;font-size:12px;line-height:1.8';
-        div.innerHTML = `<b>${t('Légende')}</b><br><span style="display:inline-block;width:10px;height:10px;background:#0d8a3c;border-radius:50%;margin-right:6px"></span>${t('Capitale de wilaya')}<br><span style="display:inline-block;width:10px;height:10px;background:#d4af37;border-radius:50%;margin-right:6px"></span>${t('Site touristique')}`;
+        div.innerHTML = `<b>${t('Légende')}</b><br><span style="display:inline-block;width:10px;height:10px;background:#0F5132;border-radius:50%;margin-right:6px"></span>${t('Capitale de wilaya')}<br><span style="display:inline-block;width:10px;height:10px;background:#C9792C;border-radius:50%;margin-right:6px"></span>${t('Site touristique')}`;
         return div;
       }
     });

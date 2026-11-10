@@ -67,7 +67,7 @@ function drawStar(ctx: CanvasRenderingContext2D, cx: number, cy: number, outer: 
 }
 
 function drawFlagEmblem(ctx: CanvasRenderingContext2D, cx: number) {
-  ctx.fillStyle = '#F5C518';
+  ctx.fillStyle = '#EAB308';
   ctx.beginPath();
   ctx.arc(cx, 270, 85, 0, Math.PI * 2);
   ctx.fill();
@@ -77,7 +77,7 @@ function drawFlagEmblem(ctx: CanvasRenderingContext2D, cx: number) {
   ctx.arc(cx, 236, 62, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = '#F5C518';
+  ctx.fillStyle = '#EAB308';
   drawStar(ctx, cx, 198, 24, 10);
 }
 

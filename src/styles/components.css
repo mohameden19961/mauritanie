@@ -16,7 +16,7 @@
 }
 .btn-secondary:hover { background: rgba(255,255,255,0.3); }
 .btn-accent { background: var(--accent); color: white; }
-.btn-accent:hover { background: var(--accent-dark); transform: scale(1.02); box-shadow: 0 8px 24px rgba(46,158,79,0.3); }
+.btn-accent:hover { background: var(--text); transform: scale(1.02); box-shadow: 0 8px 24px rgba(46,158,79,0.3); }
 
 /* ===== SECTION TITLE ===== */
 .section-title { text-align: center; margin-bottom: 32px; }

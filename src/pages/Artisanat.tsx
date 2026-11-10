@@ -57,17 +57,17 @@ function PatternEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricRef = useRef<fabric.Canvas | null>(null);
   const [tool, setTool] = useState<'rect' | 'circle' | 'line' | 'diamond' | 'zigzag'>('rect');
-  const [color, setColor] = useState('#0d8a3c');
+  const [color, setColor] = useState('#0F5132');
   const { t } = useI18n();
 
-  const colors = ['#0d8a3c', '#1a73e8', '#d4af37', '#8B4513', '#2e8b57', '#cd853f', '#dc143c', '#4a4a4a', '#ffffff'];
+  const colors = ['#0F5132', '#1a73e8', '#d4af37', '#8B4513', '#2e8b57', '#cd853f', '#dc143c', '#4a4a4a', '#ffffff'];
 
   useEffect(() => {
     if (!canvasRef.current || fabricRef.current) return;
     const canvas = new fabric.Canvas(canvasRef.current, {
       width: 600,
       height: 400,
-      backgroundColor: '#f5f0e8',
+      backgroundColor: '#F4F8F5',
     });
     fabricRef.current = canvas;
 
@@ -142,7 +142,7 @@ function PatternEditor() {
       title: t('Motif dupliqué !'),
       text: t('Le motif a été répété pour créer un effet de tissage.'),
       icon: 'info',
-      confirmButtonColor: '#0d8a3c',
+      confirmButtonColor: '#0F5132',
       timer: 2000,
       showConfirmButton: false,
     });
@@ -152,7 +152,7 @@ function PatternEditor() {
     const canvas = fabricRef.current;
     if (!canvas) return;
     canvas.clear();
-    canvas.backgroundColor = '#f5f0e8';
+    canvas.backgroundColor = '#F4F8F5';
     for (let x = 0; x < 600; x += 60) {
       canvas.add(new fabric.Line([x, 0, x, 400], { stroke: '#d4c5a0', strokeWidth: 0.5, selectable: false }));
     }

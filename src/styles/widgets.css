@@ -37,10 +37,10 @@
 .progress-fill {
   height: 100%; border-radius: 100px;
   width: 0; transition: width 1s cubic-bezier(0.22,1,0.36,1);
-  background: linear-gradient(90deg, var(--primary), #4CAF50);
+  background: linear-gradient(90deg, var(--primary), #2E9E4F);
 }
-.progress-fill.blue { background: linear-gradient(90deg, var(--secondary), #64B5F6); }
-.progress-fill.gold { background: linear-gradient(90deg, var(--accent), #FFD54F); }
+.progress-fill.blue { background: linear-gradient(90deg, var(--secondary), #C9792C); }
+.progress-fill.gold { background: linear-gradient(90deg, var(--accent), #EAB308); }
 
 /* ===== ACCORDION ===== */
 .accordion { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--glass-border); }

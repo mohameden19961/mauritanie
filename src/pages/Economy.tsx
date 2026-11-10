@@ -200,7 +200,7 @@ export default function Economy() {
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
               <div style={{ fontSize: '1.8rem', marginBottom: 4 }}>🪙</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-dark)' }}>2 250 $</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent)' }}>2 250 $</div>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{t('PIB par habitant')}</div>
             </div>
             <div className="card" style={{ textAlign: 'center', padding: '20px 12px' }}>
