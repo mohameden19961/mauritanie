@@ -135,7 +135,7 @@
 .detail-modal-body h2 { font-size: 1.5rem; margin: 12px 0 8px; }
 .detail-modal-body .dm-badge {
   display: inline-block; padding: 6px 14px; margin: 0 0 4px;
-  background: var(--primary); color: white; border-radius: 20px;
+  background: var(--primary); color: white; border-radius: 16px;
   font-size: 0.85rem; font-weight: 600;
 }
 .detail-modal-body .dm-desc {

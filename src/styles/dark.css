@@ -18,7 +18,7 @@
 [data-theme="dark"] .nav-links li { border-color: rgba(255,255,255,0.06); }
 [data-theme="dark"] .info-card { background: rgba(255,255,255,0.03); }
 [data-theme="dark"] .info-card:hover { background: rgba(255,255,255,0.06); }
-[data-theme="dark"] .flip-back { background: linear-gradient(135deg, rgba(13,138,60,0.08), rgba(30,136,229,0.08)); }
+[data-theme="dark"] .flip-back { background: linear-gradient(135deg, rgba(15,81,50,0.08), rgba(201,121,44,0.08)); }
 [data-theme="dark"] .chart-container { background: rgba(255,255,255,0.02); }
 [data-theme="dark"] .card { background: rgba(255,255,255,0.03); }
 [data-theme="dark"] .card:hover { background: rgba(255,255,255,0.06); }

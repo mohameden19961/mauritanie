@@ -7,7 +7,7 @@ import BackToTop from '../components/BackToTop';
 import { useI18n } from '../i18n';
 
 function color(c: string): string {
-  if (typeof document === 'undefined') return '#0D8A3C';
+  if (typeof document === 'undefined') return '#0F5132';
   return getComputedStyle(document.documentElement).getPropertyValue(c).trim();
 }
 function isDark(): boolean {
@@ -45,7 +45,7 @@ export default function Demographics() {
       const chartMap: Record<string, any> = {
         'chart-population': { type: 'bar', data: demo.population, labelsKey: 'year', valueKey: 'value', label: t('Population'), colorKey: '--primary', desc: demo.popDesc },
         'chart-urbanisation': { type: 'line', data: demo.urbanisation, labelsKey: 'year', valueKey: 'value', label: t("Taux d'urbanisation (%)"), colorKey: '--secondary', desc: demo.urbanDesc },
-        'chart-ethnic': { type: 'pie', data: demo.ethnicGroups, labelsKey: 'group', valueKey: 'value', colors: ['#0D8A3C', '#1E88E5', '#FF9800', '#9C27B0', '#E91E63', '#00BCD4'], desc: demo.ethnicDesc }
+        'chart-ethnic': { type: 'pie', data: demo.ethnicGroups, labelsKey: 'group', valueKey: 'value', colors: ['#0F5132', '#C9792C', '#FF9800', '#9C27B0', '#E91E63', '#00BCD4'], desc: demo.ethnicDesc }
       };
 
       Object.keys(chartMap).forEach((id) => {
@@ -70,7 +70,7 @@ export default function Demographics() {
             backgroundColor: cfg.colors
           }];
         } else {
-          const c = cfg.colors ? cfg.colors[0] : (color(cfg.colorKey) || '#0D8A3C');
+          const c = cfg.colors ? cfg.colors[0] : (color(cfg.colorKey) || '#0F5132');
           const ds: any = {
             label: cfg.label || '',
             data: cfg.data.map((d: any) => d[cfg.valueKey]),

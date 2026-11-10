@@ -34,8 +34,8 @@ export const CHARTE = {
   },
   // ---------- Typographie (03-typographie.svg) ----------
   typography: {
-    fontFamily: "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-    fontFamilyArabic: "'Plus Jakarta Sans', 'Noto Kufi Arabic', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif",
+    fontFamily: "'Nunito', -apple-system, BlinkMacSystemFont, sans-serif",
+    fontFamilyArabic: "'Nunito', 'Noto Kufi Arabic', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif",
     h1: '3rem',
     h2: '2rem',
     h3: '1.5rem',

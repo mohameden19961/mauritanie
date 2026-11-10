@@ -72,7 +72,7 @@ function drawFlagEmblem(ctx: CanvasRenderingContext2D, cx: number) {
   ctx.arc(cx, 270, 85, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = '#0D8A3C';
+  ctx.fillStyle = '#0F5132';
   ctx.beginPath();
   ctx.arc(cx, 236, 62, 0, Math.PI * 2);
   ctx.fill();
@@ -87,10 +87,10 @@ function createFlagTexture(): THREE.Texture {
   canvas.height = 512;
   const ctx = canvas.getContext('2d')!;
 
-  ctx.fillStyle = '#0D8A3C';
+  ctx.fillStyle = '#0F5132';
   ctx.fillRect(0, 0, 1024, 512);
 
-  ctx.fillStyle = '#D32F2F';
+  ctx.fillStyle = '#C0392B';
   ctx.fillRect(0, 0, 1024, 110);
   ctx.fillRect(0, 402, 1024, 110);
 
@@ -340,7 +340,7 @@ export default function Home() {
             style={{
               display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap',
               justifyContent: 'space-between', padding: '32px 36px',
-              background: 'linear-gradient(135deg, rgba(13,138,60,0.10), rgba(212,168,67,0.14))',
+              background: 'linear-gradient(135deg, rgba(15,81,50,0.10), rgba(201,121,44,0.14))',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 20, flex: 1, minWidth: 260 }}>

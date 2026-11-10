@@ -7,7 +7,7 @@ import BackToTop from '../components/BackToTop';
 import { useI18n } from '../i18n';
 
 function color(c: string): string {
-  if (typeof document === 'undefined') return '#0D8A3C';
+  if (typeof document === 'undefined') return '#0F5132';
   return getComputedStyle(document.documentElement).getPropertyValue(c).trim();
 }
 function isDark(): boolean {
@@ -63,8 +63,8 @@ export default function Economy() {
       const econ = MAURITANIA.economy;
       const chartMap: Record<string, any> = {
         'chart-gdp': { type: 'line', data: econ.gdpData, labelsKey: 'year', valueKey: 'value', label: t('PIB (milliards $)'), colorKey: '--primary', desc: econ.gdpDesc },
-        'chart-sectors': { type: 'doughnut', data: econ.sectors, labelsKey: 'name', valueKey: 'value', colors: ['#0D8A3C', '#1E88E5', '#FF9800', '#9C27B0', '#00BCD4'], desc: econ.sectorsDesc },
-        'chart-exports': { type: 'bar', data: econ.exports, labelsKey: 'product', valueKey: 'value', label: t('% des exportations'), colors: ['#0D8A3C', '#FF9800', '#1E88E5', '#9C27B0', '#E91E63', '#607D8B'], desc: econ.exportsDesc, horizontal: true }
+        'chart-sectors': { type: 'doughnut', data: econ.sectors, labelsKey: 'name', valueKey: 'value', colors: ['#0F5132', '#C9792C', '#FF9800', '#9C27B0', '#00BCD4'], desc: econ.sectorsDesc },
+        'chart-exports': { type: 'bar', data: econ.exports, labelsKey: 'product', valueKey: 'value', label: t('% des exportations'), colors: ['#0F5132', '#FF9800', '#C9792C', '#9C27B0', '#E91E63', '#607D8B'], desc: econ.exportsDesc, horizontal: true }
       };
 
       Object.keys(chartMap).forEach((id) => {
@@ -89,7 +89,7 @@ export default function Economy() {
             backgroundColor: cfg.colors
           }];
         } else {
-          const c = cfg.colors ? cfg.colors[0] : (color(cfg.colorKey) || '#0D8A3C');
+          const c = cfg.colors ? cfg.colors[0] : (color(cfg.colorKey) || '#0F5132');
           const ds: any = {
             label: cfg.label || '',
             data: cfg.data.map((d: any) => d[cfg.valueKey]),

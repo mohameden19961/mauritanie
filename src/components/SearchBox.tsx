@@ -106,7 +106,7 @@ export default function SearchBox() {
                 display: 'block', padding: '12px 16px', borderBottom: i < results.length - 1 ? '1px solid var(--glass-border)' : 'none',
                 textDecoration: 'none', transition: 'var(--transition)'
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(13,138,60,0.05)')}
+              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(15,81,50,0.05)')}
               onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
             >
               <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text)', marginBottom: 2 }}>{r.title}</div>
