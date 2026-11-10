@@ -37,13 +37,10 @@ export default function Header() {
       {/* Bande orange charte en haut de l'en-tête */}
       <div className="header-band" />
       <div className="header-inner">
-        <Link to="/" className="logo" onClick={() => setLangOpen(false)}>
-          {/* Cercle vert charte (#0F5132) avec élément orange (#C9792C) */}
-          <div className="logo-mark">
-            <div className="logo-circle" />
-            <div className="logo-dot" />
-          </div>
-          {t('Mauritanie')}
+        <Link to="/" className="logo" onClick={() => setLangOpen(false)} aria-label={t('Mauritanie')}>
+          {/* Vrai logo de la charte graphique (exports/charte-svg/01-logo.svg) */}
+          <img src="/images/logo-mauritanie.svg" alt="" style={{ height: 28, width: 'auto', display: 'block' }} />
+          <span className="logo-text">{t('Mauritanie')}</span>
         </Link>
         <ul className={`nav-links${mobileOpen ? ' open' : ''}`}>
           {navItems.map((item) => (

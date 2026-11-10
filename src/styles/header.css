@@ -47,34 +47,14 @@
   color: var(--text);
   text-decoration: none;
 }
-
-/* Marque logo : cercle vert (#0F5132) + point orange (#C9792C) */
-.logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--secondary); /* #0F5132 */
-  position: relative;
+.logo img {
+  display: block;
   flex-shrink: 0;
 }
-.logo-circle {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(201, 121, 44, 0.16);
-}
-.logo-dot {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--primary); /* #C9792C */
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.7);
+.logo-text {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--text);
 }
 
 .nav-links {
