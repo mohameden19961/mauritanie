@@ -109,66 +109,266 @@ function Globe() {
   useEffect(() => {
     if (!containerRef.current) return;
     const el = containerRef.current;
-    const w = 280, h = 280;
+    const w = el.clientWidth || 320;
+    const h = el.clientHeight || 320;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
-    camera.position.z = 3.2;
+    camera.position.z = 3.35;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     el.appendChild(renderer.domElement);
 
+    // Groupe racine pivotant pour interaction et animation
+    const worldGroup = new THREE.Group();
+    scene.add(worldGroup);
+
+    // 1. Globe principal avec le drapeau de la République Islamique de Mauritanie
     const geo = new THREE.SphereGeometry(1.2, 64, 64);
     const mat = new THREE.MeshPhongMaterial({
       map: createFlagTexture(),
-      shininess: 30,
+      shininess: 45,
+      specular: new THREE.Color(0x334433),
     });
     const globe = new THREE.Mesh(geo, mat);
-    scene.add(globe);
+    worldGroup.add(globe);
 
-    const wireGeo = new THREE.SphereGeometry(1.22, 32, 32);
-    const wireMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.08 });
+    // 2. Grille méridiens / parallèles subtile (teinte claire Neutre 200)
+    const wireGeo = new THREE.SphereGeometry(1.218, 36, 18);
+    const wireMat = new THREE.MeshBasicMaterial({
+      color: 0xDCE5DF,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.10,
+    });
     const wire = new THREE.Mesh(wireGeo, wireMat);
-    scene.add(wire);
+    worldGroup.add(wire);
 
-    const spotGeo = new THREE.SphereGeometry(0.04, 16, 16);
-    const spotMat = new THREE.MeshBasicMaterial({ color: 0xC9792C });
-    const spot = new THREE.Mesh(spotGeo, spotMat);
-    const phi = (90 - 18.07) * (Math.PI / 180);
-    const theta = (-15.96) * (Math.PI / 180);
-    spot.position.set(
-      -1.22 * Math.sin(phi) * Math.cos(theta),
-      1.22 * Math.cos(phi),
-      1.22 * Math.sin(phi) * Math.sin(theta)
+    // 3. Halo atmosphérique externe subtil (Vert Oasis #0F5132)
+    const haloGeo = new THREE.SphereGeometry(1.26, 48, 48);
+    const haloMat = new THREE.MeshBasicMaterial({
+      color: 0x0F5132,
+      transparent: true,
+      opacity: 0.15,
+      side: THREE.BackSide,
+    });
+    const halo = new THREE.Mesh(haloGeo, haloMat);
+    worldGroup.add(halo);
+
+    // 4. Anneau orbital décoratif incliné (Ocre Sahara #C9792C)
+    const ringGeo = new THREE.RingGeometry(1.42, 1.45, 64);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0xC9792C,
+      transparent: true,
+      opacity: 0.35,
+      side: THREE.DoubleSide,
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI * 0.38;
+    ring.rotation.y = Math.PI * 0.12;
+    worldGroup.add(ring);
+
+    // 5. Position géographique précise de la Mauritanie (~ 20°N, 10.5°W)
+    const phi = (90 - 20.2) * (Math.PI / 180);
+    const theta = (-10.5) * (Math.PI / 180);
+    const radius = 1.22;
+    const pinPos = new THREE.Vector3(
+      -radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta)
     );
-    scene.add(spot);
 
-    const ambLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Balise 3D principale en Ocre Sahara éclatant
+    const pinGeo = new THREE.SphereGeometry(0.048, 20, 20);
+    const pinMat = new THREE.MeshBasicMaterial({ color: 0xC9792C });
+    const pin = new THREE.Mesh(pinGeo, pinMat);
+    pin.position.copy(pinPos);
+    worldGroup.add(pin);
+
+    // Anneau d'onde lumineuse (pulsar doré #EAB308)
+    const pulseGeo = new THREE.RingGeometry(0.065, 0.09, 32);
+    const pulseMat = new THREE.MeshBasicMaterial({
+      color: 0xEAB308,
+      transparent: true,
+      opacity: 0.8,
+      side: THREE.DoubleSide,
+    });
+    const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+    pulse.position.copy(pinPos.clone().multiplyScalar(1.002));
+    pulse.lookAt(pinPos.clone().multiplyScalar(2));
+    worldGroup.add(pulse);
+
+    // 6. Éclairage premium (lumière ambiante + soleil doré + éclat Sahara)
+    const ambLight = new THREE.AmbientLight(0xffffff, 0.65);
     scene.add(ambLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(5, 3, 5);
+
+    const dirLight = new THREE.DirectionalLight(0xfff8ee, 1.15);
+    dirLight.position.set(4, 3, 5);
     scene.add(dirLight);
 
+    const rimLight = new THREE.DirectionalLight(0xC9792C, 0.5);
+    rimLight.position.set(-4, -2, -3);
+    scene.add(rimLight);
+
+    // 7. Interaction souris & tactile avec inertie et reprise automatique
+    let isDragging = false;
+    let prevX = 0;
+    let prevY = 0;
+    let velX = 0;
+    let velY = 0;
+    let autoRotate = true;
+    let resumeTimeout: number | undefined;
+
+    const onPointerDown = (clientX: number, clientY: number) => {
+      isDragging = true;
+      autoRotate = false;
+      prevX = clientX;
+      prevY = clientY;
+      velX = 0;
+      velY = 0;
+      if (resumeTimeout) window.clearTimeout(resumeTimeout);
+      if (renderer.domElement) renderer.domElement.style.cursor = 'grabbing';
+    };
+
+    const onPointerMove = (clientX: number, clientY: number) => {
+      if (!isDragging) return;
+      const dx = clientX - prevX;
+      const dy = clientY - prevY;
+      velX = dx * 0.005;
+      velY = dy * 0.005;
+      worldGroup.rotation.y += velX;
+      worldGroup.rotation.x = Math.max(-0.6, Math.min(0.6, worldGroup.rotation.x + velY));
+      prevX = clientX;
+      prevY = clientY;
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+      if (renderer.domElement) renderer.domElement.style.cursor = 'grab';
+      resumeTimeout = window.setTimeout(() => {
+        autoRotate = true;
+      }, 3500);
+    };
+
+    const handleMouseDown = (e: MouseEvent) => {
+      e.preventDefault();
+      onPointerDown(e.clientX, e.clientY);
+    };
+    const handleMouseMove = (e: MouseEvent) => onPointerMove(e.clientX, e.clientY);
+    const handleMouseUp = () => onPointerUp();
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        onPointerDown(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+    const handleTouchEnd = () => onPointerUp();
+
+    const dom = renderer.domElement;
+    dom.style.cursor = 'grab';
+    dom.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    dom.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
+
+    // Redimensionnement fluide
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      const nw = containerRef.current.clientWidth || 320;
+      const nh = containerRef.current.clientHeight || 320;
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 8. Animation à 60fps fluide
     let animId: number;
+    let pulseScale = 1;
+    let pulseDir = 0.015;
+
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      globe.rotation.y += 0.003;
-      wire.rotation.y += 0.003;
-      spot.rotation.y += 0.003;
+
+      if (autoRotate) {
+        worldGroup.rotation.y += 0.0035;
+      } else if (!isDragging) {
+        worldGroup.rotation.y += velX;
+        worldGroup.rotation.x = Math.max(-0.6, Math.min(0.6, worldGroup.rotation.x + velY));
+        velX *= 0.94;
+        velY *= 0.94;
+      }
+
+      // Effet pulsation lumineuse sur la Mauritanie
+      pulseScale += pulseDir;
+      if (pulseScale > 1.45) pulseDir = -0.012;
+      else if (pulseScale < 0.95) pulseDir = 0.012;
+      pulse.scale.set(pulseScale, pulseScale, pulseScale);
+      (pulseMat as THREE.MeshBasicMaterial).opacity = 0.35 + (1.45 - pulseScale) * 0.8;
+
+      ring.rotation.z += 0.001;
+
       renderer.render(scene, camera);
     };
     animate();
 
     return () => {
       cancelAnimationFrame(animId);
+      if (resumeTimeout) window.clearTimeout(resumeTimeout);
+      dom.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      dom.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('resize', handleResize);
       renderer.dispose();
+      geo.dispose();
+      mat.dispose();
+      wireGeo.dispose();
+      wireMat.dispose();
+      haloGeo.dispose();
+      haloMat.dispose();
+      ringGeo.dispose();
+      ringMat.dispose();
+      pinGeo.dispose();
+      pinMat.dispose();
+      pulseGeo.dispose();
+      pulseMat.dispose();
       if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: 280, height: 280, margin: '0 auto' }} />;
+  return (
+    <div
+      ref={containerRef}
+      className="interactive-globe-wrapper"
+      style={{
+        width: '100%',
+        maxWidth: 340,
+        height: 340,
+        margin: '0 auto',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        touchAction: 'none',
+      }}
+    />
+  );
 }
 
 export default function Home() {
