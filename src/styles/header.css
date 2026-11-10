@@ -51,11 +51,6 @@
   display: block;
   flex-shrink: 0;
 }
-.logo-text {
-  font-weight: 800;
-  font-size: 1.3rem;
-  color: var(--text);
-}
 
 .nav-links {
   display: flex;

@@ -38,9 +38,8 @@ export default function Header() {
       <div className="header-band" />
       <div className="header-inner">
         <Link to="/" className="logo" onClick={() => setLangOpen(false)} aria-label={t('Mauritanie')}>
-          {/* Vrai logo de la charte graphique (exports/charte-svg/01-logo.svg) */}
-          <img src="/images/logo-mauritanie.svg" alt="" style={{ height: 28, width: 'auto', display: 'block' }} />
-          <span className="logo-text">{t('Mauritanie')}</span>
+          {/* Vrai logo de la charte graphique (exports/charte-svg/01-logo.svg) — contient déjà le texte MAURITANIE */}
+          <img src="/images/logo-mauritanie.svg" alt="" style={{ height: 32, width: 'auto', display: 'block' }} />
         </Link>
         <ul className={`nav-links${mobileOpen ? ' open' : ''}`}>
           {navItems.map((item) => (
