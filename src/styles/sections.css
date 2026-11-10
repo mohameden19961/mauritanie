@@ -223,7 +223,8 @@
 @media (max-width: 768px) {
   .hero h1 { font-size: 2.2rem; }
   .hero-content { grid-template-columns: 1fr; min-height: auto; gap: 32px; }
-  .hero-globe { order: -1; }
+  .hero-text { order: 1; }
+  .hero-globe { order: 2; margin-top: 16px; }
   .hero-globe .globe-inner { width: 200px; height: 200px; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
